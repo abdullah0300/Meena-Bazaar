@@ -52,10 +52,10 @@ function Collection({ categories, filters }) {
                                                 width="330px"
                                                 height="270px"
                                             />
-                                            <button className=" px-4 py-[15px] bg-white text-black text-lg opacity-[0] transform translate-y-8 transition duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-[-115px] group-hover:translate-x-[85px]">
+                                            {/* <button className=" px-4 py-[15px] bg-white text-black text-lg opacity-[0] transform translate-y-8 transition duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-[-115px] group-hover:translate-x-[85px]">
                                                 View All
-                                            </button>
-                                            <h2 className="absolute bottom-0 left-0 right-0 text-center xl:text-3xl md:text-2xl tracking-wide pb-4 text-white transition-all duration-300 ease-in-out group-hover:hidden">Abdullah</h2>
+                                            </button> */}
+                                            <h2 className="absolute bottom-0 left-0 right-0 text-center xl:text-3xl md:text-2xl tracking-wide pb-4 text-white transition-all duration-300 ease-in-out ">Abdullah</h2>
 
                                         </div><br></br>
                                     </Link>
