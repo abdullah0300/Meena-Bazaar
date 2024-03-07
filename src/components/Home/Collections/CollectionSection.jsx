@@ -23,7 +23,7 @@ const CollectionSection = () => {
           <CollectionCard key={i} {...item} />
         ))}
       </div>
-     <Link to={`/productPage`}> <div className=" flex justify-center items-center">
+     <Link to={`/Collection`}> <div className=" flex justify-center items-center">
         <MainBtn />
       </div></Link>
     </div>
