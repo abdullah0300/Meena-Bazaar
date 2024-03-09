@@ -6,6 +6,7 @@ import ProductPage from "./components/SubComponenets/ProductPage";
 import ProductDetails from "./components/SubComponenets/ProductDetail";
 import CartPage from "./components/SubComponenets/CartPage";
 import Checkout from "./components/SubComponenets/Checkout";
+import ProfilePage from "./components/SubComponenets/ProfilePage";
 // import axios from "axios";
 // import { apiUrl } from "./data/env";
 
@@ -19,6 +20,8 @@ const App = () => {
         <Route path="ProductDetail" element={<ProductDetails />} />
         <Route path="CartPage" element={<CartPage />} />
         <Route path="Checkout" element={<Checkout />} />
+        <Route path="ProfilePage" element={<ProfilePage />} />
+
 
 
 

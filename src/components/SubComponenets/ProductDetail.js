@@ -232,7 +232,7 @@ function ProductDetails() {
                   >
                     -
                   </p>
-                  <p class="px-3 py-1  bg-white  text-[20px] shadow-sm shadow-cyan-500/50">
+                  <p class="px-2 py-1  bg-white text-[#bd9229]  text-[20px] shadow-sm shadow-cyan-500/50">
                     {count}
                   </p>
                   <p
