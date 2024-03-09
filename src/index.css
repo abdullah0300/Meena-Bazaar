@@ -20,7 +20,9 @@ body {
 .artileNameBtn {
   border: 1px solid #bd9229;
   color: #bd9229;
+  font-size: 12px;
 }
+
 .artileNameBtn:hover {
   background-color: #bd9229;
   color: white;
@@ -29,7 +31,17 @@ body {
 .secondaryBtnTop {
   border: 1px solid white;
 }
+
+
+.secondaryBtnTop1 {
+  border: 1px solid #bd9229;
+}
+
 .secondaryBtnTopInner:hover .secondaryBtnTop {
+  border: 1px solid #bd9229 !important;
+}
+
+.secondaryBtnTopInner1:hover .secondaryBtnTop1 {
   border: 1px solid #bd9229 !important;
 }
 
@@ -38,8 +50,25 @@ body {
   position: absolute;
   top: 5px;
   left: 5px;
+
 }
+
+.secondaryBtnTopInner1 {
+  background-color: #bd9229;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+
+}
+
+
 .secondaryBtnTopInner:hover {
+  top: 0;
+  left: 0;
+  background-color: #bd9229;
+}
+
+.secondaryBtnTopInner1:hover {
   top: 0;
   left: 0;
   background-color: #bd9229;

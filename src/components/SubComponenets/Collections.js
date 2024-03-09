@@ -42,7 +42,7 @@ function Collection({ categories, filters }) {
 
                                 <div id="content" className="">
                                     <Link
-                                        to={`/productPage`}
+                                        to={`/ProductPage`}
                                     >
                                         <div className=" relative xl:h-[400px] md:h-[320px] h-48  justify-center items-center group transition-all duration-300 ease-in-out">
                                             <img
