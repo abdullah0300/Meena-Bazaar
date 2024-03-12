@@ -1,7 +1,36 @@
-import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import { FaFacebookF, FaTwitter, FaInstagram, FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+
+const data = [
+  {
+    id: 1,
+    title: "get in touch with us",
+    sublinks: ["Phone: +394304095209", "Support@Company.Com"]
+  },
+  {
+    id: 2,
+    title: "information",
+    sublinks: ["About Us", "Our Products", "Our Products", "Privacy Policy"]
+  },
+  {
+    id: 3,
+    title: "our resources",
+    sublinks: ["Plan And Pricing", "Client Business", "Sales & Purchase", "Product Quality"]
+  },
+]
 
 const Footer = () => {
+  const [isOpen, setIsOpen] = useState(new Array(data.length).fill(false));
+  const handleOpen = (index) => {
+    setIsOpen((prevState) => {
+      const newOpenIndexes = prevState.map((item, i) =>
+        i === index ? !prevState[i] : item
+      );
+      return newOpenIndexes;
+    });
+  };
+
   return (
     <>
       <div className=' flex flex-col gap-5 bg-[#614605] py-10 md:py-4'>
@@ -11,7 +40,7 @@ const Footer = () => {
         <div className=' flex flex-col gap-5 md:hidden px-3'>
 
           <div className=' flex justify-start items-center gap-3 text-white'>
-            <h3 className=' capitalize'>Follow us:</h3>
+            <h3 className=' capitalize'>follow us:</h3>
             <div className=' flex gap-3'>
               <div className=' rounded-[50%] p-2 bg-white'>
                 <FaFacebookF className='text-primaryColor' />
@@ -27,20 +56,38 @@ const Footer = () => {
 
           <div className=' flex flex-col gap-3'>
 
-            <div className=' flex justify-between text-white'>
-              <p className=' capitalize text-[19px]'>get in touch with us</p>
-              <span className=' text-4xl'>+</span>
-            </div>
-
-            <div className=' flex justify-between text-white'>
-              <p className=' capitalize text-[19px]'>information</p>
-              <span className=' text-4xl'>+</span>
-            </div>
-
-            <div className=' flex justify-between text-white'>
-              <p className=' capitalize text-[19px]'>our resources</p>
-              <span className=' text-4xl'>+</span>
-            </div>
+            {
+              data.map((item, i) => (
+                <>
+                  <div className=' flex justify-between text-[#E5E5E5]' onClick={() => {
+                    handleOpen(i)
+                  }}>
+                    <p className=' capitalize text-[19px]'>{item.title}</p>
+                    {isOpen[i] ? (
+                      <FaMinus
+                        className='text-2xl text-[#E5E5E5]'
+                      />
+                    ) : (
+                      <FaPlus
+                        className='text-2xl text-[#E5E5E5]'
+                      />
+                    )}
+                  </div>
+                  <div>
+                    <ul className={` flex flex-col gap-2 text-[#E5E5E5] ${isOpen[i]
+                      ? "max-h-60 opacity-100"
+                      : "max-h-0 opacity-0 overflow-hidden"
+                      }`}>
+                      {
+                        item.sublinks.map((item, i) => (
+                          <li className=' text-sm'>{item}</li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </>
+              ))
+            }
 
             <div className=' flex justify-between text-white'>
               <p className=' capitalize text-[19px]'>about us</p>

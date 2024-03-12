@@ -5,8 +5,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, Outlet } from "react-router-dom";
-
 
 const navLinks = [
   {
@@ -52,6 +50,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openSubLinks, setOpenSubLinks] = useState(false);
   const [hoveredLinkId, setHoveredLinkId] = useState(null);
   const [subLinks, setSubLinks] = useState();
 
@@ -74,7 +73,7 @@ const Navbar = () => {
   return (
     <>
       {/* DESKTOP */}
-      <header className="md:block hidden h-48">
+      <header className="md:block hidden h-48 sticky top-0 bg-white z-50">
         <div className=" h-1/5 bg-primaryColor"></div>
         <nav
           className=" h-4/5 flex w-full px-8"
@@ -96,8 +95,11 @@ const Navbar = () => {
                 </div>
               </div>
               <div className=" w-1/5 flex gap-3 justify-center">
-                <GoPerson className=" text-3xl text-primaryColor" />
-                <FiShoppingCart className=" text-3xl text-primaryColor" />
+                <GoPerson className=" text-3xl text-primaryColor cursor-pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop" />
+                <div className="relative">
+                  <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">10</span>
+                  <FiShoppingCart className=" text-3xl text-primaryColor" />
+                </div>
               </div>
             </div>
             <ul
@@ -110,24 +112,23 @@ const Navbar = () => {
               {navLinks.map((item, i) => (
                 <li
                   key={i}
-                  className=" xl:text-lg md:text-base cursor-pointer transition-all duration-200 ease-in-out transform-gpu"
-                  style={{
-                    borderBottom:
-                      subLinks &&
-                      hoveredLinkId === item.id &&
-                      "2px solid #BD9229",
-                  }}
+                  className=" xl:text-lg md:text-base cursor-pointer transition-all duration-200 ease-in-out transform-gpu borderNavlinks"
+                  // style={{
+                  //   borderBottom:
+                  //     subLinks &&
+                  //     hoveredLinkId === item.id &&
+                  //     "2px solid #BD9229",
+                  // }}
                   onMouseEnter={() => handleMouseEnter(item.id)}
                 >
                   {item.title}
                 </li>
               ))}
-              <Link to="/Collection">
-                <button
-                  className={`px-3 py-2 rounded-md xl:text-lg md:text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu`}
-                >
-                  More Collection
-                </button></Link>
+              <button
+                className={`px-3 py-2 rounded-md xl:text-lg md:text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu`}
+              >
+                More Collection
+              </button>
             </ul>
           </div>
         </nav>
@@ -143,7 +144,7 @@ const Navbar = () => {
                   return (
                     <li
                       key={i}
-                      className=" text-headingColor xl:text-sm md:text-[13px] cursor-pointer"
+                      className=" text-headingColor xl:text-sm md:text-[13px] cursor-pointer sublinksHover"
                     >
                       {item}
                     </li>
@@ -155,7 +156,7 @@ const Navbar = () => {
       </header>
 
       {/* Mobile */}
-      <header className="block md:hidden">
+      <header className="block md:hidden sticky top-0 bg-white z-50">
         <div className=" h-9 bg-primaryColor flex items-center">
           <span className=" px-3 text-white text-sm tracking-wide font-light">
             Delivery Accross UK
@@ -170,7 +171,10 @@ const Navbar = () => {
               className=" text-3xl text-primaryColor"
               onClick={() => setIsMobileOpen((prev) => !prev)}
             />
-            <FiShoppingCart className=" text-3xl text-primaryColor" />
+            <div className="relative">
+              <span className=" absolute -right-2 -top-1 text-center text-white text-xs bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">10</span>
+              <FiShoppingCart className=" text-3xl text-primaryColor" />
+            </div>
           </div>
           <div
             className={` ${isMobileOpen ? "flex" : "hidden"
@@ -192,12 +196,30 @@ const Navbar = () => {
               </div>
               <ul className="flex flex-col gap-[6px]">
                 {navLinks.map((item, i) => (
-                  <li key={i} className="flex justify-between w-full">
-                    <span className=" text-sm text-slate-500">
-                      {item.title}
-                    </span>
-                    <IoIosArrowForward className=" text-sm text-slate-500" />
-                  </li>
+                  <>
+                    <li key={i} className="flex justify-between w-full cursor-pointer" onClick={() => {
+                      setHoveredLinkId(item.id)
+                      setOpenSubLinks((prev) => !prev)
+                    }}>
+                      <span className=" text-sm text-slate-500">
+                        {item.title}
+                      </span>
+                      {
+                        item.sublinks &&
+                        <IoIosArrowForward className=" text-sm text-slate-500" />
+                      }
+                    </li>
+                    {openSubLinks && subLinks && (item.id === hoveredLinkId) &&
+                      <div className=" ml-5">
+                        <ul className="flex flex-col justify-center items-start gap-[10px]">
+                          {
+                            subLinks && subLinks.map((item, i) => (
+                              <li key={i} className="text-headingColor text-xs xl:text-sm md:text-[13px] cursor-pointer">{item}</li>
+                            ))
+                          }
+                        </ul>
+                      </div>}
+                  </>
                 ))}
               </ul>
             </div>
