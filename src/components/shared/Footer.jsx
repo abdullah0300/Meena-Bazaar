@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
