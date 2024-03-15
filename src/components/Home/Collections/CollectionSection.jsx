@@ -4,7 +4,7 @@ import { Collections } from "../../../data/Collections";
 import MainBtn from "../../shared/MainBtn";
 import { Link } from "react-router-dom";
 
-const CollectionSection = () => {
+const CollectionSection = ({ categories }) => {
   return (
     <div className=" flex flex-col gap-4 my-10">
       {/* HEADINGS SECTION */}
@@ -19,13 +19,16 @@ const CollectionSection = () => {
 
       {/* CARDS SECTION */}
       <div className=" grid md:grid-cols-3 grid-cols-2">
-        {Collections.map((item, i) => (
-          <CollectionCard key={i} {...item} />
+        {categories?.map((item, i) => (
+          <CollectionCard key={i} cat={item} />
         ))}
       </div>
-     <Link to={`/Collection`}> <div className=" flex justify-center items-center">
-        <MainBtn />
-      </div></Link>
+      <Link to={`/Collection`}>
+        {" "}
+        <div className=" flex justify-center items-center">
+          <MainBtn />
+        </div>
+      </Link>
     </div>
   );
 };

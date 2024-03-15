@@ -15,7 +15,7 @@ const Home = ({ categories, filters }) => {
     <>
       <Navbar categories={categories} filters={filters} />
       <HeroSection />
-      <CollectionSection />
+      <CollectionSection categories={categories} filters={filters} />
       <BestSellingSection />
       <BannerSection />
       {/* <TestinomialSection /> */}
