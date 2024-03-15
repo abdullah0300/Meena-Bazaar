@@ -10,7 +10,7 @@ import { FiMinus } from "react-icons/fi";
 import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
 
-function ProductDetails() {
+function ProductDetails({ categories, filters }) {
   const [openOpt, setOpenOpt] = useState(false);
   const [count, setCount] = useState(1);
 
@@ -33,7 +33,6 @@ function ProductDetails() {
       }
     });
   }
-
 
   const onClose = () => {
     setOpenOpt(false);
@@ -76,12 +75,11 @@ function ProductDetails() {
       id: 4,
       title: "EARINGS",
     },
-
   ];
 
   return (
     <div>
-      <Navbar />
+      <Navbar categories={categories} filters={filters} />
       <div class="mt-5">
         <div>
           <Container fluid class="p-3">
@@ -159,7 +157,6 @@ function ProductDetails() {
               <Col>
                 <p class="fs-2 px-2 py-3 font-semibold text-[#BD9229]">
                   Yellowish Gold Necklace
-
                 </p>
 
                 <p class="text-[#707070] text-[15px] px-2 pt-2">
@@ -168,7 +165,9 @@ function ProductDetails() {
                 <p class="text-xl py-3 font-semibold px-2 text-black mb-2">
                   £ 7.95
                 </p>
-                <p style={{ fontFamily: 'Tw Cen MT' }}>Color: <span className="text-[#BD9229]">Gold</span></p>
+                <p style={{ fontFamily: "Tw Cen MT" }}>
+                  Color: <span className="text-[#BD9229]">Gold</span>
+                </p>
                 <Container className="border-y py-3 mx-auto text-center p-0 m-0">
                   <Row className="flex  flex-wrap">
                     <Col
@@ -182,8 +181,9 @@ function ProductDetails() {
                       <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
                         {articleJewwllaryNames.map((item, i) => (
                           <button
-                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item.id === 1 && "bg-[#BD9229] text-white"
-                              }`}
+                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
+                              item.id === 1 && "bg-[#BD9229] text-white"
+                            }`}
                           >
                             {item.title}
                           </button>
@@ -251,11 +251,8 @@ function ProductDetails() {
                     </Link>
                   </div>
                 </div>
-
               </Col>
             </Row>
-
-
             <Row class="py-8  ">
               {" "}
               <div class="mx-auto mt-5 w-75 ">
@@ -282,7 +279,6 @@ function ProductDetails() {
                     today.
                   </p>
                 ) : null}
-
                 {open2 ? (
                   <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
                     The Lorem ipsum text is derived from sections 1.10.32 and
@@ -321,7 +317,6 @@ function ProductDetails() {
                 ) : null}
               </div>
             </Row>
-
             <Row>
               <h1 class="fs-3 font-bold mt-5  text-[#BD9229] ">More For You</h1>
               <Container
@@ -375,11 +370,10 @@ function ProductDetails() {
                   </Col>
                 </Row>
               </Container>
-            </Row> <br></br><br></br>
+            </Row>{" "}
+            <br></br>
+            <br></br>
           </Container>
-
-
-
         </div>
         <Outlet />
 

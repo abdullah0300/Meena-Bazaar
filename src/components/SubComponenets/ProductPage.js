@@ -13,14 +13,14 @@ import { FaRegSquare } from "react-icons/fa";
 import Navbar from "../shared/Navbar.jsx";
 import { apiUrl } from "../../data/env.js";
 
-
 function ProductPage({
   products,
   // currentCategory,
   categories,
   // setCurrentProductId,
   filters,
-  img, title
+  img,
+  title,
 }) {
   const { categoryId, currentCategoryName } = useParams();
   console.log("hellllll", categoryId);
@@ -137,13 +137,15 @@ function ProductPage({
 
   return (
     <div class="mt-0 md:mt-52">
-      <Navbar />
+      <Navbar categories={categories} filters={filters} />
       <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229]">
         Product Page {currentCategoryName}
       </h2>
 
-
-      <Container fluid class="d-flex justify-content-center mb-5 align-items-center">
+      <Container
+        fluid
+        class="d-flex justify-content-center mb-5 align-items-center"
+      >
         <Row xs={2} md={4}>
           {data?.map((item) => (
             <Col
@@ -155,13 +157,12 @@ function ProductPage({
                 alignItems: "center",
               }}
             >
-              <Link to={'/ProductDetail'}>
+              <Link to={"/ProductDetail"}>
                 <div className=" flex flex-col justify-start items-center  md:w-full w-80 xl:px-4 md:px-3 px-3">
-
                   <div id="content" class="mx-3 my-4 sellingCard relative">
-
-                    <img src="https://ik.imagekit.io/mctozv7td/earrings.jpg?updatedAt=1709807477817"
-                      // src={ 
+                    <img
+                      src="https://ik.imagekit.io/mctozv7td/earrings.jpg?updatedAt=1709807477817"
+                      // src={
                       //   item.coverImage?.url?.replace(
                       //     "/product",
                       //     "/tr:ar-1-1,w-285.5/product"
@@ -172,14 +173,20 @@ function ProductPage({
                     />
 
                     <div className=" sellingCard-hover-div">
-                      <p className="w-full text-center text-sm font-semibold uppercase">Add To Cart</p>
+                      <p className="w-full text-center text-sm font-semibold uppercase">
+                        Add To Cart
+                      </p>
                     </div>
                   </div>
                   <h2 className=" xl:text-xl text-base font-medium mx-auto text-center">
                     {item.name}
                   </h2>
-                  <span className=" xl:text-base text-sm text-primaryColor">{item.price}</span>
-                </div> <br></br> </Link>
+                  <span className=" xl:text-base text-sm text-primaryColor">
+                    {item.price}
+                  </span>
+                </div>{" "}
+                <br></br>{" "}
+              </Link>
             </Col>
           ))}
         </Row>

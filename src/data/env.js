@@ -1,1 +1,1 @@
-export const apiUrl = "https://vape-backend.fly.dev";
+export const apiUrl = "https://meena-backend.fly.dev";

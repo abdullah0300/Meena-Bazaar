@@ -121,7 +121,7 @@ function Checkout({ categories, filters }) {
 
     return (
         <div>
-            < Navbar />
+            < Navbar categories={categories} filters={filters} />
             <div class="bg-[#F6F5F0] md:bg-[#F6F5F0] mt-0 md:mt-4">
                 <h2 class="text-3xl  font-bold text-[#bd9229] text-center py-5">Checkout</h2>
                 <Container fluid>

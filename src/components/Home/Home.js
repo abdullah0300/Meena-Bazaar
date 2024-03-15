@@ -10,10 +10,10 @@ import ArticleSection from "../../components/Home/artictles/ArticleSection";
 import ShopSection from "../../components/Home/shop/ShopSection";
 import TestinomialSection from "../../components/Home/Testinomials/TestinomialSection";
 
-const Home = () => {
+const Home = ({ categories, filters }) => {
   return (
     <>
-      <Navbar />
+      <Navbar categories={categories} filters={filters} />
       <HeroSection />
       <CollectionSection />
       <BestSellingSection />
