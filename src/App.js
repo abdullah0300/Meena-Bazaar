@@ -56,7 +56,13 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home categories={categories} filters={filters} />}
+          element={
+            <Home
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
         />
         <Route
           path="Collection"

@@ -10,13 +10,13 @@ import ArticleSection from "../../components/Home/artictles/ArticleSection";
 import ShopSection from "../../components/Home/shop/ShopSection";
 import TestinomialSection from "../../components/Home/Testinomials/TestinomialSection";
 
-const Home = ({ categories, filters }) => {
+const Home = ({ categories, filters, products }) => {
   return (
     <>
       <Navbar categories={categories} filters={filters} />
       <HeroSection />
       <CollectionSection categories={categories} filters={filters} />
-      <BestSellingSection />
+      <BestSellingSection products={products} />
       <BannerSection />
       {/* <TestinomialSection /> */}
       <ArticleSection />
