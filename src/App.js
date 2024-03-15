@@ -15,6 +15,7 @@ import { apiUrl } from "./data/env";
 const App = () => {
   const [categories, setCategories] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [products, setProducts] = useState([]);
 
   React.useEffect(() => {
     const cats = axios
@@ -38,6 +39,17 @@ const App = () => {
         console.error(err);
         return false;
       });
+
+    const products = axios
+      .get(`${apiUrl}/api/v1/product?sort=priority`)
+      .then((res) => {
+        setProducts(res.data.data);
+        return res.data.data;
+      })
+      .catch((err) => {
+        console.error(err);
+        return false;
+      });
   });
   return (
     <BrowserRouter>
@@ -51,8 +63,14 @@ const App = () => {
           element={<Collection categories={categories} filters={filters} />}
         />
         <Route
-          path="ProductPage"
-          element={<ProductPage categories={categories} filters={filters} />}
+          path="ProductPage/:categoryId/:currentCategoryName"
+          element={
+            <ProductPage
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
         />
         <Route
           path="ProductDetail"

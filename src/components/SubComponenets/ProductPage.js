@@ -147,7 +147,7 @@ function ProductPage({
         class="d-flex justify-content-center mb-5 align-items-center"
       >
         <Row xs={2} md={4}>
-          {data?.map((item) => (
+          {filteredProducts?.map((item) => (
             <Col
               key={item._id}
               class="flex justify-center items-center"
@@ -161,7 +161,7 @@ function ProductPage({
                 <div className=" flex flex-col justify-start items-center  md:w-full w-80 xl:px-4 md:px-3 px-3">
                   <div id="content" class="mx-3 my-4 sellingCard relative">
                     <img
-                      src="https://ik.imagekit.io/mctozv7td/earrings.jpg?updatedAt=1709807477817"
+                      src={item.coverImage?.url}
                       // src={
                       //   item.coverImage?.url?.replace(
                       //     "/product",
@@ -182,7 +182,7 @@ function ProductPage({
                     {item.name}
                   </h2>
                   <span className=" xl:text-base text-sm text-primaryColor">
-                    {item.price}
+                    {item.basePrice}
                   </span>
                 </div>{" "}
                 <br></br>{" "}

@@ -42,7 +42,7 @@ function Collection({ categories, filters }) {
                 }}
               >
                 <div id="content" className="">
-                  <Link to={`/ProductPage`}>
+                  <Link to={`/ProductPage/${item._id}/${item.name}`}>
                     <div className=" relative xl:h-[400px] md:h-[320px] h-48  justify-center items-center group transition-all duration-300 ease-in-out">
                       <img
                         className="absolute h-full w-full relative object-cover transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-150"
