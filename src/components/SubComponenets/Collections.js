@@ -18,22 +18,22 @@ function Collection({ categories, filters }) {
         className="d-flex justify-content-center mb-5 align-items-center"
       >
         <Row xs={2} md={3}>
-          {data.map((item, i) => {
-            let url = "";
-            if (item.image.url)
-              url = item.image.url.replace(
-                "/category",
-                "/tr:ar-1-1,w-285.5/category"
-              );
-            else if (item.image)
-              url = item.image.replace(
-                "/category",
-                "/tr:ar-1-1,w-285.5/category"
-              );
-            else url = "";
+          {categories?.map((item, i) => {
+            let url = item.image.url;
+            // if (item.image.url)
+            //   url = item.image.url.replace(
+            //     "/category",
+            //     "/tr:ar-1-1,w-285.5/category"
+            //   );
+            // else if (item.image)
+            //   url = item.image.replace(
+            //     "/category",
+            //     "/tr:ar-1-1,w-285.5/category"
+            //   );
+            // else url = "";
             return (
               <Col
-                key={item.id}
+                key={item._id}
                 className="flex justify-center items-center"
                 style={{
                   display: "flex",
@@ -55,7 +55,7 @@ function Collection({ categories, filters }) {
                                                 View All
                                             </button> */}
                       <h2 className="absolute bottom-0 left-0 right-0 text-center xl:text-3xl md:text-2xl tracking-wide pb-4 text-white transition-all duration-300 ease-in-out ">
-                        Abdullah
+                        {item.name}
                       </h2>
                     </div>
                     <br></br>
