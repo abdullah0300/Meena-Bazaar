@@ -86,10 +86,10 @@ const Navbar = () => {
           style={{ background: "white" }}
         >
           <Link to={'/'}>
-            <img src={logo} alt="logo" className=" h-[165px]" />
+            <img src={logo} alt="logo" className=" h-[165px] w-[200px]" />
           </Link>
           <div className=" flex flex-col items-center justify-center gap-4 mt-[26px] w-full">
-            <div className=" flex w-full ">
+            <div className=" flex w-full  ">
               <div className=" w-4/5 flex justify-center">
                 <div className=" flex  border rounded-3xl h-9  pl-4">
                   <input
@@ -237,46 +237,46 @@ const Navbar = () => {
         </nav>
       </header>
       <div className="modal fade text-black" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content" >
-                    <div className="modal-body">
-                      {/* CLOSE BUTTON */}
-                      <div className=' flex justify-end'>
-                        <IoCloseCircleOutline className=' text-[40px] cursor-pointer' data-bs-dismiss="modal" aria-label="Close" />
-                      </div>
-                      {/* MAIN HEADING */}
-                      <h3 className='text-2xl font-semibold text-[#161616]' style={{ textAlign: "center" }}>{type === "login" ? "Log In" : "Sign In"}</h3>
-
-                      {/* FORM */}
-                      <div className=' flex flex-col gap-3 w-full px-3'>
-
-                        {/* INPUTS FOR LOG IN */}
-                        {type === "login" ?
-                          <>
-                            <InputField label={"Email"} />
-                            <InputField label={"Password"} />
-                            <p className=' text-[#161616] text-right underline'>Forgot your password?</p>
-                          </> :
-                          <>
-                            <InputField label={"Username"} />
-                            <InputField label={"Email"} />
-                            <InputField label={"Password"} />
-                            <InputField label={"Confirm Password"} />
-                          </>
-                        }
-
-                        {/* BUTTON */}
-
-                        <button className=' bg-primaryColor text-[#FFFFFF] py-3'>{type === "login" ? "Log In" : "Sign Up"}</button>
-                        <button className=' bg-[#ACACAC] text-[#FFFFFF] py-3' onClick={() => {
-                          setType(type === "login" ? "signup" : "login")
-                        }}>{type === "login" ? "Create An Account" : "Log In"}</button>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content" >
+            <div className="modal-body">
+              {/* CLOSE BUTTON */}
+              <div className=' flex justify-end'>
+                <IoCloseCircleOutline className=' text-[40px] text-[#bd9229] cursor-pointer' data-bs-dismiss="modal" aria-label="Close" />
               </div>
+              {/* MAIN HEADING */}
+              <h3 className='text-2xl font-semibold text-[#161616]' style={{ textAlign: "center" }}>{type === "login" ? "Log In" : "Sign In"}</h3>
+
+              {/* FORM */}
+              <div className=' flex flex-col gap-3 w-full px-3'>
+
+                {/* INPUTS FOR LOG IN */}
+                {type === "login" ?
+                  <>
+                    <InputField label={"Email"} />
+                    <InputField label={"Password"} />
+                    <p className=' text-[#161616] text-right underline'>Forgot your password?</p>
+                  </> :
+                  <>
+                    <InputField label={"Username"} />
+                    <InputField label={"Email"} />
+                    <InputField label={"Password"} />
+                    <InputField label={"Confirm Password"} />
+                  </>
+                }
+
+                {/* BUTTON */}
+
+                <button className=' bg-primaryColor text-[#FFFFFF] py-3'>{type === "login" ? "Log In" : "Sign Up"}</button>
+                <button className=' bg-[#ACACAC] text-[#FFFFFF] py-3' onClick={() => {
+                  setType(type === "login" ? "signup" : "login")
+                }}>{type === "login" ? "Create An Account" : "Log In"}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
