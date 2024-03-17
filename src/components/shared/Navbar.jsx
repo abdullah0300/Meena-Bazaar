@@ -172,9 +172,8 @@ const Navbar = ({ categories, filters }) => {
         </nav>
         {subLinks && (
           <div
-            className={`${
-              subLinks ? " opacity-[1]" : "opacity-[0]"
-            } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
+            className={`${subLinks ? " opacity-[1]" : "opacity-[0]"
+              } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
             onMouseLeave={handleMouseLeave}
           >
             <ul className=" flex justify-center items-center gap-16 ">
@@ -203,14 +202,18 @@ const Navbar = ({ categories, filters }) => {
         </div>
         <nav className=" absolute z-50 w-full bg-white  flex justify-between items-center px-4">
           <div
-            className={` ${
-              isMobileOpen ? "hidden" : "flex"
-            }  justify-between w-full py-3`}
+            className={` ${isMobileOpen ? "hidden" : "flex"
+              }  justify-between w-full py-3`}
           >
             <FiMenu
               className=" text-3xl text-primaryColor"
               onClick={() => setIsMobileOpen((prev) => !prev)}
             />
+            <span className="h-[40px]">
+              <Link to={"/"}>
+                <img src={logo} alt="logo" className=" h-[100px] w-[100px] mt-[-25px]" />
+              </Link>
+            </span>
             <div className="relative">
               <span className=" absolute -right-2 -top-1 text-center text-white text-xs bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
                 10
@@ -219,9 +222,8 @@ const Navbar = ({ categories, filters }) => {
             </div>
           </div>
           <div
-            className={` ${
-              isMobileOpen ? "flex" : "hidden"
-            }  justify-between w-full py-3`}
+            className={` ${isMobileOpen ? "flex" : "hidden"
+              }  justify-between w-full py-3`}
           >
             <div className=" flex flex-col w-full gap-3">
               <div className="flex justify-between w-full">
