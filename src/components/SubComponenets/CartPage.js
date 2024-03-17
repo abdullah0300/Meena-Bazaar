@@ -60,7 +60,7 @@ function CartProduct({ product, getSavedCartProducts }) {
               src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
               alt={product.nm}
               style={{ maxWidth: "none" }}
-              className="sm:p-1 xs:m-0 md:px-12 md:py-3 sm:w-[7rem] mt-2  md:w-[16rem] "
+              className="sm:p-1 xs:m-0 md:px-12 md:py-3 sm:w-[7rem] mt-2 w-[10rem]  md:w-[16rem] "
             />
           </span>
           <span>

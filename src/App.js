@@ -10,6 +10,7 @@ import ProfilePage from "./components/SubComponenets/ProfilePage";
 import axios from "axios";
 import { apiUrl } from "./data/env";
 import ScrollToTop from "./ScrollToTop";
+import Footer from "./components/shared/Footer";
 // import axios from "axios";
 // import { apiUrl } from "./data/env";
 
@@ -97,6 +98,7 @@ const App = () => {
             element={<ProfilePage categories={categories} filters={filters} />}
           />
         </Routes>
+        
 
       </ScrollToTop>
     </BrowserRouter>
