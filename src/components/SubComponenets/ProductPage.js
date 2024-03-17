@@ -139,7 +139,7 @@ function ProductPage({
     <div class="mt-0 md:mt-52">
       <Navbar categories={categories} filters={filters} />
       <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229]">
-        Product Page {currentCategoryName}
+        {currentCategoryName}
       </h2>
 
       <Container
@@ -182,7 +182,7 @@ function ProductPage({
                     {item.name}
                   </h2>
                   <span className=" xl:text-base text-sm text-primaryColor">
-                    {item.basePrice}
+                    £ {item.basePrice}
                   </span>
                 </div>{" "}
                 <br></br>{" "}
