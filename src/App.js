@@ -11,6 +11,7 @@ import axios from "axios";
 import { apiUrl } from "./data/env";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "./components/shared/Footer";
+import SubCollectionProductPage from "./components/SubComponenets/SubCollectionProductPage";
 // import axios from "axios";
 // import { apiUrl } from "./data/env";
 
@@ -55,54 +56,59 @@ const App = () => {
   });
   return (
     <BrowserRouter>
-      <ScrollToTop>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                categories={categories}
-                filters={filters}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="Collection"
-            element={<Collection categories={categories} filters={filters} />}
-          />
-          <Route
-            path="ProductPage/:categoryId/:currentCategoryName"
-            element={
-              <ProductPage
-                categories={categories}
-                filters={filters}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="ProductDetail"
-            element={<ProductDetails categories={categories} filters={filters} />}
-          />
-          <Route
-            path="CartPage"
-            element={<CartPage categories={categories} filters={filters} />}
-          />
-          <Route
-            path="Checkout"
-            element={<Checkout categories={categories} filters={filters} />}
-          />
-          <Route
-            path="ProfilePage"
-            element={<ProfilePage categories={categories} filters={filters} />}
-          />
-        </Routes>
-        
-
-      </ScrollToTop>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="Collection"
+          element={<Collection categories={categories} filters={filters} />}
+        />
+        <Route
+          path="ProductPage/:categoryId/:currentCategoryName"
+          element={
+            <ProductPage
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="SubCollectionPage/:categoryId/:filId/:filNameEnc"
+          element={
+            <SubCollectionProductPage
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="/productDetails/:currentProdId"
+          element={<ProductDetails categories={categories} filters={filters} />}
+        />
+        <Route
+          path="CartPage"
+          element={<CartPage categories={categories} filters={filters} />}
+        />
+        <Route
+          path="Checkout"
+          element={<Checkout categories={categories} filters={filters} />}
+        />
+        <Route
+          path="ProfilePage"
+          element={<ProfilePage categories={categories} filters={filters} />}
+        />
+      </Routes>
     </BrowserRouter>
-
   );
 };
 export default App;
