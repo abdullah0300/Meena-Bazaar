@@ -1,7 +1,7 @@
 import "../SubComponenets/ProductPage.css";
 import { Container, Row, Col } from "react-bootstrap";
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
@@ -10,12 +10,85 @@ import { FiMinus } from "react-icons/fi";
 import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
 
-function ProductDetails({ categories, filters }) {
+import { set, keys, values, clear } from "idb-keyval";
+import { v4 } from "uuid";
+import { apiUrl } from "../../data/env";
+
+function ProductDetails({ products, categories, filters, setCart }) {
+  const { currentProdId } = useParams();
+  const nav = useNavigate();
+
+  const [filteredProd, setFilteredProd] = useState(null);
+  const [allImages, setAllImages] = useState([]);
+  const [more4You, setMore4You] = useState([]);
+
+  React.useEffect(() => {
+    const prod = products.find((prod) => prod._id === currentProdId);
+    setFilteredProd(prod);
+    setAllImages([prod?.coverImage, ...(prod?.images || [])]);
+    setSelectedVariants(prod?.variants);
+  }, [currentProdId, products]);
+
+  React.useEffect(() => {
+    const filteredMore4You = products.filter(
+      (p) => p._id !== currentProdId && p.category === filteredProd?.category
+    );
+    setMore4You(filteredMore4You.slice(0, 4));
+  }, [currentProdId, products, filteredProd]);
+
+  const handleImageClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
+  const [totalPrice, setTotalPrice] = useState(filteredProd?.basePrice);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const handleArrowClick = (direction) => {
+    if (direction === "left") {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex - 1 + allImages.length) % allImages.length
+      );
+    } else {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % allImages.length);
+    }
+  };
+
   const [openOpt, setOpenOpt] = useState(false);
   const [count, setCount] = useState(1);
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+  };
+
+  const handleSelectVariant = (value) => {
+    const [currOption] = currentVariantType.options.filter(
+      (opt) => opt.optionValue === value
+    );
+
+    if (currOption.optionImg) {
+      setAllImages((imgs) => {
+        const newImgs = imgs;
+        newImgs.shift();
+        newImgs.unshift(currOption.optionImg);
+        return newImgs;
+      });
+      handleImageClick(0);
+    }
+
+    setSelectedVariants((vars) => {
+      const newVars = vars.map((vr) => {
+        if (vr.variantType === currentVariantType.variantType)
+          return {
+            variantType: currentVariantType.variantType,
+            chosenOption: currOption,
+          };
+        else
+          return {
+            variantType: vr.variantType,
+            chosenOption: vr.chosenOption,
+          };
+      });
+      return newVars;
+    });
   };
 
   function increment() {
@@ -33,6 +106,18 @@ function ProductDetails({ categories, filters }) {
       }
     });
   }
+
+  const [currentVariantType, setCurrentVariantType] = useState("");
+  const [selectedVariants, setSelectedVariants] = useState(
+    filteredProd?.variants
+  );
+  // const [chosenVariants, setChosenVariants] = useState([]);
+
+  const showDrawer = (v) => {
+    console.log(selectedVariants);
+    setOpenOpt(true);
+    setCurrentVariantType(v);
+  };
 
   const onClose = () => {
     setOpenOpt(false);
@@ -58,25 +143,69 @@ function ProductDetails({ categories, filters }) {
     setIcon3(!icon3);
     setOpen3(!open3);
   };
-  const articleJewwllaryNames = [
-    {
-      id: 1,
-      title: "BRIDAL SET",
-    },
-    {
-      id: 2,
-      title: "NECKLACE SET",
-    },
-    {
-      id: 3,
-      title: "RINGS",
-    },
-    {
-      id: 4,
-      title: "EARINGS",
-    },
-  ];
 
+  async function handleAddToCart() {
+    const productToAdd = {
+      pId: filteredProd._id,
+      price: filteredProd.basePrice,
+      variants: selectedVariants,
+      nm: filteredProd.name,
+      image: filteredProd.coverImage?.url || "",
+      quantity: count,
+      offer: filteredProd.offer,
+    };
+
+    const cart = await values()
+      .then((res) => res)
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
+
+    // Function to add product to cart
+    function addToCart(productToAdd) {
+      const existingProductIndex = cart.findIndex(
+        (product) => product.pId === productToAdd.pId
+      );
+      if (existingProductIndex !== -1) {
+        // Product exists in cart
+        const existingProduct = cart[existingProductIndex];
+        let bool = false;
+        bool = existingProduct.variants.some((variant, i) => {
+          return (
+            variant.variantType === productToAdd.variants[i].variantType &&
+            variant.chosenOption.optionValue !==
+              productToAdd.variants[i].chosenOption.optionValue
+          );
+        });
+        if (bool) {
+          // add new product in cart if chosen option is different
+          cart.push(productToAdd);
+        } else {
+          // update quantity of existing product
+          existingProduct.quantity += productToAdd.quantity;
+        }
+      } else {
+        // Product not found, add it to the cart
+        cart.push(productToAdd);
+      }
+    }
+    addToCart(productToAdd);
+
+    clear()
+      .then(() => {
+        cart.forEach((crt) => {
+          const uId = v4();
+          crt.uId = uId;
+          set(uId, crt);
+        });
+      })
+      .then(() => nav("/cartView"))
+      .catch((err) => {
+        alert("Could not add to cart!!!");
+        console.log(err);
+      });
+  }
   return (
     <div>
       <Navbar categories={categories} filters={filters} />
@@ -89,31 +218,26 @@ function ProductDetails({ categories, filters }) {
                   <Row>
                     <Col md={4} className="hidden md:block">
                       <div class="d-flex flex-col gap-3 p-2 px-5 ">
-                        <img
-                          class="w-36 h-28 shadow-md"
-                          src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252127_g864.webp?updatedAt=1709929264107"
-                        />
-
-                        <img
-                          class="w-36 h-28 shadow-md"
-                          src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252151_97g5.webp?updatedAt=1709929358115"
-                        />
-
-                        <img
-                          class="w-36 h-28 shadow-md"
-                          src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252073_7sd5.webp?updatedAt=1709929381153"
-                        />
-
-                        <img
-                          class="w-36 h-24 shadow-md"
-                          src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
-                        />
+                        {allImages?.slice(1, 5).map((url, i) => (
+                          <img
+                            key={i + 1}
+                            class={`w-36 h-28 shadow-md ${
+                              i + 1 === currentImageIndex
+                                ? "border-2 border-[#59A0B8]"
+                                : ""
+                            }`}
+                            alt={`Product Img ${i + 1}`}
+                            src={url?.url || ""}
+                            onClick={() => handleImageClick(i + 1)}
+                          />
+                        ))}
                       </div>
                     </Col>
                     <Col md={8} className="hidden md:block">
                       <img
                         class="shadow-md h-full "
-                        src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
+                        alt="med-cover"
+                        src={allImages[currentImageIndex]?.url || ""}
                       />
                     </Col>
                   </Row>
@@ -125,45 +249,40 @@ function ProductDetails({ categories, filters }) {
                 <Row>
                   <img
                     class="shadow-md h-full "
-                    src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252127_g864.webp?updatedAt=1709929264107"
+                    src={allImages[currentImageIndex]?.url || ""}
+                    alt="sm-cover"
                   />
                 </Row>
 
                 <Row>
                   <div class="d-flex flex-row gap-2 py-5 ">
-                    <img
-                      class="w-36 h-24 shadow-md"
-                      src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252151_97g5.webp?updatedAt=1709929358115"
-                    />
-
-                    <img
-                      class="w-36 h-24 shadow-md"
-                      src="https://ik.imagekit.io/mctozv7td/il_794xN.4516252073_7sd5.webp?updatedAt=1709929381153"
-                    />
-
-                    <img
-                      class="w-36 h-24 shadow-md"
-                      src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
-                    />
-
-                    <img
-                      class="w-36 h-24 shadow-md"
-                      src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
-                    />
+                    {allImages?.slice(1, 5).map((url, y) => (
+                      <img
+                        key={y + 1}
+                        class={`w-36 h-24 shadow-md  ${
+                          y + 1 === currentImageIndex
+                            ? "border-2 border-[#59A0B8]"
+                            : ""
+                        }`}
+                        alt={`Product Img ${y + 1}`}
+                        src={url?.url || ""}
+                        onClick={() => handleImageClick(y + 1)}
+                      />
+                    ))}
                   </div>
                 </Row>
               </Col>
               {/* -----deatils------ */}
               <Col>
                 <p class="fs-2 px-2 py-3 font-semibold text-[#BD9229]">
-                  Yellowish Gold Necklace
+                  {filteredProd?.name}
                 </p>
 
                 <p class="text-[#707070] text-[15px] px-2 pt-2">
-                  24K Gold Plated Collection 100% brass slim design unclosed.
+                  {filteredProd?.description}
                 </p>
                 <p class="text-xl py-3 font-semibold px-2 text-black mb-2">
-                  £ 7.95
+                  £{(filteredProd?.basePrice * count).toFixed(2)}
                 </p>
                 <p style={{ fontFamily: "Tw Cen MT" }}>
                   Color: <span className="text-[#BD9229]">Gold</span>
@@ -179,10 +298,11 @@ function ProductDetails({ categories, filters }) {
                       xl={6}
                     >
                       <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
-                        {articleJewwllaryNames.map((item, i) => (
+                        {[]?.map((item, i) => (
                           <button
-                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item.id === 1 && "bg-[#BD9229] text-white"
-                              }`}
+                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
+                              item.id === 1 && "bg-[#BD9229] text-white"
+                            }`}
                           >
                             {item.title}
                           </button>
@@ -241,13 +361,26 @@ function ProductDetails({ categories, filters }) {
                     +
                   </p>
                   <div class="flex flex-col justify-center items-center ">
-                    <Link to="/CartPage">
-                      <button className=" mx-4 relative secondaryBtnTop1 lg:w-[362px]   w-32 h-11">
-                        <span className=" flex items-center justify-center lg:w-[362px] w-32 h-11 text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
-                          Add to Cart
-                        </span>
-                      </button>
-                    </Link>
+                    {/* <Link to="/CartPage"> */}
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        const bool = selectedVariants?.every(
+                          (sVar) => sVar.chosenOption !== undefined
+                        );
+                        if (bool) {
+                          await handleAddToCart();
+                        } else {
+                          alert("Select all variants before adding to cart!");
+                        }
+                      }}
+                      className=" mx-4 relative secondaryBtnTop1 lg:w-[362px] w-32 h-11"
+                    >
+                      <span className=" flex items-center justify-center lg:w-[362px] w-32 h-11 text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
+                        Add to Cart
+                      </span>
+                    </button>
+                    {/* </Link> */}
                   </div>
                 </div>
               </Col>
@@ -267,15 +400,7 @@ function ProductDetails({ categories, filters }) {
                 </div>{" "}
                 {open ? (
                   <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
-                    The Lorem ipsum text is derived from sections 1.10.32 and
-                    1.10.33 of Cicero's De finibus bonorum et malorum.The
-                    physical source may have been the 1914 Loeb Classical
-                    Library edition of De finibus, where the Latin text,
-                    presented on the left-hand (even) pages, breaks off on page
-                    34 with "Neque porro quisquam est qui do-" and continues on
-                    page 36 with "lorem ipsum ...", suggesting that the galley
-                    type of that page was mixed up to make the dummy text seen
-                    today.
+                    {filteredProd?.overview}
                   </p>
                 ) : null}
                 {open2 ? (
@@ -324,52 +449,33 @@ function ProductDetails({ categories, filters }) {
                 style={{ display: "flex", justify: "center", align: "center" }}
               >
                 <Row xs={2} md={4}>
-                  <Col>
-                    <div id="content" class="m-2 relative">
-                      <img
-                        src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
-                        alt=""
-                        class=" w-[45rem] xs:h-[13rem] md:h-[21rem] transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-150"
-                      />
-                      <div class="flex justify-between">
-                        {" "}
-                        <div>
-                          <p class="text-black font-semibold text-[15px] px-3">
-                            Yellowish Gold Necklace
-                          </p>
-                          <p class=" font-semibold text-[#BD9229] text-[15px] px-3">
-                            £14.95
-                          </p>
+                  {more4You?.map((p) => {
+                    return (
+                      <Col key={p._id}>
+                        <div id="content" class="m-2 relative">
+                          <img
+                            src={p.coverImage.url || ""}
+                            alt="cover img"
+                            class=" w-[45rem] xs:h-[13rem] md:h-[21rem] transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-150"
+                          />
+                          <div class="flex justify-between">
+                            {" "}
+                            <div>
+                              <p class="text-black font-semibold text-[15px] px-3">
+                                {p.name}
+                              </p>
+                              <p class=" font-semibold text-[#BD9229] text-[15px] px-3">
+                                £{p.basePrice}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        {/* <p class="text-[#000000] font-semibold text-[15px] px-3" >£14.95</p> */}
-                      </div>
-                    </div>
-                  </Col>
-
-                  <Col>
-                    <div id="content" class="m-2 relative">
-                      <img
-                        src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
-                        alt=""
-                        class=" w-[45rem] xs:h-[13rem] md:h-[21rem] transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-150"
-                      />
-                      <div class="flex justify-between">
-                        {" "}
-                        <div>
-                          <p class="text-black font-semibold text-[15px] px-3">
-                            Yellowish Gold Necklace
-                          </p>
-                          <p class=" font-semibold text-[#BD9229] text-[15px] px-3">
-                            £14.95
-                          </p>
-                        </div>
-                        {/* <p class="text-[#000000] font-semibold text-[15px] px-3" >£14.95</p> */}
-                      </div>
-                    </div>
-                  </Col>
+                      </Col>
+                    );
+                  })}
                 </Row>
               </Container>
-            </Row>{" "}
+            </Row>
             <br></br>
             <br></br>
           </Container>

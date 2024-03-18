@@ -82,7 +82,15 @@ const App = () => {
         />
         <Route
           path="/productDetails/:currentProdId"
-          element={<ProductDetails categories={categories} filters={filters} />}
+          element={
+            <ProductDetails
+              currentProductId={currentProductId}
+              products={products}
+              categories={categories}
+              filters={filters}
+              setCart={setCart}
+            />
+          }
         />
         <Route
           path="CartPage"

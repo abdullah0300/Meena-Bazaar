@@ -358,7 +358,7 @@ function ProductPage({
                 alignItems: "center",
               }}
             >
-              <Link to={"/ProductDetail"}>
+              <Link to={`/productDetails/${item._id}`}>
                 <div className=" flex flex-col justify-start items-center  md:w-full w-80 xl:px-4 md:px-3 px-3">
                   <div id="content" class="mx-3 my-4 sellingCard relative">
                     <img
