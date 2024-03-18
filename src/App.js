@@ -93,15 +93,15 @@ const App = () => {
           }
         />
         <Route
-          path="CartPage"
+          path="/cartView"
           element={<CartPage categories={categories} filters={filters} />}
         />
         <Route
-          path="Checkout"
+          path="/Checkout"
           element={<Checkout categories={categories} filters={filters} />}
         />
         <Route
-          path="ProfilePage"
+          path="/ProfilePage"
           element={<ProfilePage categories={categories} filters={filters} />}
         />
       </Routes>

@@ -11,15 +11,18 @@ function CartProduct({ product, getSavedCartProducts }) {
 
   function increment() {
     setCount((prev) => prev + 1);
-    get(product.uId).then((obj) => {
-      const newObj = JSON.parse(JSON.stringify(obj));
-      newObj.quantity = obj.quantity + 1;
-      console.log(newObj);
-      set(product.uId, newObj);
-    });
-    setTimeout(() => {
-      getSavedCartProducts();
-    }, 200);
+    get(product.uId)
+      .then((obj) => {
+        const newObj = JSON.parse(JSON.stringify(obj));
+        newObj.quantity = obj.quantity + 1;
+        console.log(newObj);
+        set(product.uId, newObj);
+      })
+      .then(() => {
+        setTimeout(() => {
+          getSavedCartProducts();
+        }, 200);
+      });
   }
 
   function decrement() {
@@ -32,15 +35,18 @@ function CartProduct({ product, getSavedCartProducts }) {
     });
 
     if (bool) {
-      get(product.uId).then((obj) => {
-        const newObj = JSON.parse(JSON.stringify(obj));
-        newObj.quantity = obj.quantity - 1;
-        console.log(newObj);
-        set(product.uId, newObj);
-      });
-      setTimeout(() => {
-        getSavedCartProducts();
-      }, 200);
+      get(product.uId)
+        .then((obj) => {
+          const newObj = JSON.parse(JSON.stringify(obj));
+          newObj.quantity = obj.quantity - 1;
+          console.log(newObj);
+          set(product.uId, newObj);
+        })
+        .then(() => {
+          setTimeout(() => {
+            getSavedCartProducts();
+          }, 200);
+        });
     }
   }
 
@@ -57,10 +63,10 @@ function CartProduct({ product, getSavedCartProducts }) {
         >
           <span>
             <img
-              src="https://ik.imagekit.io/mctozv7td/il_794xN.4468885032_1d4w.webp?updatedAt=1709929434188"
+              src={product.image || ""}
               alt={product.nm}
               style={{ maxWidth: "none" }}
-              className="sm:p-1 xs:m-0 md:px-12 md:py-3 sm:w-[7rem] mt-2 w-[10rem]  md:w-[16rem] "
+              className="sm:p-1 xs:m-0 md:px-12 md:py-3 w-[7rem] mt-2 w-[10rem]  md:w-[16rem] "
             />
           </span>
           <span>
@@ -72,7 +78,7 @@ function CartProduct({ product, getSavedCartProducts }) {
               }}
             >
               <div className="px-2 py-3 mt-1 mb-3">
-                <p className="text-[#000000] font-bold text-lg">Necklace</p>
+                <p className="text-[#000000] font-bold text-md">{product.nm}</p>
                 <ul className="text-xs">
                   {product.variants?.map((vr) => {
                     return (

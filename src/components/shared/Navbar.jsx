@@ -130,15 +130,18 @@ const Navbar = ({ categories, filters }) => {
               </div>
               <div className=" w-1/5 flex gap-3 justify-center">
                 <GoPerson
-                  className=" text-3xl text-primaryColor cursor-pointer"
+                  className="text-3xl text-primaryColor cursor-pointer"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 />
-                <div className="relative">
+                <div className="relative" style={{ cursor: "pointer" }}>
                   <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
                     10
                   </span>
-                  <FiShoppingCart className=" text-3xl text-primaryColor" />
+                  <FiShoppingCart
+                    onClick={() => nav("/CartPage")}
+                    className=" text-3xl text-primaryColor"
+                  />
                 </div>
               </div>
             </div>
