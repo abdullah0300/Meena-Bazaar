@@ -43,10 +43,10 @@ const ArticleSection = ({ products, categories }) => {
           <button
             key={item._id}
             onClick={() => handleCategoryChange(item._id)}
-            className={` px-3 py-[10px] rounded-md  text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedCategory && "bg-[#BD9229] text-white"
+            className={` px-3 py-[10px] rounded-md  text-base tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedCategory && "bg-[#BD9229] text-white"
               }`}
           >
-            {item.name}
+            <span style={{ fontSize: '15px' }}>{item.name}</span>
           </button>
         ))}
       </div>
