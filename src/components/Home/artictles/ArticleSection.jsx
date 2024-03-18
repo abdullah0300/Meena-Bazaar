@@ -1,48 +1,31 @@
 import React from "react";
 import ArticleCard from "./ArticleCard";
-import { articles } from "../../../data/articles";
 import MainBtn from "../../shared/MainBtn";
 
-const articleJewwllaryNames = [
-  {
-    id: 1,
-    title: "BRIDAL SET",
-  },
-  {
-    id: 2,
-    title: "NECKLACE SET",
-  },
-  {
-    id: 3,
-    title: "RINGS",
-  },
-  {
-    id: 4,
-    title: "EARINGS",
-  },
-  {
-    id: 5,
-    title: "EARINGS TIKKA SET",
-  },
-  {
-    id: 6,
-    title: "TIKKA",
-  },
-  {
-    id: 7,
-    title: "JUMMAR",
-  },
-  {
-    id: 8,
-    title: "AMERICAN DIAMOND",
-  },
-  {
-    id: 9,
-    title: "TIKKA",
-  },
-];
+const ArticleSection = ({ products, categories }) => {
+  const [selectedCategory, setSelectedCategory] = React.useState(
+    categories[0]?._id
+  );
+  const [filteredProducts, setFilteredProducts] = React.useState([]);
 
-const ArticleSection = () => {
+  React.useEffect(() => {
+    // Update filtered products when selected category changes
+    const filProds = products.filter((p) => p.category === selectedCategory);
+    setFilteredProducts(filProds);
+  }, [selectedCategory, products]);
+
+  // Handle category change
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // Set default category and filtered products on mount
+  React.useEffect(() => {
+    setSelectedCategory(categories[0]?._id);
+    const filProds = products.filter((p) => p.category === categories[0]?._id);
+    setFilteredProducts(filProds);
+  }, []);
+
   return (
     <div className=" flex flex-col justify-center items-center gap-8 md:px-[60px] px-[16px] my-20">
       {/* HEADINGS SECTION */}
@@ -56,13 +39,15 @@ const ArticleSection = () => {
       </div>
 
       <div className=" w-[100%] flex items-center gap-4 mx-auto overflow-x-auto whitespace-nowrap scrollbarHide">
-        {articleJewwllaryNames.map((item, i) => (
+        {categories?.map((item, i) => (
           <button
+            key={item._id}
+            onClick={() => handleCategoryChange(item._id)}
             className={` px-3 py-[10px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-              item.id === 1 && "bg-[#BD9229] text-white"
+              item._id === selectedCategory && "bg-[#BD9229] text-white"
             }`}
           >
-            {item.title}
+            {item.name}
           </button>
         ))}
       </div>
@@ -70,8 +55,8 @@ const ArticleSection = () => {
       {/* CARDS SECTION */}
       <div className=" flex w-full overflow-x-auto whitespace-nowrap scrollbarHide">
         <div className="md:grid md:grid-cols-4 flex md:gap-2">
-          {articles.map((item, i) => (
-            <ArticleCard key={i} {...item} />
+          {filteredProducts?.slice(0, 8).map((item) => (
+            <ArticleCard key={item._id} product={item} />
           ))}
         </div>
       </div>

@@ -19,7 +19,7 @@ const Home = ({ categories, filters, products }) => {
       <BestSellingSection products={products} />
       <BannerSection />
       {/* <TestinomialSection /> */}
-      <ArticleSection />
+      <ArticleSection categories={categories} products={products} />
       <ShopSection />
       <BlogSection />
       <Footer />
