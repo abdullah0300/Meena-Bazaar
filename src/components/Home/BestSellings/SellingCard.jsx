@@ -6,7 +6,7 @@ const SellingCard = ({ product }) => {
   const nav = useNavigate();
 
   return (
-    <Link to={"/ProductDetail"}>
+    <Link to={`/productDetails/${product._id}`}>
       <div className=" flex flex-col gap-2 justify-start items-center md:w-full w-80 xl:px-4 md:px-3 px-3">
         <div className=" sellingCard relative">
           <img
