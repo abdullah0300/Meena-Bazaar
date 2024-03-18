@@ -11,98 +11,93 @@ import axios from "axios";
 import { apiUrl } from "./data/env";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "./components/shared/Footer";
+import SubCollectionProductPage from "./components/SubComponenets/SubCollectionProductPage";
 // import axios from "axios";
 // import { apiUrl } from "./data/env";
 
 const App = () => {
-  const [categories, setCategories] = useState([]);
-  const [filters, setFilters] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
+  const [filters, setFilters] = React.useState([]);
+  const [currentCategory, setCurrentCategory] = React.useState("");
+
+  const [currentProductId, setCurrentProductId] = React.useState("");
+
+  const [cart, setCart] = React.useState([]);
+  console.log("app");
 
   React.useEffect(() => {
-    const cats = axios
+    axios
       .get(`${apiUrl}/api/v1/category?sort=priority`)
-      .then((res) => {
-        setCategories(res.data.data);
-        return res.data.data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return false;
-      });
+      .then((res) => setCategories(res.data.data))
+      .catch((err) => console.log(err));
 
-    const fils = axios
+    axios
       .get(`${apiUrl}/api/v1/filter?sort=priority`)
-      .then((res) => {
-        setFilters(res.data.data);
-        return res.data.data;
-      })
-      .catch((err) => {
-        console.error(err);
-        return false;
-      });
+      .then((res) => setFilters(res.data.data))
+      .catch((err) => console.error(err));
 
-    const products = axios
-      .get(`${apiUrl}/api/v1/product?sort=priority`)
-      .then((res) => {
-        setProducts(res.data.data);
-        return res.data.data;
-      })
-      .catch((err) => {
-        console.error(err);
-        return false;
-      });
-  });
+    axios
+      .get(`${apiUrl}/api/v1/product`)
+      .then((res) => setProducts(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <BrowserRouter>
-      <ScrollToTop>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                categories={categories}
-                filters={filters}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="Collection"
-            element={<Collection categories={categories} filters={filters} />}
-          />
-          <Route
-            path="ProductPage/:categoryId/:currentCategoryName"
-            element={
-              <ProductPage
-                categories={categories}
-                filters={filters}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="ProductDetail"
-            element={<ProductDetails categories={categories} filters={filters} />}
-          />
-          <Route
-            path="CartPage"
-            element={<CartPage categories={categories} filters={filters} />}
-          />
-          <Route
-            path="Checkout"
-            element={<Checkout categories={categories} filters={filters} />}
-          />
-          <Route
-            path="ProfilePage"
-            element={<ProfilePage categories={categories} filters={filters} />}
-          />
-        </Routes>
-        
-
-      </ScrollToTop>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="Collection"
+          element={<Collection categories={categories} filters={filters} />}
+        />
+        <Route
+          path="ProductPage/:categoryId/:currentCategoryName"
+          element={
+            <ProductPage
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="SubCollectionPage/:categoryId/:filId/:filNameEnc"
+          element={
+            <SubCollectionProductPage
+              categories={categories}
+              filters={filters}
+              products={products}
+            />
+          }
+        />
+        <Route
+          path="/productDetails/:currentProdId"
+          element={<ProductDetails categories={categories} filters={filters} />}
+        />
+        <Route
+          path="CartPage"
+          element={<CartPage categories={categories} filters={filters} />}
+        />
+        <Route
+          path="Checkout"
+          element={<Checkout categories={categories} filters={filters} />}
+        />
+        <Route
+          path="ProfilePage"
+          element={<ProfilePage categories={categories} filters={filters} />}
+        />
+      </Routes>
     </BrowserRouter>
-
   );
 };
 export default App;

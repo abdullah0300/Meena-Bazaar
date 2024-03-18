@@ -1,8 +1,9 @@
 import React from "react";
 import SellingCard from "./SellingCard";
-import { bestSelling } from "../../../data/BestSelling";
 
 const BestSellingSection = ({ products }) => {
+  const filteredProds = products?.filter((p) => p.featured).slice(0, 4);
+
   return (
     <>
       <div className=" flex flex-col justify-center items-center gap-8 md:px-[60px] px-[16px] my-20">
@@ -12,14 +13,14 @@ const BestSellingSection = ({ products }) => {
             STUNNING DESIGN
           </h4>
           <h3 className="md:text-4xl text-2xl text-headingColor capitalize">
-            Our Best Selling
+            Our Featured Products
           </h3>
         </div>
 
         {/* CARDS SECTION */}
         <div className=" flex w-full overflow-x-auto whitespace-nowrap scrollbarHide">
           <div className="md:grid md:grid-cols-4 flex md:gap-2">
-            {products?.slice(0, 4).map((item, i) => (
+            {filteredProds?.map((item, i) => (
               <SellingCard key={i} product={item} />
             ))}
           </div>

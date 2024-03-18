@@ -6,7 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import InputField from "../InputField";
 import axios from "axios";
@@ -55,6 +55,8 @@ const navLinksStatic = [
 ];
 
 const Navbar = ({ categories, filters }) => {
+  const nav = useNavigate();
+
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openSubLinks, setOpenSubLinks] = useState(false);
   const [hoveredLinkId, setHoveredLinkId] = useState(null);
@@ -70,7 +72,9 @@ const Navbar = ({ categories, filters }) => {
       );
 
       // Map filters to sublinks
-      const sublinks = categoryFilters.map((filter) => filter.name);
+      const sublinks = categoryFilters.map((filter) => {
+        return { name: filter.name, _id: filter._id };
+      });
 
       return {
         id: category._id,
@@ -156,6 +160,7 @@ const Navbar = ({ categories, filters }) => {
                   //     "2px solid #BD9229",
                   // }}
                   onMouseEnter={() => handleMouseEnter(item.id)}
+                  onClick={() => nav(`/ProductPage/${item.id}/${item.title}`)}
                 >
                   {item.title}
                 </li>
@@ -172,19 +177,27 @@ const Navbar = ({ categories, filters }) => {
         </nav>
         {subLinks && (
           <div
-            className={`${subLinks ? " opacity-[1]" : "opacity-[0]"
-              } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
+            className={`${
+              subLinks ? " opacity-[1]" : "opacity-[0]"
+            } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
             onMouseLeave={handleMouseLeave}
           >
             <ul className=" flex justify-center items-center gap-16 ">
               {subLinks &&
-                subLinks?.map((item, i) => {
+                subLinks?.map((item) => {
                   return (
                     <li
-                      key={i}
+                      key={item._id}
+                      onClick={() =>
+                        nav(
+                          `/SubCollectionPage/${hoveredLinkId}/${
+                            item._id
+                          }/${item.name.replaceAll("/", "@")}`
+                        )
+                      }
                       className=" text-headingColor xl:text-sm md:text-[13px] cursor-pointer sublinksHover"
                     >
-                      {item}
+                      {item.name}
                     </li>
                   );
                 })}
@@ -202,8 +215,9 @@ const Navbar = ({ categories, filters }) => {
         </div>
         <nav className=" absolute z-50 w-full bg-white  flex justify-between items-center px-4">
           <div
-            className={` ${isMobileOpen ? "hidden" : "flex"
-              }  justify-between w-full py-3`}
+            className={` ${
+              isMobileOpen ? "hidden" : "flex"
+            }  justify-between w-full py-3`}
           >
             <FiMenu
               className=" text-3xl text-primaryColor"
@@ -211,7 +225,11 @@ const Navbar = ({ categories, filters }) => {
             />
             <span className="h-[40px]">
               <Link to={"/"}>
-                <img src={logo} alt="logo" className=" h-[100px] w-[100px] mt-[-25px]" />
+                <img
+                  src={logo}
+                  alt="logo"
+                  className=" h-[100px] w-[100px] mt-[-25px]"
+                />
               </Link>
             </span>
             <div className="relative">
@@ -222,8 +240,9 @@ const Navbar = ({ categories, filters }) => {
             </div>
           </div>
           <div
-            className={` ${isMobileOpen ? "flex" : "hidden"
-              }  justify-between w-full py-3`}
+            className={` ${
+              isMobileOpen ? "flex" : "hidden"
+            }  justify-between w-full py-3`}
           >
             <div className=" flex flex-col w-full gap-3">
               <div className="flex justify-between w-full">
