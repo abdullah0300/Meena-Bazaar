@@ -31,7 +31,7 @@ const ArticleSection = ({ products, categories }) => {
       {/* HEADINGS SECTION */}
       <div className=" flex flex-col gap-1 text-center">
         <h4 className=" md:text-base text-sm text-primaryColor uppercase">
-          News & BLOGS
+          Dazzling & Stylish
         </h4>
         <h3 className="md:text-4xl text-2xl text-headingColor capitalize">
           Jewelery Articles
@@ -43,9 +43,8 @@ const ArticleSection = ({ products, categories }) => {
           <button
             key={item._id}
             onClick={() => handleCategoryChange(item._id)}
-            className={` px-3 py-[10px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-              item._id === selectedCategory && "bg-[#BD9229] text-white"
-            }`}
+            className={` px-3 py-[10px] rounded-md  text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedCategory && "bg-[#BD9229] text-white"
+              }`}
           >
             {item.name}
           </button>

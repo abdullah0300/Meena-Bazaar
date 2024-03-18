@@ -24,7 +24,9 @@ const ArticleCard = ({ product }) => {
       <h2 className=" xl:text-xl text-base font-medium mx-auto text-center">
         {product.name}
       </h2>
-      <span className=" xl:text-base text-sm text-primaryColor">FROM</span>
+      <span className=" xl:text-base text-sm text-primaryColor">
+      £ {product.basePrice}
+        </span>
     </div>
   );
 };
