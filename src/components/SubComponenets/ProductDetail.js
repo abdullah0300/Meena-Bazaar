@@ -181,9 +181,8 @@ function ProductDetails({ categories, filters }) {
                       <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
                         {articleJewwllaryNames.map((item, i) => (
                           <button
-                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-                              item.id === 1 && "bg-[#BD9229] text-white"
-                            }`}
+                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item.id === 1 && "bg-[#BD9229] text-white"
+                              }`}
                           >
                             {item.title}
                           </button>
@@ -243,8 +242,8 @@ function ProductDetails({ categories, filters }) {
                   </p>
                   <div class="flex flex-col justify-center items-center ">
                     <Link to="/CartPage">
-                      <button className=" mx-4 relative secondaryBtnTop1 lg:w-[362px]    sm:w-32 h-11">
-                        <span className=" flex items-center justify-center lg:w-[362px] sm:w-32 h-11 text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
+                      <button className=" mx-4 relative secondaryBtnTop1 lg:w-[362px]   w-32 h-11">
+                        <span className=" flex items-center justify-center lg:w-[362px] w-32 h-11 text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
                           Add to Cart
                         </span>
                       </button>
