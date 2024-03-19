@@ -13,6 +13,7 @@ import axios from "axios";
 import { apiUrl } from "../../data/env";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../../utils/auth";
+import { keys } from "idb-keyval";
 
 const navLinksStatic = [
   {
@@ -69,6 +70,28 @@ const closeModalFunc = () => {
 
 const Navbar = ({ categories, filters }) => {
   const nav = useNavigate();
+  const auth = useAuth();
+  const [cartLength, setCartLength] = React.useState(0);
+  const token = localStorage.getItem("token");
+
+  React.useEffect(() => {
+    keys().then((keys) => setCartLength(keys.length));
+
+    if (token && !auth?.loggedIn) {
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      axios
+        .get(`${apiUrl}/api/v1/customer/verifyToken`, config)
+        .then((res) => {
+          // console.log(res.data);
+          auth.login(token, res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("Search Products");
 
@@ -120,19 +143,6 @@ const Navbar = ({ categories, filters }) => {
   // Login Funcs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
-
-  // const handleShowPassword = () => {
-  //   setShowPassword((preve) => !preve);
-  // };
-
-  // const token = localStorage.getItem("token");
-
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  const auth = useAuth();
-
-  // const redirectPath = location.state?.path || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -270,10 +280,11 @@ const Navbar = ({ categories, filters }) => {
                   />
                 )}
                 <div className="relative" style={{ cursor: "pointer" }}>
-                  <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
-                    {/* TODO: get cart items */}
-                    10
-                  </span>
+                  {cartLength === 0 ? null : (
+                    <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
+                      {cartLength}
+                    </span>
+                  )}
                   <FiShoppingCart
                     onClick={() => nav("/cartView")}
                     className=" text-3xl text-primaryColor"
