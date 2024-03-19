@@ -71,7 +71,7 @@ function SubCollectionProductPage({ products, categories, filters }) {
                       //   ) || ""
                       // }
                       alt={item.name}
-                      class=" w-full h-60"
+                      class="w-60 h-60"
                     />
 
                     <div className=" sellingCard-hover-div">

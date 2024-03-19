@@ -12,7 +12,7 @@ const SellingCard = ({ product }) => {
           <img
             src={product.coverImage?.url || ""}
             alt="img"
-            className=" w-full h-60"
+            className="w-60 h-60"
           />
           <div className=" sellingCard-hover-div">
             <p className="w-full text-center text-sm font-semibold uppercase">

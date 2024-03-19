@@ -9,7 +9,7 @@ const ArticleCard = ({ product }) => {
         <img
           src={product.coverImage?.url || ""}
           alt="img"
-          className=" w-full h-60"
+          className="w-60 h-60"
         />
         <div
           className=" sellingCard-hover-div"
@@ -25,8 +25,8 @@ const ArticleCard = ({ product }) => {
         {product.name}
       </h2>
       <span className=" xl:text-base text-sm text-primaryColor">
-      £ {product.basePrice}
-        </span>
+        £ {product.basePrice}
+      </span>
     </div>
   );
 };
