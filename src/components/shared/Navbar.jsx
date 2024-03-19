@@ -70,6 +70,8 @@ const closeModalFunc = () => {
 const Navbar = ({ categories, filters }) => {
   const nav = useNavigate();
 
+  const [searchQuery, setSearchQuery] = useState("Search Products");
+
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openSubLinks, setOpenSubLinks] = useState(false);
   const [hoveredLinkId, setHoveredLinkId] = useState(null);
@@ -242,7 +244,10 @@ const Navbar = ({ categories, filters }) => {
                 <div className=" flex  border rounded-3xl h-9  pl-4">
                   <input
                     placeholder="Search"
-                    //TODO: autofill search with email bugfix
+                    defaultValue={"Search Products"}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setSearchQuery("")}
                     id="search"
                     className=" w-64 focus:outline-none rounded-3xl px-2"
                   />
