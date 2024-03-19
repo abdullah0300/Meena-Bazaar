@@ -139,7 +139,7 @@ const Navbar = ({ categories, filters }) => {
                     10
                   </span>
                   <FiShoppingCart
-                    onClick={() => nav("/CartPage")}
+                    onClick={() => nav("/cartView")}
                     className=" text-3xl text-primaryColor"
                   />
                 </div>
