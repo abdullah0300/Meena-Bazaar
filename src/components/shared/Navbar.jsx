@@ -275,6 +275,7 @@ const Navbar = ({ categories, filters }) => {
                 ) : (
                   <GoPerson
                     className="text-3xl text-primaryColor cursor-pointer"
+                    id="show-modal-icon"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
                   />
