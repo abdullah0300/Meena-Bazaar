@@ -14,6 +14,65 @@ import { set, keys, values, clear } from "idb-keyval";
 import { v4 } from "uuid";
 import { apiUrl } from "../../data/env";
 
+function VariantComp({ variant, handleSelectVariant }) {
+  const [selectedOption, setSelectedOption] = React.useState("");
+
+  return (
+    <>
+      <p style={{ fontFamily: "Tw Cen MT" }}>
+        {variant.variantType}:{" "}
+        <span className="text-[#BD9229]">
+          {selectedOption?.optionValue || ""}
+        </span>
+      </p>
+      <Container className="border-y py-3 mx-auto text-center p-0 m-0">
+        <Row className="flex  flex-wrap">
+          <Col className="flex py-2" xs={12} sm={12} md={6} lg={6} xl={6}>
+            <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
+              {variant.options?.map((item, i) => (
+                <button
+                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
+                    item._id === selectedOption._id && "bg-[#BD9229] text-white"
+                  }`}
+                  onClick={() => {
+                    setSelectedOption(item);
+                    // handleSelectVariant(item.optionValue, variant[i]);
+                  }}
+                >
+                  {item.optionValue}
+                </button>
+              ))}
+            </div>
+          </Col>
+          <Col className="flex py-2 " xs={12} sm={12} md={6} lg={6} xl={6}>
+            {/* <Button
+        className="cursor-pointer border-[#59A0B8] font-semibold bg-[#59A0B8] text-white grow hover:border-[#59A0B8] hover:bg-[#59A0B8] py-3 px-4 rounded-none text-md"
+      >
+        Choose Strenght
+      </Button> */}
+          </Col>
+
+          {/* <Col
+      className="flex py-1 "
+      xs={12}
+      sm={12}
+      md={4}
+      lg={4}
+      xl={4}
+    >
+      <Button
+        variant="primary"
+        className="cursor-pointer border-black font-semibold bg-black text-white grow hover:border-black py-2 px-3 rounded-none text-sm"
+      >
+        BUY IT NOW
+      </Button>
+    </Col> */}
+        </Row>
+      </Container>
+    </>
+  );
+}
+
 function ProductDetails({ products, categories, filters, setCart }) {
   const { currentProdId } = useParams();
   const nav = useNavigate();
@@ -59,8 +118,8 @@ function ProductDetails({ products, categories, filters, setCart }) {
     console.log(`selected ${value}`);
   };
 
-  const handleSelectVariant = (value) => {
-    const [currOption] = currentVariantType.options.filter(
+  const handleSelectVariant = (value, currVarType) => {
+    const [currOption] = currVarType.options.filter(
       (opt) => opt.optionValue === value
     );
 
@@ -76,9 +135,9 @@ function ProductDetails({ products, categories, filters, setCart }) {
 
     setSelectedVariants((vars) => {
       const newVars = vars.map((vr) => {
-        if (vr.variantType === currentVariantType.variantType)
+        if (vr.variantType === currVarType.variantType)
           return {
-            variantType: currentVariantType.variantType,
+            variantType: currVarType.variantType,
             chosenOption: currOption,
           };
         else
@@ -284,63 +343,13 @@ function ProductDetails({ products, categories, filters, setCart }) {
                 <p class="text-xl py-3 font-semibold px-2 text-black mb-2">
                   £{(filteredProd?.basePrice * count).toFixed(2)}
                 </p>
-                <p style={{ fontFamily: "Tw Cen MT" }}>
-                  Color: <span className="text-[#BD9229]">Gold</span>
-                </p>
-                <Container className="border-y py-3 mx-auto text-center p-0 m-0">
-                  <Row className="flex  flex-wrap">
-                    <Col
-                      className="flex py-2"
-                      xs={12}
-                      sm={12}
-                      md={6}
-                      lg={6}
-                      xl={6}
-                    >
-                      <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
-                        {[]?.map((item, i) => (
-                          <button
-                            className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-                              item.id === 1 && "bg-[#BD9229] text-white"
-                            }`}
-                          >
-                            {item.title}
-                          </button>
-                        ))}
-                      </div>
-                    </Col>
-                    <Col
-                      className="flex py-2 "
-                      xs={12}
-                      sm={12}
-                      md={6}
-                      lg={6}
-                      xl={6}
-                    >
-                      {/* <Button
-                        className="cursor-pointer border-[#59A0B8] font-semibold bg-[#59A0B8] text-white grow hover:border-[#59A0B8] hover:bg-[#59A0B8] py-3 px-4 rounded-none text-md"
-                      >
-                        Choose Strenght
-                      </Button> */}
-                    </Col>
-
-                    {/* <Col
-                      className="flex py-1 "
-                      xs={12}
-                      sm={12}
-                      md={4}
-                      lg={4}
-                      xl={4}
-                    >
-                      <Button
-                        variant="primary"
-                        className="cursor-pointer border-black font-semibold bg-black text-white grow hover:border-black py-2 px-3 rounded-none text-sm"
-                      >
-                        BUY IT NOW
-                      </Button>
-                    </Col> */}
-                  </Row>
-                </Container>
+                {filteredProd?.variants?.map((variant) => (
+                  <VariantComp
+                    key={variant._id}
+                    variant={variant}
+                    handleSelectVariant={handleSelectVariant}
+                  />
+                ))}
 
                 <p class="py-2"></p>
                 <div class="flex px-2">
