@@ -17,16 +17,16 @@ import Footer from "../shared/Footer";
 
 function ProfilePage({ filters, categories }) {
   const navigate = useNavigate();
-  const auth = { user: { firstName: '', lastName: '', email: '', phone: '', city: '', postcode: '', address: '' } };
+  const auth = useAuth();
   const handleLogout = () => {
     auth.logout();
     navigate("/");
   };
 
-  const [phone, setPhone] = React.useState(auth.user.phone || "");
-  const [city, setCity] = React.useState(auth.user.city || "");
-  const [postcode, setPostcode] = React.useState(auth.user.postcode || "");
-  const [address, setAddress] = React.useState(auth.user.address || "");
+  const [phone, setPhone] = React.useState(auth.user?.phone || "");
+  const [city, setCity] = React.useState(auth.user?.city || "");
+  const [postcode, setPostcode] = React.useState(auth.user?.postcode || "");
+  const [address, setAddress] = React.useState(auth.user?.address || "");
 
   const [currPass, setCurrPass] = React.useState("");
   const [newPass, setNewPass] = React.useState("");
@@ -97,7 +97,7 @@ function ProfilePage({ filters, categories }) {
 
   return (
     <div class="mt-0 md:mt-10 ">
-      <Navbar />
+      <Navbar categories={categories} filters={filters} />
       <Container className="mt-5 flex lg:justify-center mx-auto ml-72">
         <Row>
           <Col xs={12}>
@@ -117,7 +117,7 @@ function ProfilePage({ filters, categories }) {
                   label="Full Name"
                   disabled
                   defaultValue={
-                    `${auth.user.firstName} ${auth.user.lastName}` || "N/A"
+                    `${auth.user?.firstName} ${auth.user?.lastName}` || "N/A"
                   }
                   InputProps={{
                     readOnly: true,
@@ -129,7 +129,7 @@ function ProfilePage({ filters, categories }) {
                 <TextField
                   id="standard-read-only-input"
                   label="Email"
-                  defaultValue={auth.user.email || "N/A"}
+                  defaultValue={auth.user?.email || "N/A"}
                   disabled
                   InputProps={{
                     readOnly: true,
@@ -141,7 +141,7 @@ function ProfilePage({ filters, categories }) {
                 <TextField
                   id="standard-read-only-input"
                   label="Phone Number"
-                  defaultValue={auth.user.phone || "N/A"}
+                  defaultValue={auth.user?.phone || "N/A"}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   style={{ width: "381px" }}
@@ -151,7 +151,7 @@ function ProfilePage({ filters, categories }) {
                 {/* <TextField
                   id="standard-read-only-input"
                   label="City"
-                  defaultValue={auth.user.city || "N/A"}
+                  defaultValue={auth.user?.city || "N/A"}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -164,7 +164,7 @@ function ProfilePage({ filters, categories }) {
                 >
                   {/* <Form.Label>City</Form.Label> */}
                   <Form.Select
-                    defaultValue={auth.user.city || "Select City"}
+                    defaultValue={auth.user?.city || "Select City"}
                     onChange={(e) => setCity(e.target.value)}
                     value={city || "Select City"}
                   >
@@ -178,7 +178,7 @@ function ProfilePage({ filters, categories }) {
                 <TextField
                   id="standard-read-only-input"
                   label="Address"
-                  defaultValue={auth.user.address || "Choose Address"}
+                  defaultValue={auth.user?.address || "Choose Address"}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   style={{ width: "381px" }}
@@ -188,7 +188,7 @@ function ProfilePage({ filters, categories }) {
                 <TextField
                   id="standard-read-only-input"
                   label="Postcode"
-                  defaultValue={auth.user.postcode || "Choose Postcode"}
+                  defaultValue={auth.user?.postcode || "Choose Postcode"}
                   value={postcode}
                   onChange={(e) => setPostcode(e.target.value)}
                   style={{ width: "381px" }}

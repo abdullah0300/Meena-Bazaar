@@ -108,7 +108,9 @@ const App = () => {
             <Route
               path="/ProfilePage"
               element={
-                <ProfilePage categories={categories} filters={filters} />
+                <RequireAuth>
+                  <ProfilePage categories={categories} filters={filters} />
+                </RequireAuth>
               }
             />
           </Routes>
