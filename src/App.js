@@ -103,7 +103,11 @@ const App = () => {
             />
             <Route
               path="/Checkout"
-              element={<Checkout categories={categories} filters={filters} />}
+              element={
+                <RequireAuth>
+                  <Checkout categories={categories} filters={filters} />
+                </RequireAuth>
+              }
             />
             <Route
               path="/ProfilePage"
