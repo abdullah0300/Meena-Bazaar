@@ -6,12 +6,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import InputField from "../InputField";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
-import bootstrapBundleMin from "bootstrap/dist/js/bootstrap.bundle.min";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../../utils/auth";
 
@@ -157,8 +156,72 @@ const Navbar = ({ categories, filters }) => {
       });
   };
 
-  const handleSignup = (e) => {
-    e.preventDefault();
+  // Signup Funcs & Hooks
+  const [emailRegister, setEmailRegister] = useState("");
+  const [passwordRegister, setPasswordRegister] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [focusedValue, setFocusedValue] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSignup = () => {
+    const id = toast.loading("Signing Up...");
+
+    const payload = {
+      firstName,
+      lastName,
+      email: emailRegister,
+      password: passwordRegister,
+      passwordConfirm: passwordRegister,
+    };
+    if (postcode) payload.postcode = postcode;
+    if (city) payload.city = city;
+    if (address) payload.address = address;
+    if (phone) payload.phone = phone;
+
+    // console.log(payload);
+
+    axios
+      .post(`${apiUrl}/api/v1/customer/signup`, payload)
+      .then((res) => {
+        // console.log(res.data);
+        toast.success("Registered Successfully", {
+          id,
+        });
+        auth.login(res.data.token, res.data.data);
+
+        setTimeout(() => {
+          closeModalFunc();
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response?.data?.message || "Could Not Sign Up", {
+          id,
+        });
+      });
+  };
+
+  const verifyPostcode = (pstcd) => {
+    const id = toast.loading("Verifying Postcode...");
+    axios
+      .get(`https://api.postcodes.io/postcodes/${pstcd}`)
+      .then((res) => {
+        // const destLat = res.data.result.latitude;
+        // const destLon = res.data.result.longitude;
+        toast.success("Verified!", { id });
+      })
+      .catch((err) => {
+        console.log(err);
+        setPostcode("");
+        toast.error(
+          err.response?.data?.error || "Postcode could not be verified!",
+          { id }
+        );
+      });
   };
 
   return (
@@ -179,6 +242,7 @@ const Navbar = ({ categories, filters }) => {
                 <div className=" flex  border rounded-3xl h-9  pl-4">
                   <input
                     placeholder="Search"
+                    //TODO: autofill search with email bugfix
                     id="search"
                     className=" w-64 focus:outline-none rounded-3xl px-2"
                   />
@@ -188,22 +252,28 @@ const Navbar = ({ categories, filters }) => {
                 </div>
               </div>
               <div className=" w-1/5 flex gap-3 justify-center">
-                <GoPerson
-                  className="text-3xl text-primaryColor cursor-pointer"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                />
                 {auth.loggedIn ? (
-                  <div className="relative" style={{ cursor: "pointer" }}>
-                    <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
-                      10
-                    </span>
-                    <FiShoppingCart
-                      onClick={() => nav("/cartView")}
-                      className=" text-3xl text-primaryColor"
-                    />
-                  </div>
-                ) : null}
+                  <GoPerson
+                    className="text-3xl text-primaryColor cursor-pointer"
+                    onClick={() => nav("/ProfilePage")}
+                  />
+                ) : (
+                  <GoPerson
+                    className="text-3xl text-primaryColor cursor-pointer"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  />
+                )}
+                <div className="relative" style={{ cursor: "pointer" }}>
+                  <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
+                    {/* TODO: get cart items */}
+                    10
+                  </span>
+                  <FiShoppingCart
+                    onClick={() => nav("/cartView")}
+                    className=" text-3xl text-primaryColor"
+                  />
+                </div>
               </div>
             </div>
             <ul
@@ -388,7 +458,7 @@ const Navbar = ({ categories, filters }) => {
                 className="text-2xl font-semibold text-[#161616]"
                 style={{ textAlign: "center" }}
               >
-                {type === "login" ? "Log In" : "Sign In"}
+                {type === "login" ? "Log In" : "Create New Account"}
               </h3>
 
               {/* FORM */}
@@ -414,10 +484,55 @@ const Navbar = ({ categories, filters }) => {
                   </>
                 ) : (
                   <>
-                    <InputField label={"Username"} />
-                    <InputField label={"Email"} />
-                    <InputField label={"Password"} />
-                    <InputField label={"Confirm Password"} />
+                    <InputField
+                      label={"First Name"}
+                      val={firstName}
+                      onchng={(e) => setFirstName(e.target.value)}
+                    />
+                    <InputField
+                      label={"Last Name"}
+                      val={lastName}
+                      onchng={(e) => setLastName(e.target.value)}
+                    />
+                    <InputField
+                      label={"City"}
+                      val={city}
+                      onchng={(e) => setCity(e.target.value)}
+                      selectEl={true}
+                    />
+                    <InputField
+                      label={"Post Code"}
+                      val={postcode}
+                      onchng={(e) => setPostcode(e.target.value)}
+                      onFocus={(e) => setFocusedValue(e.target.value)}
+                      onBlur={(e) => {
+                        if (e.target.value !== focusedValue)
+                          verifyPostcode(e.target.value);
+                      }}
+                    />
+                    <InputField
+                      label={"Address"}
+                      val={address}
+                      onchng={(e) => setAddress(e.target.value)}
+                    />
+                    <InputField
+                      typ="tel"
+                      label={"Phone"}
+                      val={phone}
+                      onchng={(e) => setPhone(e.target.value)}
+                    />
+                    <InputField
+                      typ="email"
+                      label={"Email"}
+                      val={emailRegister}
+                      onchng={(e) => setEmailRegister(e.target.value)}
+                    />
+                    <InputField
+                      typ="password"
+                      label={"Password"}
+                      val={passwordRegister}
+                      onchng={(e) => setPasswordRegister(e.target.value)}
+                    />
                   </>
                 )}
 
@@ -434,7 +549,17 @@ const Navbar = ({ categories, filters }) => {
                   <button
                     className=" bg-primaryColor text-[#FFFFFF] py-3"
                     aria-label="Close"
-                    onClick={handleSignup}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (
+                        firstName &&
+                        lastName &&
+                        passwordRegister &&
+                        emailRegister
+                      )
+                        handleSignup();
+                      else toast.error("Please enter all the necessary info!");
+                    }}
                   >
                     Sign Up
                   </button>
