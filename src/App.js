@@ -15,6 +15,9 @@ import SubCollectionProductPage from "./components/SubComponenets/SubCollectionP
 // import axios from "axios";
 // import { apiUrl } from "./data/env";
 
+import { AuthProvider } from "./utils/auth";
+import { RequireAuth } from "./utils/RequireAuth";
+
 const App = () => {
   const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
@@ -45,66 +48,72 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              categories={categories}
-              filters={filters}
-              products={products}
+      <AuthProvider>
+        <ScrollToTop>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  categories={categories}
+                  filters={filters}
+                  products={products}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="Collection"
-          element={<Collection categories={categories} filters={filters} />}
-        />
-        <Route
-          path="ProductPage/:categoryId/:currentCategoryName"
-          element={
-            <ProductPage
-              categories={categories}
-              filters={filters}
-              products={products}
+            <Route
+              path="Collection"
+              element={<Collection categories={categories} filters={filters} />}
             />
-          }
-        />
-        <Route
-          path="SubCollectionPage/:categoryId/:filId/:filNameEnc"
-          element={
-            <SubCollectionProductPage
-              categories={categories}
-              filters={filters}
-              products={products}
+            <Route
+              path="ProductPage/:categoryId/:currentCategoryName"
+              element={
+                <ProductPage
+                  categories={categories}
+                  filters={filters}
+                  products={products}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/productDetails/:currentProdId"
-          element={
-            <ProductDetails
-              currentProductId={currentProductId}
-              products={products}
-              categories={categories}
-              filters={filters}
-              setCart={setCart}
+            <Route
+              path="SubCollectionPage/:categoryId/:filId/:filNameEnc"
+              element={
+                <SubCollectionProductPage
+                  categories={categories}
+                  filters={filters}
+                  products={products}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/cartView"
-          element={<CartPage categories={categories} filters={filters} />}
-        />
-        <Route
-          path="/Checkout"
-          element={<Checkout categories={categories} filters={filters} />}
-        />
-        <Route
-          path="/ProfilePage"
-          element={<ProfilePage categories={categories} filters={filters} />}
-        />
-      </Routes>
+            <Route
+              path="/productDetails/:currentProdId"
+              element={
+                <ProductDetails
+                  currentProductId={currentProductId}
+                  products={products}
+                  categories={categories}
+                  filters={filters}
+                  setCart={setCart}
+                />
+              }
+            />
+            <Route
+              path="/cartView"
+              element={<CartPage categories={categories} filters={filters} />}
+            />
+            <Route
+              path="/Checkout"
+              element={<Checkout categories={categories} filters={filters} />}
+            />
+            <Route
+              path="/ProfilePage"
+              element={
+                <ProfilePage categories={categories} filters={filters} />
+              }
+            />
+          </Routes>
+        </ScrollToTop>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

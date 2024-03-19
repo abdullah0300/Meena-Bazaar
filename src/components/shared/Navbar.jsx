@@ -6,11 +6,14 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import InputField from "../InputField";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
+import bootstrapBundleMin from "bootstrap/dist/js/bootstrap.bundle.min";
+import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../../utils/auth";
 
 const navLinksStatic = [
   {
@@ -53,6 +56,17 @@ const navLinksStatic = [
     title: "Scarves/Hijab",
   },
 ];
+
+const closeModalFunc = () => {
+  const trigger = (el, etype, custom) => {
+    const evt = custom ?? new Event(etype, { bubbles: true });
+    el.dispatchEvent(evt);
+  };
+  setTimeout(
+    (_) => trigger(document.querySelector(`#close-button-icon`), `click`),
+    100
+  );
+};
 
 const Navbar = ({ categories, filters }) => {
   const nav = useNavigate();
@@ -97,10 +111,55 @@ const Navbar = ({ categories, filters }) => {
     const sub = navLinks.filter(
       (item) => item.id === hoveredLinkId && hoveredLinkId
     );
-    console.log(sub[0]?.sublinks);
+    // console.log(sub[0]?.sublinks);
     setSubLinks(sub[0]?.sublinks);
   }, [hoveredLinkId]);
   const [type, setType] = useState("login");
+
+  // Login Funcs
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [showPassword, setShowPassword] = useState(false);
+
+  // const handleShowPassword = () => {
+  //   setShowPassword((preve) => !preve);
+  // };
+
+  // const token = localStorage.getItem("token");
+
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  const auth = useAuth();
+
+  // const redirectPath = location.state?.path || "/";
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const id = toast.loading("Logging In...");
+
+    axios
+      .post(`${apiUrl}/api/v1/customer/login`, { email, password })
+      .then((res) => {
+        // console.log(res.data);
+        toast.success("Logged In Successfully", {
+          id,
+        });
+        auth.login(res.data.token, res.data.data);
+
+        setTimeout(closeModalFunc, 350);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response?.data?.message || "Could Not Log In", {
+          id,
+        });
+      });
+  };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -134,15 +193,17 @@ const Navbar = ({ categories, filters }) => {
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 />
-                <div className="relative" style={{ cursor: "pointer" }}>
-                  <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
-                    10
-                  </span>
-                  <FiShoppingCart
-                    onClick={() => nav("/cartView")}
-                    className=" text-3xl text-primaryColor"
-                  />
-                </div>
+                {auth.loggedIn ? (
+                  <div className="relative" style={{ cursor: "pointer" }}>
+                    <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
+                      10
+                    </span>
+                    <FiShoppingCart
+                      onClick={() => nav("/cartView")}
+                      className=" text-3xl text-primaryColor"
+                    />
+                  </div>
+                ) : null}
               </div>
             </div>
             <ul
@@ -317,6 +378,7 @@ const Navbar = ({ categories, filters }) => {
               <div className=" flex justify-end">
                 <IoCloseCircleOutline
                   className=" text-[40px] text-[#bd9229] cursor-pointer"
+                  id="close-button-icon"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 />
@@ -334,8 +396,18 @@ const Navbar = ({ categories, filters }) => {
                 {/* INPUTS FOR LOG IN */}
                 {type === "login" ? (
                   <>
-                    <InputField label={"Email"} />
-                    <InputField label={"Password"} />
+                    <InputField
+                      label={"Email"}
+                      val={email}
+                      onchng={(e) => setEmail(e.target.value)}
+                      typ={"email"}
+                    />
+                    <InputField
+                      label={"Password"}
+                      val={password}
+                      onchng={(e) => setPassword(e.target.value)}
+                      typ="password"
+                    />
                     <p className=" text-[#161616] text-right underline">
                       Forgot your password?
                     </p>
@@ -351,22 +423,38 @@ const Navbar = ({ categories, filters }) => {
 
                 {/* BUTTON */}
 
-                <button className=" bg-primaryColor text-[#FFFFFF] py-3">
-                  {type === "login" ? "Log In" : "Sign Up"}
-                </button>
+                {type === "login" ? (
+                  <button
+                    className=" bg-primaryColor text-[#FFFFFF] py-3"
+                    onClick={handleLogin}
+                  >
+                    Log In
+                  </button>
+                ) : (
+                  <button
+                    className=" bg-primaryColor text-[#FFFFFF] py-3"
+                    aria-label="Close"
+                    onClick={handleSignup}
+                  >
+                    Sign Up
+                  </button>
+                )}
                 <button
                   className=" bg-[#ACACAC] text-[#FFFFFF] py-3"
                   onClick={() => {
                     setType(type === "login" ? "signup" : "login");
                   }}
                 >
-                  {type === "login" ? "Create An Account" : "Log In"}
+                  {type === "login"
+                    ? "Create An Account"
+                    : "Already have account?"}
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Toaster />
     </>
   );
 };
