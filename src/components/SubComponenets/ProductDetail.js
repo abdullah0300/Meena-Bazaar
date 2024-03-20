@@ -36,7 +36,7 @@ function VariantComp({ variant, handleSelectVariant }) {
                   }`}
                   onClick={() => {
                     setSelectedOption(item);
-                    // handleSelectVariant(item.optionValue, variant[i]);
+                    handleSelectVariant(item.optionValue, variant);
                   }}
                 >
                   {item.optionValue}
@@ -410,42 +410,6 @@ function ProductDetails({ products, categories, filters, setCart }) {
                 {open ? (
                   <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
                     {filteredProd?.overview}
-                  </p>
-                ) : null}
-                {open2 ? (
-                  <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
-                    The Lorem ipsum text is derived from sections 1.10.32 and
-                    1.10.33 of Cicero's De finibus bonorum et malorum.The
-                    physical source may have been the 1914 Loeb Classical
-                    Library edition of De finibus, where the Latin text,
-                    presented on the left-hand (even) pages, breaks off on page
-                    34 with "Neque porro quisquam est qui do-" and continues on
-                    page 36 with "lorem ipsum ...", suggesting that the galley
-                    type of that page was mixed up to make the dummy text seen
-                    today.
-                  </p>
-                ) : null}
-                <div
-                  className="flex justify-between px-2 bg-[#E9E9E9] my-2 items-baseline "
-                  onClick={changeIcon3}
-                >
-                  <p className=" text-[#383838] text-[15px]  pt-3 py-3 text-base  font-semibold flex">
-                    {" "}
-                    Delivery Information
-                  </p>
-                  <p className="">{icon3 ? <FiPlus /> : <FiMinus />}</p>
-                </div>{" "}
-                {open3 ? (
-                  <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
-                    The Lorem ipsum text is derived from sections 1.10.32 and
-                    1.10.33 of Cicero's De finibus bonorum et malorum.The
-                    physical source may have been the 1914 Loeb Classical
-                    Library edition of De finibus, where the Latin text,
-                    presented on the left-hand (even) pages, breaks off on page
-                    34 with "Neque porro quisquam est qui do-" and continues on
-                    page 36 with "lorem ipsum ...", suggesting that the galley
-                    type of that page was mixed up to make the dummy text seen
-                    today.
                   </p>
                 ) : null}
               </div>
