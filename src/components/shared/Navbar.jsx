@@ -383,11 +383,31 @@ const Navbar = ({ categories, filters }) => {
                 />
               </Link>
             </span>
-            <div className="relative">
-              <span className=" absolute -right-2 -top-1 text-center text-white text-xs bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
-                10
-              </span>
-              <FiShoppingCart className=" text-3xl text-primaryColor" />
+            <div className=" w-1/5 flex gap-3 justify-center">
+              {auth.loggedIn ? (
+                <GoPerson
+                  className="text-3xl text-primaryColor cursor-pointer"
+                  onClick={() => nav("/ProfilePage")}
+                />
+              ) : (
+                <GoPerson
+                  className="text-3xl text-primaryColor cursor-pointer"
+                  id="show-modal-icon"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                />
+              )}
+              <div className="relative" style={{ cursor: "pointer" }}>
+                {cartLength === 0 ? null : (
+                  <span className=" absolute -right-2 -top-1 text-center text-white text-xs bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
+                    {cartLength}
+                  </span>
+                )}
+                <FiShoppingCart
+                  onClick={() => nav("/cartView")}
+                  className=" text-3xl text-primaryColor"
+                />
+              </div>
             </div>
           </div>
           <div
