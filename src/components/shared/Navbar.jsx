@@ -282,7 +282,7 @@ const Navbar = ({ categories, filters }) => {
                 )}
                 <div className="relative" style={{ cursor: "pointer" }}>
                   {cartLength === 0 ? null : (
-                    <span className=" absolute -right-2 -top-2 text-center text-white text-sm bg-primaryColor rounded-[50%] py-[1px] px-[3px] ">
+                    <span className=" absolute -right-4 -top-2 text-center text-primaryColor text-md  rounded-[50%] py-[1px] px-[3px] ">
                       {cartLength}
                     </span>
                   )}
