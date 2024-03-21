@@ -103,22 +103,24 @@ function CartProduct({ product, getSavedCartProducts }) {
                   </div>{" "}
                   <div className="flex justify-between items-center">
                     <span className="flex px-1">
-                      <p class="text-[#707070] text-sm pr-2">Quantity</p>
+                      <p class="text-[#707070] text-sm pr-2">Quantity:</p>
                       <p
-                        class="px-3 py-1 mx-1 bg-white text-[#bd9229]  font-semibold text-[15px] shadow-sm  cursor-pointer"
+                        class="md:px-3 md:py-1 md:mx-1 mx-1 text-[#bd9229] font-semibold text-[15px]   cursor-pointer"
                         onClick={decrement}
                       >
                         -
                       </p>
-                      <p class="px-3 py-1 mx-1 bg-white text-[#bd9229]  text-[15px] shadow-sm ">
+                      <p
+                        class="md:px-3 md:py-1 md:mx-1 mx-2 text-[#bd9229]  text-[15px]  ">
                         {count}
                       </p>
                       <p
-                        class="px-3 py-1 mx-1 bg-white text-[#bd9229]  font-semibold text-[15px] shadow-sm  cursor-pointer"
+                        class="md:px-3 md:py-1 md:mx-1 mx-1 text-[#bd9229]  font-semibold text-[15px]   cursor-pointer"
                         onClick={increment}
                       >
                         +
                       </p>
+
                       <RiDeleteBin5Line
                         onClick={(e) => {
                           e.preventDefault();
