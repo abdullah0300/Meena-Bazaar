@@ -66,7 +66,7 @@ function CartProduct({ product, getSavedCartProducts }) {
               src={product.image || ""}
               alt={product.nm}
               style={{ maxWidth: "none" }}
-              className="sm:p-1 xs:m-0 md:px-12 md:py-3 w-[7rem] mt-2 w-[10rem]  md:w-[16rem] "
+              className="sm:p-1 xs:m-0 md:px-12 md:py-3 w-[7rem] mt-2 w-[10rem] h-[8rem]  md:w-[16rem] md:h-[12rem]"
             />
           </span>
           <span>
