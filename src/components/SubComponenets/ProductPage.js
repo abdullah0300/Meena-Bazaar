@@ -302,7 +302,7 @@ function ProductPage({
         {currentCategoryName}
       </h2>
 
-      <Container fluid>
+      {/* <Container fluid class="flex justify-center items-baseline">
         <Row>
           <Col xs={4} md={2}>
             <p class="font-semibold py-3 text-center text-[#59A0B8]">
@@ -341,11 +341,11 @@ function ProductPage({
             </div>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
 
       <Container
         fluid
-        class="d-flex justify-content-center mb-5 align-items-center"
+        class="flex justify-center items-baseline"
       >
         <Row xs={2} md={4}>
           {filteredProducts?.map((item) => (
@@ -359,7 +359,7 @@ function ProductPage({
               }}
             >
               <Link to={`/productDetails/${item._id}`}>
-                <div className=" flex flex-col justify-start items-center  md:w-full w-80 xl:px-4 md:px-3 px-3">
+                <div className=" flex flex-col justify-start items-center  md:w-full md:w-80 w-[14rem]  xl:px-4 md:px-3 px-3">
                   <div id="content" class="mx-3 my-4 sellingCard relative">
                     <img
                       src={item.coverImage?.url}
