@@ -37,29 +37,24 @@ const HeroSection = () => {
           style={{ width: "10px", height: "10px" }}
         ></button>
       </div>
-      <div className="carousel-inner md:mt-0  h-[20rem] w-full ">
-        <div className="carousel-item active relative h-[20rem] w-full">
+      <div className="carousel-inner md:mt-0  h-[20rem] w-[30rem] md:w-full ">
+        <div className="carousel-item active relative h-[20rem] w-[30rem] md:w-full">
           <img
-            src={carousel1}
-            className=" absolute h-[20rem] w-full object-cover"
+            src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
+            className=" absolute h-[20rem] md:w-full w-[30rem] object-cover"
             alt="carousel1"
           />
-          <div className=" relative w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
-            <h2 className=" md:text-3xl text-1xl font-medium leading-snug">
-              Happiness comes in the boxof Jewellery
-            </h2>
-            <p className=" md:text-3md text-base font-extralight">
-              Our full range of Asian ,Indian and Pakistani Bridal Jewellery
-            </p>
+          {/* <div className=" relative w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
+
             <button className=' rounded-[32px] text-center bg-[#fff] px-[30px] py-[5px] text-primaryColor text-xl hover:text-[#fff] hover:bg-[#BD9229] transition-all duration-300 ease-in-out transform-gpu hover:scale-105 group'>
               <span className='transform translate-y-[8] transition duration-300 ease-in-out group-hover:translate-y-[200px]'>
                 View All
               </span>
-            </button>          </div>
+            </button>          </div> */}
         </div>
-        <div className="carousel-item relative h-[20rem] w-full">
-          <img src={carousel2} className=" absolute h-[20rem] w-full object-cover" alt="carousel1" />
-          <div className="  relative w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
+        <div className="carousel-item relative h-[20rem]  w-[30rem] md:w-full">
+          <img src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079" className=" absolute h-[20rem]  w-[30rem] md:w-full object-cover" alt="carousel1" />
+          {/* <div className="  relative  w-[30rem] md:w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
             <h2 className="md:text-5xl text-3xl font-medium">
               Happiness comes in the boxof Jewellery
             </h2>
@@ -71,11 +66,11 @@ const HeroSection = () => {
                 View All
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
-        <div className="carousel-item relative h-[20rem] w-full">
-          <img src={carousel1} className=" absolute h-[20rem] w-full object-cover" alt="carousel1" />
-          <div className="  relative w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
+        <div className="carousel-item relative h-[20rem]  w-[30rem] md:w-full">
+          <img src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079" className=" absolute h-[20rem]  w-[30rem] md:w-full object-cover" alt="carousel1" />
+          {/* <div className="  relative  w-[30rem] md:w-full flex flex-col gap-4 justify-center items-center text-white h-full text-center md:px-0 px-4">
             <h2 className="md:text-5xl text-3xl font-medium">
               Happiness comes in the boxof Jewellery
             </h2>
@@ -87,7 +82,7 @@ const HeroSection = () => {
                 View All
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
