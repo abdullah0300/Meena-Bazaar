@@ -431,7 +431,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
                           onClick={() => nav(`/productDetails/${p._id}`)}
                         >
                           <img
-                            src={p.coverImage.url || ""}
+                            src={p.coverImage?.url || ""}
                             alt="cover img"
                             class=" w-[45rem] xs:h-[13rem] md:h-[21rem] transition ease-in-out delay-75  hover:-translate-y-1 hover:scale-105 duration-150"
                           />

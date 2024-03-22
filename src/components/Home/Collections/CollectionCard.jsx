@@ -9,7 +9,11 @@ const CollectionCard = ({ cat }) => {
       <div
         className={`relative xl:h-[400px] md:h-[320px] h-48 flex justify-center items-center group transition-all duration-300 ease-in-out`}
       >
-        <img src={cat.image.url} alt="img" className="absolute h-full w-full" />
+        <img
+          src={cat.image?.url || ""}
+          alt="img"
+          className="absolute h-full w-full"
+        />
         <button
           className=" px-4 py-[11px] bg-white text-black text-lg opacity-[0] transform translate-y-8 transition duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0"
           onClick={() => nav(`/ProductPage/${cat._id}/${cat.name}`)}

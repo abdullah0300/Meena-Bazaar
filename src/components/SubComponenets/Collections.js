@@ -19,18 +19,6 @@ function Collection({ categories, filters }) {
       >
         <Row xs={2} md={3}>
           {categories?.map((item, i) => {
-            let url = item.image.url;
-            // if (item.image.url)
-            //   url = item.image.url.replace(
-            //     "/category",
-            //     "/tr:ar-1-1,w-285.5/category"
-            //   );
-            // else if (item.image)
-            //   url = item.image.replace(
-            //     "/category",
-            //     "/tr:ar-1-1,w-285.5/category"
-            //   );
-            // else url = "";
             return (
               <Col
                 key={item._id}
@@ -46,7 +34,7 @@ function Collection({ categories, filters }) {
                     <div className=" relative xl:h-[400px] md:h-[320px] h-48  justify-center items-center group transition-all duration-300 ease-in-out">
                       <img
                         className="absolute h-full w-full relative object-cover transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-150"
-                        src={url}
+                        src={item.image?.url || ""}
                         alt={item.name}
                         width="330px"
                         height="270px"
