@@ -5,17 +5,16 @@ const ArticleCard = ({ product }) => {
   const nav = useNavigate();
   return (
     <div className="flex flex-col gap-2 justify-start items-center md:w-full w-80 xl:px-4 md:px-3 px-3">
-      <div className=" sellingCard relative">
+      <div
+        className=" sellingCard relative cursor-pointer"
+        onClick={() => nav(`/productDetails/${product._id}`)}
+      >
         <img
           src={product.coverImage?.url || ""}
           alt="img"
           className="w-60 h-60"
         />
-        <div
-          className=" sellingCard-hover-div"
-          onClick={() => nav(`/productDetails/${product._id}`)}
-          style={{ cursor: "pointer" }}
-        >
+        <div className=" sellingCard-hover-div" style={{ cursor: "pointer" }}>
           <p className="w-full text-center text-sm font-semibold uppercase">
             View Details
           </p>
