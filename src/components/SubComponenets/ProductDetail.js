@@ -425,7 +425,11 @@ function ProductDetails({ products, categories, filters, setCart }) {
                   {more4You?.map((p) => {
                     return (
                       <Col key={p._id}>
-                        <div id="content" class="m-2 relative">
+                        <div
+                          id="content"
+                          class="m-2 relative cursor-pointer"
+                          onClick={() => nav(`/productDetails/${p._id}`)}
+                        >
                           <img
                             src={p.coverImage.url || ""}
                             alt="cover img"
