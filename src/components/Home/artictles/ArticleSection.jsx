@@ -24,7 +24,7 @@ const ArticleSection = ({ products, categories }) => {
     setSelectedCategory(categories[0]?._id);
     const filProds = products.filter((p) => p.category === categories[0]?._id);
     setFilteredProducts(filProds);
-  }, []);
+  }, [products, categories]);
 
   return (
     <div className=" flex flex-col justify-center items-center gap-8 md:px-[60px] px-[16px] my-20">
@@ -43,10 +43,11 @@ const ArticleSection = ({ products, categories }) => {
           <button
             key={item._id}
             onClick={() => handleCategoryChange(item._id)}
-            className={` px-3 py-[10px] rounded-md  text-base tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedCategory && "bg-[#BD9229] text-white"
-              }`}
+            className={` px-3 py-[10px] rounded-md  text-base tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
+              item._id === selectedCategory && "bg-[#BD9229] text-white"
+            }`}
           >
-            <span style={{ fontSize: '15px' }}>{item.name}</span>
+            <span style={{ fontSize: "15px" }}>{item.name}</span>
           </button>
         ))}
       </div>
