@@ -5,6 +5,18 @@ import { Link, Outlet } from "react-router-dom";
 import { del, get, set, values } from "idb-keyval";
 import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
+import { useAuth } from "../../utils/auth";
+
+const showModalFunc = (time = 150) => {
+  const trigger = (el, etype, custom) => {
+    const evt = custom ?? new Event(etype, { bubbles: true });
+    el.dispatchEvent(evt);
+  };
+  setTimeout(
+    (_) => trigger(document.querySelector(`#show-modal-icon`), `click`),
+    time
+  );
+};
 
 function CartProduct({ product, getSavedCartProducts }) {
   const [count, setCount] = React.useState(product.quantity);
@@ -110,8 +122,7 @@ function CartProduct({ product, getSavedCartProducts }) {
                       >
                         -
                       </p>
-                      <p
-                        class="md:px-3 md:py-1 md:mx-1 mx-2 text-[#bd9229]  text-[15px]  ">
+                      <p class="md:px-3 md:py-1 md:mx-1 mx-2 text-[#bd9229]  text-[15px]  ">
                         {count}
                       </p>
                       <p
@@ -196,6 +207,7 @@ function CartProduct({ product, getSavedCartProducts }) {
 
 function CartPage({ categories, filters }) {
   const [cartArr, setCartArr] = React.useState([]);
+  const auth = useAuth();
 
   function getSavedCartProducts() {
     values()
@@ -265,11 +277,25 @@ function CartPage({ categories, filters }) {
                 </div>
 
                 <div class="flex flex-col justify-center items-center pb-5">
-                  <Link to="/checkout">
-                    <button class="bg-[#bd9229] text-white mt-5 px-5  py-2 ">
-                      Go to Checkout
-                    </button>
-                  </Link>
+                  {auth.loggedIn ? (
+                    <Link to="/checkout">
+                      <button class="bg-[#bd9229] text-white mt-5 px-5  py-2 ">
+                        Go to Checkout
+                      </button>
+                    </Link>
+                  ) : (
+                    <a
+                      href
+                      onClick={(e) => {
+                        e.preventDefault();
+                        showModalFunc();
+                      }}
+                    >
+                      <button class="bg-[#bd9229] text-white mt-5 px-5  py-2 ">
+                        Login to Checkout
+                      </button>
+                    </a>
+                  )}
                   <Link to="/">
                     <p class="text-[#bd9229] p-2 underline underline-offset-2">
                       Continue Shopping
