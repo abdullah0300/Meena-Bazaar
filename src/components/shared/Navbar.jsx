@@ -386,12 +386,12 @@ const Navbar = ({ categories, filters }) => {
             <div className=" w-1/5 flex gap-3 justify-center">
               {auth.loggedIn ? (
                 <GoPerson
-                  className="text-3xl text-primaryColor cursor-pointer"
+                  className="text-2xl text-primaryColor cursor-pointer"
                   onClick={() => nav("/ProfilePage")}
                 />
               ) : (
                 <GoPerson
-                  className="text-3xl text-primaryColor cursor-pointer"
+                  className="text-2xl text-primaryColor cursor-pointer"
                   id="show-modal-icon"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
@@ -405,7 +405,7 @@ const Navbar = ({ categories, filters }) => {
                 )}
                 <FiShoppingCart
                   onClick={() => nav("/cartView")}
-                  className=" text-3xl text-primaryColor"
+                  className=" text-2xl text-primaryColor"
                 />
               </div>
             </div>
