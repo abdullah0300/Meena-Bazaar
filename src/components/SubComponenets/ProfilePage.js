@@ -202,12 +202,23 @@ function ProfilePage({ filters, categories }) {
                   style={{ width: "381px" }}
                 />
               </div>
-              <Button
-                className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#0b428b]  text-white px-14 py-2 font-semibold text-sm"
-                onClick={handleChangeDetails}
-              >
-                Save
-              </Button>
+              <div className="d-flex justify-between">
+                <Button
+                  className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#0b428b]  text-white px-14 py-2 font-semibold text-sm"
+                  onClick={handleChangeDetails}
+                >
+                  Save
+                </Button>
+                <Button
+                  className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[#0b428b]  text-white px-14 py-2 font-semibold text-sm"
+                  onClick={() => {
+                    auth.logout();
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
 
               {/* Password Part */}
               <div>
