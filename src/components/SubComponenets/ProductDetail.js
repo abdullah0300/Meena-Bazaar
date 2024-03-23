@@ -31,9 +31,8 @@ function VariantComp({ variant, handleSelectVariant }) {
             <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
               {variant.options?.map((item, i) => (
                 <button
-                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-                    item._id === selectedOption._id && "bg-[#BD9229] text-white"
-                  }`}
+                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedOption._id && "bg-[#BD9229] text-white"
+                    }`}
                   onClick={() => {
                     setSelectedOption(item);
                     handleSelectVariant(item.optionValue, variant);
@@ -234,7 +233,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
           return (
             variant.variantType === productToAdd.variants[i].variantType &&
             variant.chosenOption.optionValue !==
-              productToAdd.variants[i].chosenOption.optionValue
+            productToAdd.variants[i].chosenOption.optionValue
           );
         });
         if (bool) {
@@ -280,11 +279,10 @@ function ProductDetails({ products, categories, filters, setCart }) {
                         {allImages?.slice(1, 5).map((url, i) => (
                           <img
                             key={i + 1}
-                            class={`w-36 h-28 shadow-md ${
-                              i + 1 === currentImageIndex
-                                ? "border-2 border-[#59A0B8]"
-                                : ""
-                            }`}
+                            class={`w-36 h-28 shadow-md ${i + 1 === currentImageIndex
+                              ? "border-2 border-[#59A0B8]"
+                              : ""
+                              }`}
                             alt={`Product Img ${i + 1}`}
                             src={url?.url || ""}
                             onClick={() => handleImageClick(i + 1)}
@@ -314,15 +312,14 @@ function ProductDetails({ products, categories, filters, setCart }) {
                 </Row>
 
                 <Row>
-                  <div class="d-flex flex-row gap-2 py-5 ">
+                  <div class="d-flex flex-row gap-2 py-2 ">
                     {allImages?.slice(1, 5).map((url, y) => (
                       <img
                         key={y + 1}
-                        class={`w-36 h-24 shadow-md  ${
-                          y + 1 === currentImageIndex
-                            ? "border-2 border-[#59A0B8]"
-                            : ""
-                        }`}
+                        class={`w-36 h-24 shadow-md  ${y + 1 === currentImageIndex
+                          ? "border-2 border-[#59A0B8]"
+                          : ""
+                          }`}
                         alt={`Product Img ${y + 1}`}
                         src={url?.url || ""}
                         onClick={() => handleImageClick(y + 1)}
@@ -333,13 +330,14 @@ function ProductDetails({ products, categories, filters, setCart }) {
               </Col>
               {/* -----deatils------ */}
               <Col>
-                <p class="fs-2 px-2 py-3 font-semibold text-[#BD9229]">
+                <p class="title fs-2 px-2 py-1 font-semibold text-[#BD9229] sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
                   {filteredProd?.name}
                 </p>
 
-                <p class="text-[#707070] text-[15px] px-2 pt-2">
+                <p class="description text-[#707070] text-[15px] px-2 pt-2 sm:text-sm md:text-base lg:text-lg xl:text-xl">
                   {filteredProd?.description}
                 </p>
+
                 <p class="text-xl py-3 font-semibold px-2 text-black mb-2">
                   £{(filteredProd?.basePrice * count).toFixed(2)}
                 </p>
@@ -371,24 +369,49 @@ function ProductDetails({ products, categories, filters, setCart }) {
                   </p>
                   <div class="flex flex-col justify-center items-center ">
                     {/* <Link to="/CartPage"> */}
-                    <button
-                      onClick={async (e) => {
-                        e.preventDefault();
-                        const bool = selectedVariants?.every(
-                          (sVar) => sVar.chosenOption !== undefined
-                        );
-                        if (bool) {
-                          await handleAddToCart();
-                        } else {
-                          alert("Select all variants before adding to cart!");
-                        }
-                      }}
-                      className=" mx-4 relative secondaryBtnTop1 lg:w-[362px] w-32 h-11"
-                    >
-                      <span className=" flex items-center justify-center lg:w-[362px] w-32 h-11 text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
-                        Add to Cart
-                      </span>
-                    </button>
+                    <div className="flex justify-center">
+
+                      {/* Button for small screens */}
+                      {/* <button
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          const bool = selectedVariants?.every(
+                            (sVar) => sVar.chosenOption !== undefined
+                          );
+                          if (bool) {
+                            await handleAddToCart();
+                          } else {
+                            alert("Select all variants before adding to cart!");
+                          }
+                        }}
+                        className="mx-4 relative secondaryBtnTop1 lg:hidden w-32 h-11"
+                      >
+                        <span className="flex items-center justify-center w-full h-full text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
+                          Add to Cart
+                        </span>
+                      </button> */}
+
+                      {/* Button for desktop screens */}
+                      <button
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          const bool = selectedVariants?.every(
+                            (sVar) => sVar.chosenOption !== undefined
+                          );
+                          if (bool) {
+                            await handleAddToCart();
+                          } else {
+                            alert("Select all variants before adding to cart!");
+                          }
+                        }}
+                        className="mx-4 relative secondaryBtnTop1 hidden lg:block lg:w-[362px] w-32 h-11"
+                      >
+                        <span className="flex items-center justify-center w-full h-full text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
+                          Add to Cart
+                        </span>
+                      </button>
+                    </div>
+
                     {/* </Link> */}
                   </div>
                 </div>
