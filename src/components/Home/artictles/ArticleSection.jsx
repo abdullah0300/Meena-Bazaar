@@ -1,10 +1,15 @@
 import React from "react";
 import ArticleCard from "./ArticleCard";
-import MainBtn from "../../shared/MainBtn";
+// import MainBtn from "../../shared/MainBtn";
+import { useNavigate } from "react-router-dom";
 
 const ArticleSection = ({ products, categories }) => {
+  const nav = useNavigate();
   const [selectedCategory, setSelectedCategory] = React.useState(
     categories[0]?._id
+  );
+  const [selectedCategoryName, setSelectedCategoryName] = React.useState(
+    categories[0]?.name
   );
   const [filteredProducts, setFilteredProducts] = React.useState([]);
 
@@ -15,13 +20,15 @@ const ArticleSection = ({ products, categories }) => {
   }, [selectedCategory, products]);
 
   // Handle category change
-  const handleCategoryChange = (category) => {
+  const handleCategoryChange = (category, catName) => {
     setSelectedCategory(category);
+    setSelectedCategoryName(catName);
   };
 
   // Set default category and filtered products on mount
   React.useEffect(() => {
     setSelectedCategory(categories[0]?._id);
+    setSelectedCategoryName(categories[0]?.name);
     const filProds = products.filter((p) => p.category === categories[0]?._id);
     setFilteredProducts(filProds);
   }, [products, categories]);
@@ -42,7 +49,7 @@ const ArticleSection = ({ products, categories }) => {
         {categories?.map((item, i) => (
           <button
             key={item._id}
-            onClick={() => handleCategoryChange(item._id)}
+            onClick={() => handleCategoryChange(item._id, item.name)}
             className={` px-3 py-[10px] rounded-md  text-base tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
               item._id === selectedCategory && "bg-[#BD9229] text-white"
             }`}
@@ -60,7 +67,22 @@ const ArticleSection = ({ products, categories }) => {
           ))}
         </div>
       </div>
-      <MainBtn />
+      <button
+        className=" rounded-[32px] text-center bg-[#fff] px-[80px] py-[10px] text-primaryColor text-xl hover:text-[#fff] hover:bg-[#BD9229] transition-all duration-300 ease-in-out transform-gpu hover:scale-105 group"
+        onClick={(e) => {
+          e.preventDefault();
+          nav(
+            `/productPage/${selectedCategory}/${selectedCategoryName.replaceAll(
+              "/",
+              "@"
+            )}`
+          );
+        }}
+      >
+        <span className="transform translate-y-[8] transition duration-300 ease-in-out group-hover:translate-y-[200px]">
+          View All
+        </span>
+      </button>
     </div>
   );
 };
