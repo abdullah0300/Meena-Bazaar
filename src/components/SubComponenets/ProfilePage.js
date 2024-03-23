@@ -101,7 +101,15 @@ function ProfilePage({ filters, categories }) {
       <Container className="mt-5 flex lg:justify-center mx-auto ml-72">
         <Row>
           <Col xs={12}>
-            <p className="mt-3  font-bold my-3 text-xl">My Profile</p>
+            <div className="d-flex justify-between">
+              <p className="mt-3  font-bold my-3 text-xl">My Profile</p>
+              <Button
+                className="border-0 rounded-full bg-[#bd9229] hover:bg-[#0b428b]  text-white px-6 py-1 font-semibold text-sm"
+                onClick={() => navigate("/myOrders")}
+              >
+                My Orders
+              </Button>
+            </div>
             <Box
               className="mt- ml-2"
               component="form"

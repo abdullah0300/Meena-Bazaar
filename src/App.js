@@ -17,6 +17,7 @@ import SubCollectionProductPage from "./components/SubComponenets/SubCollectionP
 
 import { AuthProvider } from "./utils/auth";
 import { RequireAuth } from "./utils/RequireAuth";
+import MyOrder from "./components/SubComponenets/orderPage";
 
 const App = () => {
   const [products, setProducts] = React.useState([]);
@@ -114,6 +115,14 @@ const App = () => {
               element={
                 <RequireAuth>
                   <ProfilePage categories={categories} filters={filters} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/myOrders"
+              element={
+                <RequireAuth>
+                  <MyOrder categories={categories} filters={filters} />
                 </RequireAuth>
               }
             />
