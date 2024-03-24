@@ -18,6 +18,7 @@ import SubCollectionProductPage from "./components/SubComponenets/SubCollectionP
 import { AuthProvider } from "./utils/auth";
 import { RequireAuth } from "./utils/RequireAuth";
 import MyOrder from "./components/SubComponenets/orderPage";
+import SearchProductPage from "./components/SubComponenets/SearchProductPage";
 
 const App = () => {
   const [products, setProducts] = React.useState([]);
@@ -73,6 +74,16 @@ const App = () => {
                   categories={categories}
                   filters={filters}
                   products={products}
+                />
+              }
+            />
+            <Route
+              path="/searchProductPage/:query"
+              element={
+                <SearchProductPage
+                  products={products}
+                  categories={categories}
+                  filters={filters}
                 />
               }
             />

@@ -243,11 +243,31 @@ const Navbar = ({ categories, filters }) => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setSearchQuery("")}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        nav(
+                          `/searchProductPage/${searchQuery.replaceAll(
+                            "/",
+                            "@"
+                          )}`
+                        );
+                      }
+                    }}
                     id="search"
                     className=" w-64 focus:outline-none rounded-3xl px-2"
                   />
                   <span className=" flex items-center rounded-e-3xl px-3 bg-primaryColor">
-                    <IoSearch className=" text-white text-xl" />
+                    <IoSearch
+                      className=" text-white text-xl"
+                      onClick={() => {
+                        nav(
+                          `/searchProductPage/${searchQuery.replaceAll(
+                            "/",
+                            "@"
+                          )}`
+                        );
+                      }}
+                    />
                   </span>
                 </div>
               </div>
