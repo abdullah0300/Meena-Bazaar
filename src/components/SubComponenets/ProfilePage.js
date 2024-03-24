@@ -108,7 +108,7 @@ function ProfilePage({ filters, categories }) {
             <div className="d-flex justify-between">
               <p className="mt-3  font-bold my-3 text-xl">My Profile</p>
               <Button
-                className="border-0 rounded-full bg-[#bd9229] hover:bg-[#0b428b]  text-white px-6 py-1 font-semibold text-sm"
+                className="border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white px-6 py-1 font-semibold text-sm"
                 onClick={() => navigate("/myOrders")}
               >
                 My Orders
@@ -125,6 +125,7 @@ function ProfilePage({ filters, categories }) {
             >
               <div>
                 <TextField
+                  className=" w-[381px]"
                   id="standard-read-only-input"
                   label="Full Name"
                   disabled
@@ -134,11 +135,11 @@ function ProfilePage({ filters, categories }) {
                   InputProps={{
                     readOnly: true,
                   }}
-                  style={{ width: "381px" }}
                 />
               </div>
               <div>
                 <TextField
+                  className="w-[381px]"
                   id="standard-read-only-input"
                   label="Email"
                   defaultValue={auth.user?.email || "N/A"}
@@ -151,6 +152,7 @@ function ProfilePage({ filters, categories }) {
               </div>
               <div>
                 <TextField
+                  className="w-[381px]"
                   id="standard-read-only-input"
                   label="Phone Number"
                   defaultValue={auth.user?.phone || "N/A"}
@@ -222,13 +224,13 @@ function ProfilePage({ filters, categories }) {
               </div>
               <div className="d-flex justify-between">
                 <Button
-                  className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#0b428b]  text-white px-14 py-2 font-semibold text-sm"
+                  className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white px-14 py-2 font-semibold text-sm"
                   onClick={handleChangeDetails}
                 >
                   Save
                 </Button>
                 <Button
-                  className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[#0b428b]  text-white px-14 py-2 font-semibold text-sm"
+                  className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[red]  text-white px-14 py-2 font-semibold text-sm"
                   onClick={() => {
                     auth.logout();
                     navigate("/");
@@ -264,7 +266,7 @@ function ProfilePage({ filters, categories }) {
                 </div>
               </div>
               <Button
-                className="mt-16 border-0 mb-5 rounded-full bg-[#bd9229]  hover:bg-[#0b428b] text-white px-14 py-2 font-semibold text-sm"
+                className="mt-16 border-0 mb-5 rounded-full bg-[#bd9229]  hover:bg-[#bd9229] text-white px-14 py-2 font-semibold text-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   if (currPass && newPass) handleChangePassword();
