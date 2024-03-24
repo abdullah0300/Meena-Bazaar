@@ -43,7 +43,7 @@ function MyOrder({ categories, filters }) {
   }, []);
 
   return (
-    <div class="mt-36 md:mt-52 ">
+    <div class=" ">
       <Navbar categories={categories} filters={filters} />
       <h1 class="fs-2 font-bold py-5 text-center">My Orders</h1>
       <Container className="md:w-50 bg-light md:rounded-[50px]">

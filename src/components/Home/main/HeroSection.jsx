@@ -45,14 +45,14 @@ const HeroSection = () => {
         <div className="carousel-item relative">
           <img
             src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
-            className="w-full h-auto object-contain md:mt-0.5 mt-5"
+            className="w-full h-auto object-contain  md:mt-0.5 mt-[5rem]"
             alt="carousel2"
           />
         </div>
         <div className="carousel-item relative">
           <img
             src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
-            className="w-full h-auto object-contain md:mt-0.5 mt-5"
+            className="w-full h-auto object-contain  md:mt-0.5 mt-[5rem]"
             alt="carousel3"
           />
         </div>
