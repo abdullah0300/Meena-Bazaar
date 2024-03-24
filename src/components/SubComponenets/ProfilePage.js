@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/auth";
 import { Form } from "react-bootstrap";
-import { cityArray } from "../../utils/data";
+import { countriesArray } from "../../utils/data";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
 import toast, { Toaster } from "react-hot-toast";
@@ -25,6 +25,8 @@ function ProfilePage({ filters, categories }) {
 
   const [phone, setPhone] = React.useState(auth.user?.phone || "");
   const [city, setCity] = React.useState(auth.user?.city || "");
+  const [country, setCountry] = React.useState(auth.user?.country || "");
+  const [state, setState] = React.useState(auth.user?.state || "");
   const [postcode, setPostcode] = React.useState(auth.user?.postcode || "");
   const [address, setAddress] = React.useState(auth.user?.address || "");
 
@@ -35,6 +37,8 @@ function ProfilePage({ filters, categories }) {
     const payload = {};
     if (phone) payload.phone = phone;
     if (city) payload.city = city;
+    if (city) payload.country = country;
+    if (city) payload.state = state;
     if (postcode) payload.postcode = postcode;
     if (address) payload.address = address;
 
@@ -156,15 +160,6 @@ function ProfilePage({ filters, categories }) {
                 />
               </div>
               <div>
-                {/* <TextField
-                  id="standard-read-only-input"
-                  label="City"
-                  defaultValue={auth.user?.city || "N/A"}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  style={{ width: "381px" }}
-                /> */}
                 <Form.Group
                   as={Col}
                   controlId=""
@@ -172,12 +167,15 @@ function ProfilePage({ filters, categories }) {
                 >
                   {/* <Form.Label>City</Form.Label> */}
                   <Form.Select
-                    defaultValue={auth.user?.city || "Select City"}
-                    onChange={(e) => setCity(e.target.value)}
-                    value={city || "Select City"}
+                    defaultValue={auth.user?.country || "Select Country"}
+                    onChange={(e) => setCountry(e.target.value)}
+                    value={country || "Select Country"}
                   >
-                    {cityArray?.map((city) => (
-                      <option key={city}>{city}</option>
+                    <option hidden selected>
+                      Select Country
+                    </option>
+                    {countriesArray?.map((cntry) => (
+                      <option key={cntry}>{cntry}</option>
                     ))}
                   </Form.Select>
                 </Form.Group>
@@ -185,10 +183,20 @@ function ProfilePage({ filters, categories }) {
               <div>
                 <TextField
                   id="standard-read-only-input"
-                  label="Address"
-                  defaultValue={auth.user?.address || "Choose Address"}
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  label="City"
+                  defaultValue={auth.user?.city || "N/A"}
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  style={{ width: "381px" }}
+                />
+              </div>
+              <div>
+                <TextField
+                  id="standard-read-only-input"
+                  label="State/Province"
+                  defaultValue={auth.user?.state || "N/A"}
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
                   style={{ width: "381px" }}
                 />
               </div>
@@ -199,6 +207,16 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.postcode || "Choose Postcode"}
                   value={postcode}
                   onChange={(e) => setPostcode(e.target.value)}
+                  style={{ width: "381px" }}
+                />
+              </div>
+              <div>
+                <TextField
+                  id="standard-read-only-input"
+                  label="Address"
+                  defaultValue={auth.user?.address || "Choose Address"}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   style={{ width: "381px" }}
                 />
               </div>

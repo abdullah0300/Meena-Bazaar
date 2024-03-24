@@ -174,6 +174,8 @@ const Navbar = ({ categories, filters }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
   const [postcode, setPostcode] = useState("");
   const [focusedValue, setFocusedValue] = useState("");
   const [address, setAddress] = useState("");
@@ -191,6 +193,8 @@ const Navbar = ({ categories, filters }) => {
     };
     if (postcode) payload.postcode = postcode;
     if (city) payload.city = city;
+    if (country) payload.country = country;
+    if (state) payload.state = state;
     if (address) payload.address = address;
     if (phone) payload.phone = phone;
 
@@ -214,25 +218,6 @@ const Navbar = ({ categories, filters }) => {
         toast.error(err.response?.data?.message || "Could Not Sign Up", {
           id,
         });
-      });
-  };
-
-  const verifyPostcode = (pstcd) => {
-    const id = toast.loading("Verifying Postcode...");
-    axios
-      .get(`https://api.postcodes.io/postcodes/${pstcd}`)
-      .then((res) => {
-        // const destLat = res.data.result.latitude;
-        // const destLon = res.data.result.longitude;
-        toast.success("Verified!", { id });
-      })
-      .catch((err) => {
-        console.log(err);
-        setPostcode("");
-        toast.error(
-          err.response?.data?.error || "Postcode could not be verified!",
-          { id }
-        );
       });
   };
 
@@ -532,20 +517,25 @@ const Navbar = ({ categories, filters }) => {
                       onchng={(e) => setLastName(e.target.value)}
                     />
                     <InputField
+                      label={"Country"}
+                      val={country}
+                      onchng={(e) => setCountry(e.target.value)}
+                      selectEl={true}
+                    />
+                    <InputField
+                      label={"State/Province"}
+                      val={state}
+                      onchng={(e) => setState(e.target.value)}
+                    />
+                    <InputField
                       label={"City"}
                       val={city}
                       onchng={(e) => setCity(e.target.value)}
-                      selectEl={true}
                     />
                     <InputField
                       label={"Post Code"}
                       val={postcode}
                       onchng={(e) => setPostcode(e.target.value)}
-                      onFocus={(e) => setFocusedValue(e.target.value)}
-                      onBlur={(e) => {
-                        if (e.target.value !== focusedValue)
-                          verifyPostcode(e.target.value);
-                      }}
                     />
                     <InputField
                       label={"Address"}

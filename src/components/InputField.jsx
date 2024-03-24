@@ -1,5 +1,5 @@
 import React from "react";
-import { cityArray } from "../utils/data";
+import { countriesArray } from "../utils/data";
 
 const InputField = ({
   typ = "text",
@@ -15,15 +15,15 @@ const InputField = ({
       <label className=" text-[#4D4D4D] text-md">{label}</label>
       {selectEl ? (
         <select
-          defaultValue="Select City (optional)"
+          defaultValue="Select Country"
           onChange={onchng}
           className=" w-full h-12 border border-[#B9B9B9] p-2 outline-none"
         >
           <option selected hidden>
-            Select City
+            Select Country
           </option>
-          {cityArray?.map((city) => (
-            <option key={city}>{city}</option>
+          {countriesArray?.map((cntry) => (
+            <option key={cntry}>{cntry}</option>
           ))}
         </select>
       ) : (
