@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const data = [
   {
@@ -111,21 +112,21 @@ const Footer = () => {
                 <hr className='w-12 my-1 rounded-lg' style={{ border: "3px solid #BD9229" }} />
               </div>
               <div className=' flex flex-col gap-3 capitalize text-[#E5E5E5]'>
-                <p>Phone: +394304095209</p>
-                <p>support@company.com</p>
+                <p>Phone: +44 7403 113223</p>
+                <p>support@meenabazaarbytaj.com</p>
               </div>
             </div>
             <div className=' flex justify-start items-center gap-3 ml-[-20px]'>
               <h3 className=' capitalize'>follow us:</h3>
               <div className=' flex gap-3'>
                 <div className=' rounded-[50%] p-2 bg-white'>
-                  <FaFacebookF className='text-primaryColor' />
+                  <a href='https://www.facebook.com/meenabazaarbytaj/'>  <FaFacebookF className='text-primaryColor' /></a>
                 </div>
+                {/* <div className=' rounded-[50%] p-2 bg-white'>
+                  <a> <FaTwitter className='text-primaryColor' /></a>
+                </div> */}
                 <div className=' rounded-[50%] p-2 bg-white'>
-                  <FaTwitter className='text-primaryColor' />
-                </div>
-                <div className=' rounded-[50%] p-2 bg-white'>
-                  <FaInstagram className='text-primaryColor' />
+                  <a href='https://www.instagram.com/meenabazaarbytaj/'> <FaInstagram className='text-primaryColor' /></a>
                 </div>
               </div>
             </div>
@@ -139,16 +140,16 @@ const Footer = () => {
             </div>
             <div className=' flex flex-col gap-3 capitalize text-[#E5E5E5]'>
               <p>about us</p>
-              <p>our products</p>
+              <Link to="/Collection"><p>our collection</p></Link>
               <p>terms & conditions</p>
-              <p>privacy policy</p>
+              {/* <p>privacy policy</p> */}
             </div>
           </div>
 
           {/* 3rd */}
           <div className=' flex flex-col gap-3'>
-            <div>
-              <h3 className='text-lg uppercase font-semibold'>our resources</h3>
+            {/* <div>
+              <h3 className='text-lg uppercase font-semibold'>Our resources</h3>
               <hr className='w-12 my-1 rounded-lg' style={{ border: "3px solid #BD9229" }} />
             </div>
             <div className=' flex flex-col gap-3 capitalize text-[#E5E5E5]'>
@@ -156,7 +157,8 @@ const Footer = () => {
               <p>client business</p>
               <p>sales & purchase</p>
               <p>product quality</p>
-            </div>
+            </div> */}
+            <img className='h-[10rem] rounded-pill' src='https://ik.imagekit.io/mctozv7td/WhatsApp%20Image%202024-02-28%20at%2002.49.09_5c1c6572.jpg?updatedAt=1709070883137'></img>
           </div>
 
         </div>
@@ -165,7 +167,7 @@ const Footer = () => {
         <div className='flex flex-col gap-3 justify-center items-start'>
           <hr className=' w-full text-[#707070]' />
           <div className=' pl-10'>
-            <h3 className=' capitalize text-lg text-[#E5E5E5]'>designed by WebCraftio</h3>
+            <h3 className=' capitalize text-lg text-[#E5E5E5]'>designed by<a href='https://www.webcraftio.com/'></a> WebCraftio</h3>
           </div>
 
         </div>
