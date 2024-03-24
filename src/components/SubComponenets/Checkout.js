@@ -10,7 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
-import { cityArray } from "../../utils/data";
+import { cityArray, countriesArray } from "../../utils/data";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 
@@ -83,6 +83,8 @@ function Checkout({ categories, filters }) {
   const [city, setCity] = React.useState(auth.user.city);
   const [postcode, setPostcode] = React.useState(auth.user.postcode);
   const [address, setAddress] = React.useState(auth.user.address);
+  const [country, setCountry] = React.useState(auth.user.country);
+  const [state, setState] = React.useState(auth.user.state);
 
   const handleChangeDetails = () => {
     const payload = {
@@ -90,6 +92,8 @@ function Checkout({ categories, filters }) {
       city,
       postcode,
       address,
+      state,
+      country,
     };
     console.log("payload: ", payload);
 
@@ -113,6 +117,8 @@ function Checkout({ categories, filters }) {
         setCity(res.data.user.city);
         setAddress(res.data.user.address);
         setPhone(res.data.user.phone);
+        setCountry(res.data.user.country);
+        setState(res.data.user.state);
 
         handleClose();
       })
@@ -138,25 +144,6 @@ function Checkout({ categories, filters }) {
 
   const handleDeliveryOptionChange = (option) => {
     setDeliveryOption(option);
-  };
-
-  const verifyPostcode = (pstcd) => {
-    const id = toast.loading("Verifying Postcode...");
-    axios
-      .get(`https://api.postcodes.io/postcodes/${pstcd}`)
-      .then((res) => {
-        // const destLat = res.data.result.latitude;
-        // const destLon = res.data.result.longitude;
-        toast.success("Verified!", { id });
-      })
-      .catch((err) => {
-        console.log(err);
-        setPostcode("");
-        toast.error(
-          err.response?.data?.error || "Postcode could not be verified!",
-          { id }
-        );
-      });
   };
 
   return (
@@ -224,9 +211,8 @@ function Checkout({ categories, filters }) {
                               defaultValue={auth.user.lastName}
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                          <Form.Group as={Col} controlId="" sm={6}>
+
+                          <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Email
                             </Form.Label>
@@ -236,7 +222,8 @@ function Checkout({ categories, filters }) {
                               defaultValue={auth.user.email}
                             />
                           </Form.Group>
-
+                        </Row>
+                        <Row className="mb-3">
                           <Form.Group as={Col} controlId="" sm={6}>
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Phone
@@ -247,8 +234,30 @@ function Checkout({ categories, filters }) {
                               placeholder={phone || "N/A"}
                             />
                           </Form.Group>
+
+                          <Form.Group as={Col} controlId="" sm={6}>
+                            <Form.Label class="text-[#bd9229] font-semibold py-2">
+                              Country
+                            </Form.Label>
+                            <Form.Control
+                              type="text"
+                              disabled
+                              placeholder={country || "N/A"}
+                            />
+                          </Form.Group>
                         </Row>
                         <Row className="mb-3">
+                          <Form.Group as={Col} controlId="">
+                            <Form.Label class="text-[#bd9229] font-semibold py-2">
+                              State/Province
+                            </Form.Label>
+                            <Form.Control
+                              type="text"
+                              disabled
+                              placeholder={state || "N/A"}
+                            />
+                          </Form.Group>
+
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               City
@@ -386,6 +395,41 @@ function Checkout({ categories, filters }) {
             />
           </Form.Group>
           <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+            <Form.Label class="font-semibold w-20">Country:</Form.Label>
+            <Form.Select
+              placeholder="Country"
+              defaultValue={auth.user?.country || "Select Country"}
+              onChange={(e) => setCountry(e.target.value)}
+              value={country}
+              className="w-70"
+            >
+              <option selected hidden>
+                Select Country
+              </option>
+              {countriesArray?.map((cntry) => (
+                <option key={cntry}>{cntry}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+            <Form.Label class="font-semibold w-20">State/Province:</Form.Label>
+            <Form.Control
+              placeholder="State/Province"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className="w-70"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+            <Form.Label class="font-semibold w-20">City:</Form.Label>
+            <Form.Control
+              placeholder="Address Line"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="w-70"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">Address:</Form.Label>
             <Form.Control
               placeholder="Address Line"
@@ -400,30 +444,8 @@ function Checkout({ categories, filters }) {
               placeholder="Postcode"
               value={postcode}
               onChange={(e) => setPostcode(e.target.value)}
-              onFocus={(e) => setFocusedValue(e.target.value)}
-              onBlur={(e) => {
-                if (e.target.value !== focusedValue)
-                  verifyPostcode(e.target.value);
-              }}
               className="w-70"
             />
-          </Form.Group>
-          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
-            <Form.Label class="font-semibold w-20">City:</Form.Label>
-            <Form.Select
-              placeholder="City"
-              defaultValue={auth.user.city || "Select City"}
-              onChange={(e) => setCity(e.target.value)}
-              value={city}
-              className="w-70"
-            >
-              <option selected hidden>
-                Select City
-              </option>
-              {cityArray?.map((city) => (
-                <option key={city}>{city}</option>
-              ))}
-            </Form.Select>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
