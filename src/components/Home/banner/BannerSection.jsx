@@ -1,6 +1,7 @@
 import React from "react";
 import banner1 from "../../../assets/images/banner/banner-1.png";
 import SecondaryBtn from "../../shared/SecondaryBtn";
+import { Link } from "react-router-dom";
 
 const BannerSection = () => {
   return (
@@ -14,7 +15,9 @@ const BannerSection = () => {
           Mi Bibendum Neque Egestas Congue Quisque Egestas Diam. Ullamcorper Sit
           Amet Risus Nullam. Vehicula Ipsum A Arcu Cursus Vitae Congue Mauris.
         </p>
-        <SecondaryBtn />
+        <Link to={"/Collection"}>
+          <SecondaryBtn />
+        </Link>
       </div>
       <div className=" md:w-1/2 w-4/5 md:h-[400px] h-56 md:right-0 right-[10%] bannerImg flex ">
         <img src={banner1} alt="banner1" className="w-full" />

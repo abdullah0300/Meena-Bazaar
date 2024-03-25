@@ -20,8 +20,9 @@ const CollectionSection = ({ categories }) => {
       {/* CARDS SECTION */}
       <div className=" grid md:grid-cols-3 grid-cols-2">
         {categories?.slice(0, 6).map((item, i) => (
-          <Link to={`/ProductPage/${item._id}/${item.name}`}>
-            {" "}
+          <Link
+            to={`/ProductPage/${item._id}/${item.name.replaceAll("/", "@")}`}
+          >
             <CollectionCard key={i} cat={item} />
           </Link>
         ))}
