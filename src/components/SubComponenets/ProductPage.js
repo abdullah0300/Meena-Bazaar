@@ -298,7 +298,7 @@ function ProductPage({
   return (
     <div class="mt-0 md:mt-52">
       <Navbar categories={categories} filters={filters} />
-      <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229]">
+      <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229] mt-10 md:pb-0">
         {currentCategoryName}
       </h2>
 
@@ -343,10 +343,7 @@ function ProductPage({
         </Row>
       </Container> */}
 
-      <Container
-        fluid
-        class="flex justify-center items-baseline"
-      >
+      <Container fluid class="flex justify-center items-baseline">
         <Row xs={2} md={4}>
           {filteredProducts?.map((item) => (
             <Col
@@ -362,15 +359,15 @@ function ProductPage({
                 <div className=" flex flex-col justify-start items-center  md:w-full md:w-80 w-[14rem]  xl:px-4 md:px-3 px-3">
                   <div id="content" class="mx-3 my-4 sellingCard relative">
                     <img
-                      src={item.coverImage?.url}
-                      // src={
-                      //   item.coverImage?.url?.replace(
-                      //     "/product",
-                      //     "/tr:ar-1-1,w-285.5/product"
-                      //   ) || ""
-                      // }
+                      // src={item.coverImage?.url}
+                      src={
+                        item.coverImage?.url?.replace(
+                          "/product",
+                          "/tr:ar-1-1,w-640/product"
+                        ) || ""
+                      }
                       alt={item.name}
-                      class="w-60 h-60"
+                      class="w-60"
                     />
 
                     <div className=" sellingCard-hover-div">
