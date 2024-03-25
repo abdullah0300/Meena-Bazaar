@@ -4,7 +4,6 @@ import { Collections } from "../../../data/Collections";
 import MainBtn from "../../shared/MainBtn";
 import { Link } from "react-router-dom";
 
-
 const CollectionSection = ({ categories }) => {
   return (
     <div className=" flex flex-col gap-4 my-10">
@@ -20,8 +19,11 @@ const CollectionSection = ({ categories }) => {
 
       {/* CARDS SECTION */}
       <div className=" grid md:grid-cols-3 grid-cols-2">
-        {categories?.map((item, i) => (
-       <Link to={`/ProductPage/${item._id}/${item.name}`}>  <CollectionCard key={i} cat={item} /></Link> 
+        {categories?.slice(0, 6).map((item, i) => (
+          <Link to={`/ProductPage/${item._id}/${item.name}`}>
+            {" "}
+            <CollectionCard key={i} cat={item} />
+          </Link>
         ))}
       </div>
       <Link to={`/Collection`}>
