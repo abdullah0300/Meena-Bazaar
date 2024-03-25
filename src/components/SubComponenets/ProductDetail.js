@@ -31,8 +31,9 @@ function VariantComp({ variant, handleSelectVariant }) {
             <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
               {variant.options?.map((item, i) => (
                 <button
-                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedOption._id && "bg-[#BD9229] text-white"
-                    }`}
+                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
+                    item._id === selectedOption._id && "bg-[#BD9229] text-white"
+                  }`}
                   onClick={() => {
                     setSelectedOption(item);
                     handleSelectVariant(item.optionValue, variant);
@@ -233,7 +234,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
           return (
             variant.variantType === productToAdd.variants[i].variantType &&
             variant.chosenOption.optionValue !==
-            productToAdd.variants[i].chosenOption.optionValue
+              productToAdd.variants[i].chosenOption.optionValue
           );
         });
         if (bool) {
@@ -279,10 +280,11 @@ function ProductDetails({ products, categories, filters, setCart }) {
                         {allImages?.slice(1, 5).map((url, i) => (
                           <img
                             key={i + 1}
-                            class={`w-36 h-28 shadow-md ${i + 1 === currentImageIndex
-                              ? "border-2 border-[#59A0B8]"
-                              : ""
-                              }`}
+                            class={`w-36 h-28 shadow-md ${
+                              i + 1 === currentImageIndex
+                                ? "border-2 border-[#59A0B8]"
+                                : ""
+                            }`}
                             alt={`Product Img ${i + 1}`}
                             src={url?.url || ""}
                             onClick={() => handleImageClick(i + 1)}
@@ -316,10 +318,11 @@ function ProductDetails({ products, categories, filters, setCart }) {
                     {allImages?.slice(1, 5).map((url, y) => (
                       <img
                         key={y + 1}
-                        class={`w-36 h-24 shadow-md  ${y + 1 === currentImageIndex
-                          ? "border-2 border-[#59A0B8]"
-                          : ""
-                          }`}
+                        class={`w-36 h-24 shadow-md  ${
+                          y + 1 === currentImageIndex
+                            ? "border-2 border-[#59A0B8]"
+                            : ""
+                        }`}
                         alt={`Product Img ${y + 1}`}
                         src={url?.url || ""}
                         onClick={() => handleImageClick(y + 1)}
@@ -334,7 +337,10 @@ function ProductDetails({ products, categories, filters, setCart }) {
                   {filteredProd?.name}
                 </p>
 
-                <p class="description text-[#707070] text-[15px] px-2 pt-2 sm:text-sm md:text-base lg:text-lg xl:text-xl">
+                <p
+                  class="description text-[#707070] text-[15px] px-2 pt-2 sm:text-sm md:text-base lg:text-lg xl:text-xl"
+                  style={{ overflow: "auto" }}
+                >
                   {filteredProd?.description}
                 </p>
 
@@ -370,7 +376,6 @@ function ProductDetails({ products, categories, filters, setCart }) {
                   <div class="flex flex-col justify-center items-center ">
                     {/* <Link to="/CartPage"> */}
                     <div className="flex justify-center">
-
                       {/* Button for small screens */}
                       {/* <button
                         onClick={async (e) => {
@@ -431,7 +436,10 @@ function ProductDetails({ products, categories, filters, setCart }) {
                   <p className="">{icon ? <FiPlus /> : <FiMinus />}</p>
                 </div>{" "}
                 {open ? (
-                  <p className="text-[#383838] text-[15px] px-2  pt-3 py-3  flex ">
+                  <p
+                    className="text-[#383838] text-[15px] px-2  pt-3 py-3"
+                    style={{ overflow: "auto" }}
+                  >
                     {filteredProd?.overview}
                   </p>
                 ) : null}
