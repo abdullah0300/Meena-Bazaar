@@ -1,6 +1,7 @@
 import React from "react";
 import banner1 from "../../../assets/images/banner/banner-1.png";
 import SecondaryBtn from "../../shared/SecondaryBtn";
+import { Link } from "react-router-dom";
 
 const BannerSection = () => {
   return (
@@ -13,7 +14,9 @@ const BannerSection = () => {
         <p className=" xl:text-lg md:text-base text-xs md:w-[96%] md:mb-0 mb-4">
           Embrace majesty with Meena Bazaar by Taj Bridal Collection – where luxury meets tradition in grandeur!
         </p>
-        <SecondaryBtn />
+        <Link to={"/Collection"}>
+          <SecondaryBtn />
+        </Link>
       </div>
       <div className=" md:w-1/2 w-4/5 md:h-[400px] h-56 md:right-0 right-[10%] bannerImg flex ">
         <img src='https://ik.imagekit.io/mctozv7td/meena/Monochrome%20Watercolor%20Minimal%20Line%20Floral%20Wedding%20Banner.png?updatedAt=1711317258042' alt="banner1" className="w-full" />

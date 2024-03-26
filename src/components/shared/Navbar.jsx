@@ -305,7 +305,7 @@ const Navbar = ({ categories, filters }) => {
                 borderBottom: "1px solid #EDEDED",
               }}
             >
-              {navLinks?.map((item, i) => (
+              {navLinks?.slice(0, 6).map((item, i) => (
                 <li
                   key={i}
                   className=" xl:text-lg md:text-base cursor-pointer transition-all duration-200 ease-in-out transform-gpu borderNavlinks"
@@ -435,21 +435,26 @@ const Navbar = ({ categories, filters }) => {
                 />
               </div>
               <ul className="flex flex-col gap-[6px]">
-                {navLinks?.map((item, i) => (
+                {navLinks?.slice(0, 6).map((item, i) => (
                   <>
                     <li
                       key={i}
                       className="flex justify-between w-full cursor-pointer"
-                      onClick={() => {
-                        setHoveredLinkId(item.id);
-                        setOpenSubLinks((prev) => !prev);
-                      }}
+                      onClick={() =>
+                        nav(`/ProductPage/${item.id}/${item.title}`)
+                      }
                     >
                       <span className=" text-sm text-slate-500">
                         {item.title}
                       </span>
                       {item.sublinks && (
-                        <IoIosArrowForward className=" text-sm text-slate-500" />
+                        <IoIosArrowForward
+                          className=" text-sm text-slate-500"
+                          onClick={() => {
+                            setHoveredLinkId(item.id);
+                            setOpenSubLinks((prev) => !prev);
+                          }}
+                        />
                       )}
                     </li>
                     {openSubLinks && subLinks && item.id === hoveredLinkId && (
@@ -460,8 +465,15 @@ const Navbar = ({ categories, filters }) => {
                               <li
                                 key={i}
                                 className="text-headingColor text-xs xl:text-sm md:text-[13px] cursor-pointer"
+                                onClick={() =>
+                                  nav(
+                                    `/SubCollectionPage/${hoveredLinkId}/${
+                                      item._id
+                                    }/${item.name.replaceAll("/", "@")}`
+                                  )
+                                }
                               >
-                                {item}
+                                {item.name}
                               </li>
                             ))}
                         </ul>
@@ -469,6 +481,21 @@ const Navbar = ({ categories, filters }) => {
                     )}
                   </>
                 ))}
+                <hr />
+                <li
+                  className="flex justify-between w-max cursor-pointer"
+                  onClick={() => nav("/Collection")}
+                >
+                  <span className=" text-md text-slate-500">
+                    More Collections
+                  </span>
+                  <IoIosArrowForward
+                    className=" text-md text-slate-500 align-self-center"
+                    onClick={() => {
+                      setOpenSubLinks((prev) => !prev);
+                    }}
+                  />
+                </li>
               </ul>
             </div>
           </div>
