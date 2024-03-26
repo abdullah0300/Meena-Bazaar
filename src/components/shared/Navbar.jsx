@@ -333,9 +333,8 @@ const Navbar = ({ categories, filters }) => {
         </nav>
         {subLinks && (
           <div
-            className={`${
-              subLinks ? " opacity-[1]" : "opacity-[0]"
-            } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
+            className={`${subLinks ? " opacity-[1]" : "opacity-[0]"
+              } absolute z-50 bg-[#fff] w-full h-10 pt-[10px] pb-1 transition-opacity duration-200 ease-in-out transform-gpu`}
             onMouseLeave={handleMouseLeave}
           >
             <ul className=" flex justify-center items-center gap-16 ">
@@ -346,8 +345,7 @@ const Navbar = ({ categories, filters }) => {
                       key={item._id}
                       onClick={() =>
                         nav(
-                          `/SubCollectionPage/${hoveredLinkId}/${
-                            item._id
+                          `/SubCollectionPage/${hoveredLinkId}/${item._id
                           }/${item.name.replaceAll("/", "@")}`
                         )
                       }
@@ -366,25 +364,24 @@ const Navbar = ({ categories, filters }) => {
       <header className="block md:hidden sticky top-0 bg-white z-50">
         <div className=" h-9 bg-primaryColor flex items-center">
           <span className=" px-3 text-white text-sm tracking-wide font-light">
-            Delivery Accross UK
+            Delivery Across UK
           </span>
         </div>
         <nav className=" absolute z-50 w-full bg-white  flex justify-between items-center px-4">
           <div
-            className={` ${
-              isMobileOpen ? "hidden" : "flex"
-            }  justify-between w-full py-3`}
+            className={` ${isMobileOpen ? "hidden" : "flex"
+              }  justify-between w-full py-3`}
           >
             <FiMenu
               className=" text-3xl text-primaryColor"
               onClick={() => setIsMobileOpen((prev) => !prev)}
             />
-            <span className="h-[40px]">
+            <span className="h-[60px] ml-[3rem]">
               <Link to={"/"}>
                 <img
                   src={logo}
                   alt="logo"
-                  className=" h-[100px] w-[100px] mt-[-25px]"
+                  className=" h-[120px] w-[120px] mt-[-25px]"
                 />
               </Link>
             </span>
@@ -416,9 +413,8 @@ const Navbar = ({ categories, filters }) => {
             </div>
           </div>
           <div
-            className={` ${
-              isMobileOpen ? "flex" : "hidden"
-            }  justify-between w-full py-3`}
+            className={` ${isMobileOpen ? "flex" : "hidden"
+              }  justify-between w-full py-3`}
           >
             <div className=" flex flex-col w-full gap-3">
               <div className="flex justify-between w-full">
@@ -467,8 +463,7 @@ const Navbar = ({ categories, filters }) => {
                                 className="text-headingColor text-xs xl:text-sm md:text-[13px] cursor-pointer"
                                 onClick={() =>
                                   nav(
-                                    `/SubCollectionPage/${hoveredLinkId}/${
-                                      item._id
+                                    `/SubCollectionPage/${hoveredLinkId}/${item._id
                                     }/${item.name.replaceAll("/", "@")}`
                                   )
                                 }

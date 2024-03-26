@@ -7,18 +7,18 @@ const data = [
   {
     id: 1,
     title: "get in touch with us",
-    sublinks: ["Phone: +394304095209", "Support@Company.Com"]
+    sublinks: ["Phone: +44 7403 113223", "Support@meenabazaarbytaj.com"]
   },
   {
     id: 2,
     title: "information",
-    sublinks: ["About Us", "Our Products", "Our Products", "Privacy Policy"]
+    sublinks: ["About Us", "Our Collections", "Terms & Conditions"]
   },
-  {
-    id: 3,
-    title: "our resources",
-    sublinks: ["Plan And Pricing", "Client Business", "Sales & Purchase", "Product Quality"]
-  },
+  // {
+  //   id: 3,
+  //   title: "our resources",
+  //   sublinks: ["Plan And Pricing", "Client Business", "Sales & Purchase", "Product Quality"]
+  // },
 ]
 
 const Footer = () => {
@@ -44,14 +44,14 @@ const Footer = () => {
             <h3 className=' capitalize'>follow us:</h3>
             <div className=' flex gap-3'>
               <div className=' rounded-[50%] p-2 bg-white'>
-                <FaFacebookF className='text-primaryColor' />
+                <a href='https://www.facebook.com/meenabazaarbytaj/'> <FaFacebookF className='text-primaryColor' /></a>
               </div>
-              <div className=' rounded-[50%] p-2 bg-white'>
+              {/* <div className=' rounded-[50%] p-2 bg-white'>
                 <FaTwitter className='text-primaryColor' />
-              </div>
-              <div className=' rounded-[50%] p-2 bg-white'>
+              </div> */}
+              <a href='https://www.instagram.com/meenabazaarbytaj/'> <div className=' rounded-[50%] p-2 bg-white'>
                 <FaInstagram className='text-primaryColor' />
-              </div>
+              </div></a>
             </div>
           </div>
 
@@ -90,9 +90,9 @@ const Footer = () => {
               ))
             }
 
-            <div className=' flex justify-between text-white'>
+            {/* <div className=' flex justify-between text-white'>
               <p className=' capitalize text-[19px]'>about us</p>
-            </div>
+            </div> */}
 
           </div>
 
@@ -176,13 +176,15 @@ const Footer = () => {
         </div>
 
         {/* second div (same for both) */}
-        <div className='flex flex-col gap-3 justify-center items-start'>
-          <hr className=' w-full text-[#707070]' />
-          <div className=' pl-10'>
-            <h3 className=' capitalize text-lg text-[#E5E5E5]'>designed by<a href='https://www.webcraftio.com/'></a> WebCraftio</h3>
+        <div className='flex flex-col gap-3 justify-center items-center'>
+          <hr className='w-full text-[#707070]' />
+          <div className='text-center'>
+            <h3 className='capitalize text-lg text-[#E5E5E5]'>
+              Designed by <a href='https://www.webcraftio.com/' className='text-[#E5E5E5]'>WebCraftio</a>
+            </h3>
           </div>
-
         </div>
+
 
       </div>
     </>
