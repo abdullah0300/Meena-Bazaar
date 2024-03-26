@@ -105,10 +105,10 @@ function ProfilePage({ filters, categories }) {
       <Container className="mt-5 flex lg:justify-center mx-auto ml-72">
         <Row>
           <Col xs={12}>
-            <div className="d-flex justify-between">
+            <div className="d-flex mb-2  md:mt-[0.5rem] mt-[5rem] ">
               <p className="mt-3  font-bold my-3 text-xl">My Profile</p>
               <Button
-                className="border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white px-6 py-1 font-semibold text-sm"
+                className="ml-[5rem] border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white md:px-6 px-3 py-1 font-semibold text-sm"
                 onClick={() => navigate("/myOrders")}
               >
                 My Orders
@@ -125,7 +125,7 @@ function ProfilePage({ filters, categories }) {
             >
               <div>
                 <TextField
-                  className=" w-[381px]"
+                  className=" "
                   id="standard-read-only-input"
                   label="Full Name"
                   disabled
@@ -135,11 +135,12 @@ function ProfilePage({ filters, categories }) {
                   InputProps={{
                     readOnly: true,
                   }}
+                // 
                 />
               </div>
               <div>
                 <TextField
-                  className="w-[381px]"
+                  className="md:w-[15rem] w-[10rem]"
                   id="standard-read-only-input"
                   label="Email"
                   defaultValue={auth.user?.email || "N/A"}
@@ -147,25 +148,24 @@ function ProfilePage({ filters, categories }) {
                   InputProps={{
                     readOnly: true,
                   }}
-                  style={{ width: "381px" }}
                 />
               </div>
               <div>
                 <TextField
-                  className="w-[381px]"
+                  className=""
                   id="standard-read-only-input"
                   label="Phone Number"
                   defaultValue={auth.user?.phone || "N/A"}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  style={{ width: "381px" }}
+
                 />
               </div>
               <div>
                 <Form.Group
                   as={Col}
                   controlId=""
-                  style={{ width: "381px", marginLeft: "8px" }}
+                  style={{ width: "200px", marginLeft: "8px" }}
                 >
                   {/* <Form.Label>City</Form.Label> */}
                   <Form.Select
@@ -189,7 +189,7 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.city || "N/A"}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  style={{ width: "381px" }}
+
                 />
               </div>
               <div>
@@ -199,7 +199,7 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.state || "N/A"}
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  style={{ width: "381px" }}
+
                 />
               </div>
               <div>
@@ -209,7 +209,7 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.postcode || "Choose Postcode"}
                   value={postcode}
                   onChange={(e) => setPostcode(e.target.value)}
-                  style={{ width: "381px" }}
+
                 />
               </div>
               <div>
@@ -219,18 +219,18 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.address || "Choose Address"}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  style={{ width: "381px" }}
+
                 />
               </div>
-              <div className="d-flex justify-between">
+              <div className="d-flex gap-5">
                 <Button
-                  className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white px-14 py-2 font-semibold text-sm"
+                  className="mt-6 border-0 rounded-full bg-[#bd9229] hover:bg-[#bd9229]  text-white  px-4 py-2 font-semibold text-sm"
                   onClick={handleChangeDetails}
                 >
                   Save
                 </Button>
                 <Button
-                  className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[red]  text-white px-14 py-2 font-semibold text-sm"
+                  className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[red]  text-white px-4 py-2 font-semibold text-sm"
                   onClick={() => {
                     auth.logout();
                     navigate("/");
@@ -250,7 +250,7 @@ function ProfilePage({ filters, categories }) {
                     placeholder="........."
                     value={currPass}
                     onChange={(e) => setCurrPass(e.target.value)}
-                    style={{ width: "381px", height: "10px" }}
+                    style={{ width: "200px", height: "10px" }}
                   />
                 </div>
 
@@ -261,12 +261,12 @@ function ProfilePage({ filters, categories }) {
                     placeholder="........."
                     value={newPass}
                     onChange={(e) => setNewPass(e.target.value)}
-                    style={{ width: "381px", height: "10px" }}
+                    style={{ width: "200px", height: "10px" }}
                   />
                 </div>
               </div>
               <Button
-                className="mt-16 border-0 mb-5 rounded-full bg-[#bd9229]  hover:bg-[#bd9229] text-white px-14 py-2 font-semibold text-sm"
+                className="mt-16 border-0 mb-5 rounded-full bg-[#bd9229]  hover:bg-[#bd9229] text-white px-7 py-2 font-semibold text-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   if (currPass && newPass) handleChangePassword();

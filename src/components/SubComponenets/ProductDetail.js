@@ -377,7 +377,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
                     {/* <Link to="/CartPage"> */}
                     <div className="flex justify-center">
                       {/* Button for small screens */}
-                      {/* <button
+                      <button
                         onClick={async (e) => {
                           e.preventDefault();
                           const bool = selectedVariants?.every(
@@ -394,7 +394,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
                         <span className="flex items-center justify-center w-full h-full text-lg text-white hover:text-white secondaryBtnTopInner1 transition-all duration-200 ease-in-out transform-gpu">
                           Add to Cart
                         </span>
-                      </button> */}
+                      </button>
 
                       {/* Button for desktop screens */}
                       <button

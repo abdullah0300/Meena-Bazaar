@@ -37,21 +37,21 @@ const HeroSection = () => {
       <div className="carousel-inner md:mt-0 w-full">
         <div className="carousel-item active relative">
           <img
-            src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
+            src="https://ik.imagekit.io/mctozv7td/meena/1.jpg?updatedAt=1711471154752"
             className="w-full h-auto object-contain md:mt-0.5 mt-[5rem]"
             alt="carousel1"
           />
         </div>
         <div className="carousel-item relative">
           <img
-            src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
+            src="https://ik.imagekit.io/mctozv7td/meena/3.jpg?updatedAt=1711471154776"
             className="w-full h-auto object-contain  md:mt-0.5 mt-[5rem]"
             alt="carousel2"
           />
         </div>
         <div className="carousel-item relative">
           <img
-            src="https://ik.imagekit.io/mctozv7td/meena/KUNDAN.png?updatedAt=1711052996079"
+            src="https://ik.imagekit.io/mctozv7td/meena/2.jpg?updatedAt=1711471154963"
             className="w-full h-auto object-contain  md:mt-0.5 mt-[5rem]"
             alt="carousel3"
           />
