@@ -189,7 +189,8 @@ function Checkout({ categories, filters }) {
                   <div class="mt-8 p-4">
                     <div>
                       <Form sm={12}>
-                        <Row className="mb-3">
+                        <Row className="mb-3 ">
+
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               First Name
@@ -212,6 +213,9 @@ function Checkout({ categories, filters }) {
                             />
                           </Form.Group>
 
+                        </Row>
+                        <Row className="mb-3">
+
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Email
@@ -222,8 +226,7 @@ function Checkout({ categories, filters }) {
                               defaultValue={auth.user.email}
                             />
                           </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
+
                           <Form.Group as={Col} controlId="" sm={6}>
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Phone
@@ -246,7 +249,7 @@ function Checkout({ categories, filters }) {
                             />
                           </Form.Group>
                         </Row>
-                        <Row className="mb-3">
+                        <Row className="d-flex mb-3">
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               State/Province
@@ -281,7 +284,7 @@ function Checkout({ categories, filters }) {
                           </Form.Group>
                         </Row>
                         <Form.Group
-                          className="mb-3"
+                          className="mb-1"
                           controlId="formGridAddress1"
                         >
                           <Form.Label class="text-[#bd9229] font-semibold py-2">
@@ -293,34 +296,14 @@ function Checkout({ categories, filters }) {
                             placeholder={address || "N/A"}
                           />
                         </Form.Group>
-
+                        {/* 
                         <Form.Group
-                          className="mb-3 text-black"
+                          className="mb-1 text-black"
                           class="text-[#707070]"
                           id="formGridCheckbox"
-                        ></Form.Group>
+                        ></Form.Group> */}
 
-                        <div class="flex flex-col justify-center items-center ">
-                          <button
-                            class=" bg-[#bd9229] text-white mt-5 px-5  py-2 "
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (
-                                auth.user.phone &&
-                                auth.user.address &&
-                                auth.user.city &&
-                                auth.user.postcode
-                              )
-                                handleCheckout();
-                              else {
-                                toast.error("Complete your information");
-                                handleShow();
-                              }
-                            }}
-                          >
-                            Proceed to Payment
-                          </button>
-                        </div>
+
                       </Form>
                     </div>
                   </div>
@@ -329,7 +312,7 @@ function Checkout({ categories, filters }) {
             </Col>
             <Col xs={12} md={4}>
               <div class="bg-[#FFFFFF] rounded-lg mx-5 my-3">
-                {cartArr?.map((crt, i) => {
+                {/* {cartArr?.map((crt, i) => {
                   return (
                     <div key={i} class="flex px-4 py-5 justify-between">
                       <img src={crt.image} alt="" class="w-[70px] h-[70px]" />
@@ -337,14 +320,12 @@ function Checkout({ categories, filters }) {
                         {crt.nm}
                       </p>
 
-                      {/* <div class="border flex  w-16 h-5 border-black "> */}
                       <p class="text-[#bd9229] ml-2">
                         Qty.&nbsp;{crt.quantity}
                       </p>
-                      {/* </div> */}
                     </div>
                   );
-                })}
+                })} */}
 
                 <hr class="mx-4" />
                 <div class="px-4 pt-4 flex justify-between">
@@ -375,6 +356,27 @@ function Checkout({ categories, filters }) {
                       .reduce((p, c) => p + c, 0)
                       .toFixed(2)}
                   </h2>
+                </div>
+                <div class="flex flex-col justify-center items-center ">
+                  <button
+                    class=" bg-[#bd9229] text-white mt-2 mb-3 px-5  py-2 "
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (
+                        auth.user.phone &&
+                        auth.user.address &&
+                        auth.user.city &&
+                        auth.user.postcode
+                      )
+                        handleCheckout();
+                      else {
+                        toast.error("Complete your information");
+                        handleShow();
+                      }
+                    }}
+                  >
+                    Proceed to Payment
+                  </button>
                 </div>
               </div>
             </Col>
