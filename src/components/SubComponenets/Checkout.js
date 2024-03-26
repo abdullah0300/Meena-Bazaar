@@ -153,7 +153,7 @@ function Checkout({ categories, filters }) {
         <h2 class="text-3xl  font-bold text-[#bd9229] text-center py-5">
           Checkout
         </h2>
-        <Container fluid>
+        <Container fluid className="mb-3">
           <Row>
             <Col sm={12} md={8}>
               <div class="bg-[#FFFFFF] rounded-lg md:mx-5 my-3">

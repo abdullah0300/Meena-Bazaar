@@ -1,11 +1,13 @@
 import React from "react";
 
 const HeroSection = () => {
+
   return (
     <div
       id="carouselExampleAutoplaying"
       className="carousel slide w-full"
       data-bs-ride="carousel"
+      data-bs-interval="2000"
     >
       <div className="carousel-indicators gap-2">
         <button

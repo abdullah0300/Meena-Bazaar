@@ -227,7 +227,7 @@ function CartPage({ categories, filters }) {
     <div>
       <Navbar categories={categories} filters={filters} />
       <div className="bg-[#F6F5F0]  md:bg-[#F6F5F0] mt-[2rem] md:mt-[0rem] ">
-        <h1 className="fs-2 py-5 font-bold text-center text-[#BD9229] ">
+        <h1 className="fs-2 py-5 md:mt-[2rem] mt-[5rem] font-bold text-center text-[#BD9229] ">
           Your Cart
         </h1>
         <Container fluid>

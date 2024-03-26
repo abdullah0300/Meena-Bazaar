@@ -25,7 +25,7 @@ function SearchProductPage({ products, categories, filters }) {
     <div class="mt-0 md:mt-52">
       <Navbar categories={categories} filters={filters} />
       <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229]">
-        Query: ({query})
+        Results: {query}
       </h2>
 
       <Container

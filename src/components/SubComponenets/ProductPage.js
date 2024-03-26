@@ -298,7 +298,7 @@ function ProductPage({
   return (
     <div class="mt-0 md:mt-52">
       <Navbar categories={categories} filters={filters} />
-      <h2 class="fs-1 py-5 font-bold text-center text-[#BD9229] mt-10 md:pb-0">
+      <h2 class="fs-1  font-bold text-center mb-3 text-[#BD9229]  md:mt-[3rem] mt-[8rem]  md:pb-0">
         {currentCategoryName}
       </h2>
 
