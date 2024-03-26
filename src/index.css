@@ -124,7 +124,7 @@ body {
   border: none;
 }
 
-
+/* Default styles */
 #whatsapp-button {
   position: fixed;
   bottom: 20px;
@@ -138,10 +138,40 @@ body {
   border-radius: 50%;
   background-color: white;
   /* WhatsApp green color */
-
 }
 
 .whatsapp-button img {
   width: 60px;
   /* Adjust the size of the icon as needed */
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  #whatsapp-button {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .whatsapp-button a {
+    padding: 8px;
+  }
+
+  .whatsapp-button img {
+    width: 50px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #whatsapp-button {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .whatsapp-button a {
+    padding: 6px;
+  }
+
+  .whatsapp-button img {
+    width: 40px;
+  }
 }
