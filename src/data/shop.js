@@ -7,12 +7,12 @@ import shop3b from "../assets/images/shop/shop3b.png";
 
 export const shops = [
   {
-    img: shop1,
+    img: 'https://ik.imagekit.io/mctozv7td/meena/neckalce%20meena%20baazar.png?updatedAt=1711318026288',
     imgb: shop1b,
-    description: "Rings For You",
+    description: "Necklalce Sets For You",
   },
   {
-    img: shop2,
+    img: 'https://ik.imagekit.io/mctozv7td/meena/meena%20earings.png?updatedAt=1711318372924',
     imgb: shop2b,
     description: "Earings For You",
   },
@@ -22,3 +22,4 @@ export const shops = [
     description: "Hijab For You",
   },
 ];
+  

@@ -9,6 +9,7 @@ import Footer from "../../components/shared/Footer";
 import ArticleSection from "../../components/Home/artictles/ArticleSection";
 import ShopSection from "../../components/Home/shop/ShopSection";
 import TestinomialSection from "../../components/Home/Testinomials/TestinomialSection";
+import WhatsAppButton from "../shared/Whatsapp";
 
 const Home = ({ categories, filters, products }) => {
   return (
@@ -23,6 +24,7 @@ const Home = ({ categories, filters, products }) => {
       <ShopSection />
       <BlogSection />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 };

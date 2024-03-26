@@ -11,13 +11,12 @@ const BannerSection = () => {
         </span>
         <h3 className="xl:text-6xl md:text-5xl text-2xl">For Precious Women</h3>
         <p className=" xl:text-lg md:text-base text-xs md:w-[96%] md:mb-0 mb-4">
-          Mi Bibendum Neque Egestas Congue Quisque Egestas Diam. Ullamcorper Sit
-          Amet Risus Nullam. Vehicula Ipsum A Arcu Cursus Vitae Congue Mauris.
+          Embrace majesty with Meena Bazaar by Taj Bridal Collection – where luxury meets tradition in grandeur!
         </p>
         <SecondaryBtn />
       </div>
       <div className=" md:w-1/2 w-4/5 md:h-[400px] h-56 md:right-0 right-[10%] bannerImg flex ">
-        <img src={banner1} alt="banner1" className="w-full" />
+        <img src='https://ik.imagekit.io/mctozv7td/meena/Monochrome%20Watercolor%20Minimal%20Line%20Floral%20Wedding%20Banner.png?updatedAt=1711317258042' alt="banner1" className="w-full" />
       </div>
     </section>
   );
