@@ -31,9 +31,8 @@ function VariantComp({ variant, handleSelectVariant }) {
             <div className=" w-[100%] flex items-center gap-2 mx-auto  whitespace-nowrap scrollbarHide">
               {variant.options?.map((item, i) => (
                 <button
-                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${
-                    item._id === selectedOption._id && "bg-[#BD9229] text-white"
-                  }`}
+                  className={` px-3 py-[6px] rounded-md text-base font-medium tracking-wide artileNameBtn transition-all duration-200 ease-in-out transform-gpu ${item._id === selectedOption._id && "bg-[#BD9229] text-white"
+                    }`}
                   onClick={() => {
                     setSelectedOption(item);
                     handleSelectVariant(item.optionValue, variant);
@@ -234,7 +233,7 @@ function ProductDetails({ products, categories, filters, setCart }) {
           return (
             variant.variantType === productToAdd.variants[i].variantType &&
             variant.chosenOption.optionValue !==
-              productToAdd.variants[i].chosenOption.optionValue
+            productToAdd.variants[i].chosenOption.optionValue
           );
         });
         if (bool) {
@@ -280,11 +279,10 @@ function ProductDetails({ products, categories, filters, setCart }) {
                         {allImages?.slice(1, 5).map((url, i) => (
                           <img
                             key={i + 1}
-                            class={`w-36 h-28 shadow-md ${
-                              i + 1 === currentImageIndex
-                                ? "border-2 border-[#59A0B8]"
-                                : ""
-                            }`}
+                            class={`w-36 h-28 shadow-md ${i + 1 === currentImageIndex
+                              ? "border-2 border-[#59A0B8]"
+                              : ""
+                              }`}
                             alt={`Product Img ${i + 1}`}
                             src={url?.url || ""}
                             onClick={() => handleImageClick(i + 1)}
@@ -318,11 +316,10 @@ function ProductDetails({ products, categories, filters, setCart }) {
                     {allImages?.slice(1, 5).map((url, y) => (
                       <img
                         key={y + 1}
-                        class={`w-36 h-24 shadow-md  ${
-                          y + 1 === currentImageIndex
-                            ? "border-2 border-[#59A0B8]"
-                            : ""
-                        }`}
+                        class={`w-36 h-24 shadow-md  ${y + 1 === currentImageIndex
+                          ? "border-2 border-[#59A0B8]"
+                          : ""
+                          }`}
                         alt={`Product Img ${y + 1}`}
                         src={url?.url || ""}
                         onClick={() => handleImageClick(y + 1)}
@@ -356,8 +353,9 @@ function ProductDetails({ products, categories, filters, setCart }) {
                 ))}
 
                 <p class="py-2"></p>
+                <p class=" mb-2 text-[#707070] text-[18px] mt-2  pr-2">Quantity:</p>
+
                 <div class="flex px-2">
-                  <p class="text-[#707070] text-[18px] mt-2  pr-2">Quantity</p>
                   <p
                     class="px-3 py-1  bg-white  text-[20px] shadow-sm shadow-cyan-500/50 cursor-pointer"
                     onClick={decrement}
