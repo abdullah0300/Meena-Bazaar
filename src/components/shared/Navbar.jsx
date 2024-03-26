@@ -376,7 +376,7 @@ const Navbar = ({ categories, filters }) => {
               className=" text-3xl text-primaryColor"
               onClick={() => setIsMobileOpen((prev) => !prev)}
             />
-            <span className="h-[60px] ml-[3rem]">
+            <span className="h-[60px] ml-[2rem]">
               <Link to={"/"}>
                 <img
                   src={logo}
