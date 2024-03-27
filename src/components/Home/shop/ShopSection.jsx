@@ -8,7 +8,7 @@ const ShopSection = ({ categories }) => {
     <div className=" flex w-full overflow-x-auto scrollbarHide">
       <div className=" md:grid md:grid-cols-3 flex md:gap-10 gap-4 md:px-20">
         {categories?.slice(1, 4).map((item, i) => (
-          <div className={` relative md:w-full w-screen xl:h-48 md:h-44`}>
+          <div className={` relative md:w-full w-80 xl:h-48 md:h-44`}>
             <img
               src={shops[i]?.img || ""}
               alt="img1"
