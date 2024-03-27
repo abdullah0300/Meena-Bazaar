@@ -1,0 +1,19 @@
+/* Show arrows on mobile */
+@media screen and (max-width: 768px) {
+  .card_div_desktop {
+    display: none;
+  }
+  .card_div_mobile {
+    display: block;
+  }
+}
+
+/* Show arrows on laptop */
+@media screen and (min-width: 769px) {
+  .card_div_desktop {
+    display: block;
+  }
+  .card_div_mobile {
+    display: none;
+  }
+}

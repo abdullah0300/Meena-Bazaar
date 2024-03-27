@@ -1,8 +1,21 @@
 import React from "react";
 import SellingCard from "./SellingCard";
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
+import "./featured-styles.css";
+
+function chunkArray(array, size) {
+  const chunkedArray = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunkedArray.push(array.slice(i, i + size));
+  }
+  return chunkedArray;
+}
 
 const BestSellingSection = ({ products }) => {
-  const filteredProds = products?.filter((p) => p.featured).slice(0, 4);
+  const filteredProds = products?.filter((p) => p.featured) || [];
+
+  const desktopProds = chunkArray([...filteredProds], 3);
 
   return (
     <>
@@ -18,12 +31,48 @@ const BestSellingSection = ({ products }) => {
         </div>
 
         {/* CARDS SECTION */}
-        <div className=" flex w-full overflow-x-auto whitespace-nowrap scrollbarHide">
-          <div className="md:grid md:grid-cols-4 flex md:gap-2">
+        <div className="w-full card_div_mobile">
+          <AwesomeSlider
+            bullets={true} // Hide bullet navigation
+            organicArrows={true} // Show arrows
+            mobileTouch={true} // Enable touch events for mobile
+            buttons={true}
+            buttonContentRight={">"}
+            buttonContentLeft={"<"}
+          >
             {filteredProds?.map((item, i) => (
-              <SellingCard key={i} product={item} />
+              <div
+                key={i}
+                style={{ backgroundColor: "#0000" }}
+                className="pb-2"
+              >
+                <SellingCard product={item} />
+              </div>
             ))}
-          </div>
+          </AwesomeSlider>
+        </div>
+
+        {/* CARDS SECTION DEsk*/}
+        <div className="w-full card_div_desktop">
+          <AwesomeSlider
+            bullets={false} // Hide bullet navigation
+            organicArrows={true} // Show arrows
+            buttons={true}
+            buttonContentRight={">"}
+            buttonContentLeft={"<"}
+          >
+            {desktopProds?.map((item, i) => (
+              <div
+                key={i}
+                style={{ backgroundColor: "#0000" }}
+                className="d-flex gap-3"
+              >
+                {item?.map((el, i) => (
+                  <SellingCard product={el} key={i} />
+                ))}
+              </div>
+            ))}
+          </AwesomeSlider>
         </div>
       </div>
     </>
