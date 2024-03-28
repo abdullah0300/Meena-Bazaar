@@ -44,7 +44,7 @@ const BestSellingSection = ({ products }) => {
               <div
                 key={i}
                 style={{ backgroundColor: "#0000" }}
-                className="pb-2"
+                // className="pb-4"
               >
                 <SellingCard product={item} />
               </div>

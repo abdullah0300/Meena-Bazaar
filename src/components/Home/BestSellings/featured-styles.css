@@ -6,6 +6,10 @@
   .card_div_mobile {
     display: block;
   }
+  .awssld__container {
+    padding-bottom: 0 !important;
+    height: 320px;
+  }
 }
 
 /* Show arrows on laptop */
@@ -15,5 +19,9 @@
   }
   .card_div_mobile {
     display: none;
+  }
+  .awssld__container {
+    padding-bottom: 0 !important;
+    height: 320px;
   }
 }
