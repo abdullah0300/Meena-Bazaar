@@ -19,6 +19,8 @@ import { AuthProvider } from "./utils/auth";
 import { RequireAuth } from "./utils/RequireAuth";
 import MyOrder from "./components/SubComponenets/orderPage";
 import SearchProductPage from "./components/SubComponenets/SearchProductPage";
+import Success from "./components/SubComponenets/Success";
+import Failure from "./components/SubComponenets/Failure";
 
 const App = () => {
   const [products, setProducts] = React.useState([]);
@@ -63,6 +65,8 @@ const App = () => {
                 />
               }
             />
+            <Route path="/success" element={<Success />} />
+            <Route path="/failure" element={<Failure />} />
             <Route
               path="Collection"
               element={<Collection categories={categories} filters={filters} />}
