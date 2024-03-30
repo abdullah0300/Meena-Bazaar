@@ -58,19 +58,20 @@ function MyOrder({ categories, filters }) {
                   </span>
                   <span>
                     Order No:
-                    <span className="text-[#59A0B8]"> {`${new Date(order.createdAt).getTime()}`.slice(5)}</span>
+                    <span className="text-[#bd9229]"> {`${new Date(order.createdAt).getTime()}`.slice(5)}</span>
                   </span>
                 </h2> */}
 
-                {order.status === "cancelled" ? null : (
+                {order.status ? (
                   <h2 class="fs-6 mb-2 font-bold py-2 pl-5 text-left  d-flex gap-2">
                     <span>
                       <span className="mt-3"></span>
                       <span className=" mt-3">
-                        Date: {new Date(order.createdAt).getDate()}{" "}
-                        {shortMonthName(new Date(order.createdAt))} (
-                        {order.delivery?.deliveryType || "Standard"} Delivery -{" "}
-                        {order.delivery?.deliveryTime || "2 - 3 Days"})
+                        Date: {shortMonthName(new Date(order.createdAt))}{" "}
+                        {new Date(order.createdAt).getDate()}
+                        {/* ( */}
+                        {/* {order.delivery?.deliveryType || "Standard"} Delivery -{" "} */}
+                        {/* {order.delivery?.deliveryTime || "2 - 3 Days"}) */}
                       </span>
                       <h2 class="fs-6 md:ml-[30rem] ml-[10rem] font-bold py-1 pl-2 text-left flex gap-2">
                         <span className="">
@@ -78,7 +79,7 @@ function MyOrder({ categories, filters }) {
                         </span>{" "}
                         <span>
                           Status:{" "}
-                          <span className="text-[#59A0B8]">
+                          <span className="text-[#bd9229]">
                             {" "}
                             '{order.status}'
                           </span>
@@ -86,14 +87,14 @@ function MyOrder({ categories, filters }) {
                       </h2>
                       <div className="mt-2">
                         Order No:
-                        <span className="text-[#59A0B8]">
+                        <span className="text-[#bd9229]">
                           {" "}
                           {`${new Date(order.createdAt).getTime()}`.slice(5)}
                         </span>
                       </div>
                     </span>
                   </h2>
-                )}
+                ) : null}
               </div>
               <Row class="shadow-md mb-4 ">
                 <ol type="1">
@@ -118,7 +119,7 @@ function MyOrder({ categories, filters }) {
                               }
                               alt={commodity.nm}
                               style={{ maxWidth: "none" }}
-                              class="p-1 xs:m-0 md:px-12 md:py-3 w-[7rem]  md:w-[10rem] "
+                              class="sm:p-1 xs:m-0 md:px-12 md:py-3 w-[7rem] mt-2 w-[10rem] h-[8rem] md:w-[16rem] md:h-[12rem]"
                             />{" "}
                           </span>
                           <span>
@@ -137,7 +138,7 @@ function MyOrder({ categories, filters }) {
                                 {commodity.variants?.map((vr) => (
                                   <p class="pb-2 font-bold ">
                                     {vr.variantType}:
-                                    <span className="text-[#59A0B8]">
+                                    <span className="text-[#bd9229]">
                                       {" "}
                                       {vr.chosenOption.optionValue}
                                     </span>
@@ -145,7 +146,7 @@ function MyOrder({ categories, filters }) {
                                 ))}
                                 <div class="flex justify-between items-center block md:hidden">
                                   <span>
-                                    <p class=" py-3 md:hidden block  text-[#59A0B8] md:pl-[6rem] md:pr-[3rem] text-[#000000] font-bold text-sm pr-5">
+                                    <p class=" py-3 md:hidden block  text-[#bd9229] md:pl-[6rem] md:pr-[3rem] text-[#000000] font-bold text-sm pr-5">
                                       £
                                       {commodity.totalPrice ||
                                         (
@@ -159,7 +160,7 @@ function MyOrder({ categories, filters }) {
                                   >
                                     <span class="">
                                       Qty :{" "}
-                                      <span className="text-[#59A0B8]">
+                                      <span className="text-[#bd9229]">
                                         {commodity.quantity}
                                       </span>
                                     </span>
@@ -176,7 +177,7 @@ function MyOrder({ categories, filters }) {
                               >
                                 <span class="hidden mb-4 md:block">
                                   Quantity :
-                                  <span className="text-[#59A0B8]">
+                                  <span className="text-[#bd9229]">
                                     {" "}
                                     {commodity.quantity}
                                   </span>
@@ -189,7 +190,7 @@ function MyOrder({ categories, filters }) {
                             </div>
                           </span>
                           <span>
-                            <div class="mt-4 py-3 hidden md:block  text-[#59A0B8] md:pl-[6rem] md:pr-[3rem] text-[#000000] font-bold text-sm">
+                            <div class="mt-4 py-3 hidden md:block  text-[#bd9229] md:pl-[6rem] md:pr-[3rem] text-[#000000] font-bold text-sm">
                               £
                               {commodity.totalPrice ||
                                 (commodity.price * commodity.quantity).toFixed(
