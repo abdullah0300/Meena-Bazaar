@@ -13,6 +13,7 @@ import { apiUrl } from "../../data/env";
 import { cityArray, countriesArray } from "../../utils/data";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
+import { IoPencilOutline } from "react-icons/io5";
 
 function Checkout({ categories, filters }) {
   const [cartArr, setCartArr] = React.useState([]);
@@ -41,11 +42,12 @@ function Checkout({ categories, filters }) {
         const config = {
           headers: { Authorization: `Bearer ${auth.token}` },
         };
+        console.log(res);
 
         axios
           .post(
-            `${apiUrl}/api/v1/order`,
-            { commodities: res, delivery: deliveryObj },
+            `${apiUrl}/api/v1/customer/generateStripeSession`,
+            { commodities: res },
             config
           )
           .then((res) => {
@@ -190,7 +192,6 @@ function Checkout({ categories, filters }) {
                     <div>
                       <Form sm={12}>
                         <Row className="mb-3 ">
-
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               First Name
@@ -212,10 +213,8 @@ function Checkout({ categories, filters }) {
                               defaultValue={auth.user.lastName}
                             />
                           </Form.Group>
-
                         </Row>
                         <Row className="mb-3">
-
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Email
@@ -296,14 +295,26 @@ function Checkout({ categories, filters }) {
                             placeholder={address || "N/A"}
                           />
                         </Form.Group>
+                        <span>
+                          <button
+                            class="bg-[#bd9229] md:ml-[37.5rem] mt-3 text-white p-3  text-xs rounded d-flex"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleShow();
+                            }}
+                          >
+                            <span className="w-max">Edit Info</span>
+                            <span>
+                              <IoPencilOutline className="relative text-white text-sm align-centre" />
+                            </span>
+                          </button>
+                        </span>
                         {/* 
                         <Form.Group
                           className="mb-1 text-black"
                           class="text-[#707070]"
                           id="formGridCheckbox"
                         ></Form.Group> */}
-
-
                       </Form>
                     </div>
                   </div>
@@ -414,7 +425,7 @@ function Checkout({ categories, filters }) {
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
-            <Form.Label class="font-semibold w-20">State/Province:</Form.Label>
+            <Form.Label class="font-semibold w-20">State:</Form.Label>
             <Form.Control
               placeholder="State/Province"
               value={state}
