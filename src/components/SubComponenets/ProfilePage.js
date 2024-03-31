@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/auth";
 import { Form } from "react-bootstrap";
-import { countriesArray } from "../../utils/data";
+import { cityArray } from "../../utils/data";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
 import toast, { Toaster } from "react-hot-toast";
@@ -25,8 +25,8 @@ function ProfilePage({ filters, categories }) {
 
   const [phone, setPhone] = React.useState(auth.user?.phone || "");
   const [city, setCity] = React.useState(auth.user?.city || "");
-  const [country, setCountry] = React.useState(auth.user?.country || "");
-  const [state, setState] = React.useState(auth.user?.state || "");
+  // const [country, setCountry] = React.useState(auth.user?.country || "");
+  // const [state, setState] = React.useState(auth.user?.state || "");
   const [postcode, setPostcode] = React.useState(auth.user?.postcode || "");
   const [address, setAddress] = React.useState(auth.user?.address || "");
 
@@ -37,8 +37,8 @@ function ProfilePage({ filters, categories }) {
     const payload = {};
     if (phone) payload.phone = phone;
     if (city) payload.city = city;
-    if (city) payload.country = country;
-    if (city) payload.state = state;
+    // if (country) payload.country = country;
+    // if (state) payload.state = state;
     if (postcode) payload.postcode = postcode;
     if (address) payload.address = address;
 
@@ -135,7 +135,7 @@ function ProfilePage({ filters, categories }) {
                   InputProps={{
                     readOnly: true,
                   }}
-                // 
+                  //
                 />
               </div>
               <div>
@@ -158,7 +158,6 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.phone || "N/A"}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-
                 />
               </div>
               <div>
@@ -167,32 +166,30 @@ function ProfilePage({ filters, categories }) {
                   controlId=""
                   style={{ width: "200px", marginLeft: "8px" }}
                 >
-                  {/* <Form.Label>City</Form.Label> */}
                   <Form.Select
-                    defaultValue={auth.user?.country || "Select Country"}
-                    onChange={(e) => setCountry(e.target.value)}
-                    value={country || "Select Country"}
+                    defaultValue={auth.user?.city || "Select City"}
+                    onChange={(e) => setCity(e.target.value)}
+                    value={city || "Select City"}
                   >
                     <option hidden selected>
-                      Select Country
+                      Select City
                     </option>
-                    {countriesArray?.map((cntry) => (
+                    {cityArray?.map((cntry) => (
                       <option key={cntry}>{cntry}</option>
                     ))}
                   </Form.Select>
                 </Form.Group>
               </div>
-              <div>
+              {/* <div>
                 <TextField
                   id="standard-read-only-input"
                   label="City"
                   defaultValue={auth.user?.city || "N/A"}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-
                 />
-              </div>
-              <div>
+              </div> */}
+              {/* <div>
                 <TextField
                   id="standard-read-only-input"
                   label="State/Province"
@@ -201,7 +198,7 @@ function ProfilePage({ filters, categories }) {
                   onChange={(e) => setState(e.target.value)}
 
                 />
-              </div>
+              </div> */}
               <div>
                 <TextField
                   id="standard-read-only-input"
@@ -209,7 +206,6 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.postcode || "Choose Postcode"}
                   value={postcode}
                   onChange={(e) => setPostcode(e.target.value)}
-
                 />
               </div>
               <div>
@@ -219,7 +215,6 @@ function ProfilePage({ filters, categories }) {
                   defaultValue={auth.user?.address || "Choose Address"}
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-
                 />
               </div>
               <div className="d-flex gap-5">
@@ -231,10 +226,7 @@ function ProfilePage({ filters, categories }) {
                 </Button>
                 <Button
                   className="mt-6 border-0 rounded-full bg-[#cc3300] hover:bg-[red]  text-white px-4 py-2 font-semibold text-sm"
-                  onClick={() => {
-                    auth.logout();
-                    navigate("/");
-                  }}
+                  onClick={handleLogout}
                 >
                   Logout
                 </Button>

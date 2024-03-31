@@ -14,6 +14,7 @@ import { apiUrl } from "../../data/env";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 import { IoPencilOutline } from "react-icons/io5";
+import { cityArray } from "../../utils/data";
 
 function Checkout({ categories, filters }) {
   const [cartArr, setCartArr] = React.useState([]);
@@ -409,24 +410,24 @@ function Checkout({ categories, filters }) {
               className="w-70"
             />
           </Form.Group>
-          {/* <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
-            <Form.Label class="font-semibold w-20">Country:</Form.Label>
+          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+            <Form.Label class="font-semibold w-20">City:</Form.Label>
             <Form.Select
-              placeholder="Country"
-              defaultValue={auth.user?.country || "Select Country"}
-              onChange={(e) => setCountry(e.target.value)}
-              value={country}
+              placeholder="City"
+              defaultValue={auth.user?.city || "Select City"}
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
               className="w-70"
             >
               <option selected hidden>
-                Select Country
+                Select City
               </option>
-              {countriesArray?.map((cntry) => (
+              {cityArray?.map((cntry) => (
                 <option key={cntry}>{cntry}</option>
               ))}
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+          {/* <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">State:</Form.Label>
             <Form.Control
               placeholder="State/Province"
@@ -435,7 +436,7 @@ function Checkout({ categories, filters }) {
               className="w-70"
             />
           </Form.Group> */}
-          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+          {/* <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">City:</Form.Label>
             <Form.Control
               placeholder="Address Line"
@@ -443,7 +444,7 @@ function Checkout({ categories, filters }) {
               onChange={(e) => setCity(e.target.value)}
               className="w-70"
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">Address:</Form.Label>
             <Form.Control
