@@ -284,17 +284,11 @@ function CartPage({ categories, filters }) {
                       </button>
                     </Link>
                   ) : (
-                    <a
-                      href
-                      onClick={(e) => {
-                        e.preventDefault();
-                        showModalFunc();
-                      }}
-                    >
+                    <Link to="/GuestCheckout">
                       <button class="bg-[#bd9229] text-white mt-5 px-5  py-2 ">
-                        Login to Checkout
+                        Go to Guest Checkout
                       </button>
-                    </a>
+                    </Link>
                   )}
                   <Link to="/">
                     <p class="text-[#bd9229] p-2 underline underline-offset-2">

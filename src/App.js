@@ -21,6 +21,7 @@ import MyOrder from "./components/SubComponenets/orderPage";
 import SearchProductPage from "./components/SubComponenets/SearchProductPage";
 import Success from "./components/SubComponenets/Success";
 import Failure from "./components/SubComponenets/Failure";
+import GuestCheckout from "./components/SubComponenets/GuestCheckout";
 
 import AboutUs from "./components/static/About";
 import Shipping from "./components/static/Shipping";
@@ -127,6 +128,12 @@ const App = () => {
                 <RequireAuth>
                   <Checkout categories={categories} filters={filters} />
                 </RequireAuth>
+              }
+            />
+            <Route
+              path="/GuestCheckout"
+              element={
+                <GuestCheckout categories={categories} filters={filters} />
               }
             />
             <Route
