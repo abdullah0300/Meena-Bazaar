@@ -1,23 +1,23 @@
 import React from "react";
 import { Container, Row, Col, Modal } from "react-bootstrap";
-import { RiDeleteBin5Line } from "react-icons/ri";
+// import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaCircle, FaRegCircle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { values } from "idb-keyval";
 import { useAuth } from "../../utils/auth";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiUrl } from "../../data/env";
-import { cityArray, countriesArray } from "../../utils/data";
+// import { cityArray, countriesArray } from "../../utils/data";
 import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
 import { IoPencilOutline } from "react-icons/io5";
 
 function Checkout({ categories, filters }) {
   const [cartArr, setCartArr] = React.useState([]);
-  const nav = useNavigate();
+  // const nav = useNavigate();
 
   function getSavedCartProducts() {
     values()
@@ -47,7 +47,7 @@ function Checkout({ categories, filters }) {
         axios
           .post(
             `${apiUrl}/api/v1/customer/generateStripeSession`,
-            { commodities: res },
+            { commodities: res, delivery: deliveryObj },
             config
           )
           .then((res) => {
@@ -57,7 +57,7 @@ function Checkout({ categories, filters }) {
             });
             setTimeout(() => {
               window.location.replace(res.data.redirectUrl);
-            }, 1000);
+            }, 700);
           })
           .catch((err) => {
             console.log(err);
@@ -85,8 +85,8 @@ function Checkout({ categories, filters }) {
   const [city, setCity] = React.useState(auth.user.city);
   const [postcode, setPostcode] = React.useState(auth.user.postcode);
   const [address, setAddress] = React.useState(auth.user.address);
-  const [country, setCountry] = React.useState(auth.user.country);
-  const [state, setState] = React.useState(auth.user.state);
+  // const [country, setCountry] = React.useState(auth.user.country);
+  // const [state, setState] = React.useState(auth.user.state);
 
   const handleChangeDetails = () => {
     const payload = {
@@ -94,8 +94,8 @@ function Checkout({ categories, filters }) {
       city,
       postcode,
       address,
-      state,
-      country,
+      // state,
+      // country,
     };
     console.log("payload: ", payload);
 
@@ -119,8 +119,8 @@ function Checkout({ categories, filters }) {
         setCity(res.data.user.city);
         setAddress(res.data.user.address);
         setPhone(res.data.user.phone);
-        setCountry(res.data.user.country);
-        setState(res.data.user.state);
+        // setCountry(res.data.user.country);
+        // setState(res.data.user.state);
 
         handleClose();
       })
@@ -133,20 +133,20 @@ function Checkout({ categories, filters }) {
   };
 
   // delivery
-  const [deliveryOption, setDeliveryOption] =
-    React.useState("standardDelivery");
+  // const [deliveryOption, setDeliveryOption] =
+  //   React.useState("standardDelivery");
   const [deliveryObj, setDeliveryObj] = React.useState({
     deliveryType: "Standard",
-    deliveryTime: "Next Day",
+    deliveryTime: "1 - 2 Days",
     deliveryPrice: "5.00",
   });
 
   // postcodes
-  const [focusedValue, setFocusedValue] = React.useState("");
+  // const [focusedValue, setFocusedValue] = React.useState("");
 
-  const handleDeliveryOptionChange = (option) => {
-    setDeliveryOption(option);
-  };
+  // const handleDeliveryOptionChange = (option) => {
+  //   setDeliveryOption(option);
+  // };
 
   return (
     <div>
@@ -237,7 +237,7 @@ function Checkout({ categories, filters }) {
                             />
                           </Form.Group>
 
-                          <Form.Group as={Col} controlId="" sm={6}>
+                          {/* <Form.Group as={Col} controlId="" sm={6}>
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               Country
                             </Form.Label>
@@ -246,10 +246,10 @@ function Checkout({ categories, filters }) {
                               disabled
                               placeholder={country || "N/A"}
                             />
-                          </Form.Group>
+                          </Form.Group> */}
                         </Row>
                         <Row className="d-flex mb-3">
-                          <Form.Group as={Col} controlId="">
+                          {/* <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
                               State/Province
                             </Form.Label>
@@ -258,7 +258,7 @@ function Checkout({ categories, filters }) {
                               disabled
                               placeholder={state || "N/A"}
                             />
-                          </Form.Group>
+                          </Form.Group> */}
 
                           <Form.Group as={Col} controlId="">
                             <Form.Label class="text-[#bd9229] font-semibold py-2">
@@ -351,7 +351,7 @@ function Checkout({ categories, filters }) {
                 </div>
                 <div class="px-4 pt-3 flex justify-between">
                   <p>Shipping</p>
-                  <p>£{0}</p>
+                  <p>£{deliveryObj.deliveryPrice}</p>
                 </div>
                 <div class="px-4 pt-3 pb-2 flex justify-between">
                   <p>Tax</p>
@@ -362,10 +362,12 @@ function Checkout({ categories, filters }) {
                   <h2 class="text-xl font-bold">Estimated Total</h2>
                   <h2 class="text-xl text-[#bd9229] font-bold">
                     £
-                    {cartArr
-                      .map((c) => c.price * c.quantity)
-                      .reduce((p, c) => p + c, 0)
-                      .toFixed(2)}
+                    {Number(
+                      cartArr
+                        .map((c) => c.price * c.quantity)
+                        .reduce((p, c) => p + c, 0)
+                        .toFixed(2)
+                    ) + Number(deliveryObj.deliveryPrice)}
                   </h2>
                 </div>
                 <div class="flex flex-col justify-center items-center ">
@@ -407,7 +409,7 @@ function Checkout({ categories, filters }) {
               className="w-70"
             />
           </Form.Group>
-          <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
+          {/* <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">Country:</Form.Label>
             <Form.Select
               placeholder="Country"
@@ -432,7 +434,7 @@ function Checkout({ categories, filters }) {
               onChange={(e) => setState(e.target.value)}
               className="w-70"
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3 d-flex gap-2 justify-center items-center">
             <Form.Label class="font-semibold w-20">City:</Form.Label>
             <Form.Control
