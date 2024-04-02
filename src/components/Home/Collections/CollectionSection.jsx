@@ -9,12 +9,9 @@ const CollectionSection = ({ categories }) => {
     <div className=" flex flex-col gap-4 my-10">
       {/* HEADINGS SECTION */}
       <div className=" flex flex-col gap-1 text-center">
-        <h4 className=" md:text-base text-sm text-primaryColor uppercase">
-          ATTRACTIVE JEWELLERY
-        </h4>
-        <h3 className=" md:text-4xl text-2xl text-headingColor capitalize">
-          Gorgeous Collections
-        </h3>
+
+        <h3 className=" md:text-4xl mb-2 text-1xl text-headingColor capitalize">
+          Jewellery For All Your Occasions        </h3>
       </div>
 
       {/* CARDS SECTION */}

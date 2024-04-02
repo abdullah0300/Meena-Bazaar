@@ -1,0 +1,99 @@
+/* about.module.css */
+.aboutSection {
+  margin-top: 20px;
+  padding-bottom: 50px;
+}
+
+.container {
+  max-width: full;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contentColumn {
+  position: relative;
+}
+
+.innerColumn {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.secTitle {
+  margin-bottom: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  
+}
+
+.text {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.btnBox {
+  margin-top: 30px;
+}
+
+.themeBtn {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #9b9ea1;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.themeBtn:hover {
+  background-color: #8f979e;
+}
+
+.imageColumn {
+  width: 100%;
+}
+
+.authorDesc {
+  margin-bottom: 20px;
+}
+
+.authorDesc h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.authorDesc span {
+  font-size: 16px;
+  color: #666;
+}
+
+.image1 {
+  margin-bottom: 30px;
+}
+
+.lightboxImage img {
+  max-width: full;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+  /* transition: transform 0.3s ease; */
+}
+
+/* .lightboxImage img:hover {
+  transform: scale(1.05);
+} */

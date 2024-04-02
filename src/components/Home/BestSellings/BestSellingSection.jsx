@@ -22,9 +22,7 @@ const BestSellingSection = ({ products }) => {
       <div className=" flex flex-col justify-center items-center gap-8 md:px-[60px] px-[16px] my-20">
         {/* HEADINGS SECTION */}
         <div className=" flex flex-col gap-1 text-center">
-          <h4 className=" md:text-base text-sm text-primaryColor uppercase">
-            STUNNING DESIGN
-          </h4>
+         
           <h3 className="md:text-4xl text-2xl text-headingColor capitalize">
             Our Featured Products
           </h3>

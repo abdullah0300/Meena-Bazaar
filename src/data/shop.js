@@ -9,7 +9,7 @@ export const shops = [
   {
     img: 'https://ik.imagekit.io/mctozv7td/meena/neckalce%20meena%20baazar.png?updatedAt=1711318026288',
     imgb: shop1b,
-    description: "Necklalce Sets For You",
+    description: "Mehndi jewellery",
   },
   {
     img: 'https://ik.imagekit.io/mctozv7td/meena/meena%20earings.png?updatedAt=1711318372924',
@@ -22,4 +22,3 @@ export const shops = [
     description: "Hijab For You",
   },
 ];
-  

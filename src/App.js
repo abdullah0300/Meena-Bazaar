@@ -22,6 +22,10 @@ import SearchProductPage from "./components/SubComponenets/SearchProductPage";
 import Success from "./components/SubComponenets/Success";
 import Failure from "./components/SubComponenets/Failure";
 
+import AboutUs from "./components/static/About";
+import Shipping from "./components/static/Shipping";
+import ReturnPolicy from "./components/static/ReturnPolicy";
+
 const App = () => {
   const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
@@ -140,6 +144,18 @@ const App = () => {
                   <MyOrder categories={categories} filters={filters} />
                 </RequireAuth>
               }
+            />
+            <Route
+              path="/aboutus"
+              element={<AboutUs categories={categories} filters={filters} />}
+            />
+            <Route
+              path="/Shipping"
+              element={<Shipping categories={categories} filters={filters} />}
+            />
+            <Route
+              path="/ReturnPolicy"
+              element={<ReturnPolicy categories={categories} filters={filters} />}
             />
           </Routes>
         </ScrollToTop>

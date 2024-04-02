@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaMinus } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaTiktok } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 const data = [
@@ -51,6 +51,9 @@ const Footer = () => {
               </div> */}
               <a href='https://www.instagram.com/meenabazaarbytaj/'> <div className=' rounded-[50%] p-2 bg-white'>
                 <FaInstagram className='text-primaryColor' />
+              </div></a>
+              <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1'> <div className=' rounded-[50%] p-2 bg-white'>
+                <FaTiktok className='text-primaryColor' />
               </div></a>
             </div>
           </div>
@@ -140,6 +143,9 @@ const Footer = () => {
                 <div className=' rounded-[50%] p-2 bg-white'>
                   <a href='https://www.instagram.com/meenabazaarbytaj/'> <FaInstagram className='text-primaryColor' /></a>
                 </div>
+                <div className=' rounded-[50%] p-2 bg-white'>
+                  <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1'> <FaTiktok className='text-primaryColor' /></a>
+                </div>
               </div>
             </div>
           </div>
@@ -151,9 +157,9 @@ const Footer = () => {
               <hr className='w-12 my-1 rounded-lg' style={{ border: "3px solid #BD9229" }} />
             </div>
             <div className=' flex flex-col gap-3 capitalize text-[#E5E5E5]'>
-              <p>about us</p>
-              <Link to="/Collection"><p>our collection</p></Link>
-              <p>terms & conditions</p>
+              <Link to='./aboutus'>   <p>about us</p></Link>
+              <Link to="/Shipping"><p>Shipping Policy</p></Link>
+              <Link to="/ReturnPolicy"><p>Returns Policy</p></Link>
               {/* <p>privacy policy</p> */}
             </div>
           </div>

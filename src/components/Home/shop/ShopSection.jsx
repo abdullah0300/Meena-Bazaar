@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ShopSection = ({ categories }) => {
   return (
-    <div className=" flex w-full overflow-x-auto scrollbarHide">
+    <div className=" flex mb-5 w-full overflow-x-auto scrollbarHide">
       <div className=" md:grid md:grid-cols-3 flex md:gap-10 gap-4 md:px-20">
         {categories?.slice(1, 4).map((item, i) => (
           <div className={` relative md:w-full w-80 xl:h-48 md:h-44`}>
