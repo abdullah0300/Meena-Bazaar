@@ -221,6 +221,9 @@ const Navbar = ({ categories, filters }) => {
       });
   };
 
+  // forgot password
+  const [forgotPass, setForgotPass] = React.useState(false);
+
   return (
     <>
       {/* DESKTOP */}
@@ -527,13 +530,23 @@ const Navbar = ({ categories, filters }) => {
                 className="text-2xl font-semibold text-[#161616]"
                 style={{ textAlign: "center" }}
               >
-                {type === "login" ? "Log In" : "Create New Account"}
+                {forgotPass
+                  ? "Reset Password"
+                  : `${type === "login" ? "Log In" : "Create New Account"}`}
               </h3>
 
               {/* FORM */}
               <div className=" flex flex-col gap-3 w-full px-3">
                 {/* INPUTS FOR LOG IN */}
-                {type === "login" ? (
+                {forgotPass ? (
+                  <InputField
+                    label={"Your Email"}
+                    val={email}
+                    onchng={(e) => setEmail(e.target.value)}
+                    typ={"email"}
+                  />
+                ) : null}
+                {forgotPass ? null : type === "login" ? (
                   <>
                     <InputField
                       label={"Email"}
@@ -547,7 +560,10 @@ const Navbar = ({ categories, filters }) => {
                       onchng={(e) => setPassword(e.target.value)}
                       typ="password"
                     />
-                    <p className=" text-[#161616] text-right underline">
+                    <p
+                      className=" text-[#161616] text-right underline cursor-pointer"
+                      onClick={() => setForgotPass(true)}
+                    >
                       Forgot your password?
                     </p>
                   </>
@@ -612,7 +628,15 @@ const Navbar = ({ categories, filters }) => {
 
                 {/* BUTTON */}
 
-                {type === "login" ? (
+                {forgotPass ? (
+                  <button
+                    className=" bg-primaryColor text-[#FFFFFF] py-3"
+                    onClick={() => {}}
+                  >
+                    Reset Password
+                  </button>
+                ) : null}
+                {forgotPass ? null : type === "login" ? (
                   <button
                     className=" bg-primaryColor text-[#FFFFFF] py-3"
                     onClick={handleLogin}
@@ -641,6 +665,7 @@ const Navbar = ({ categories, filters }) => {
                 <button
                   className=" bg-[#ACACAC] text-[#FFFFFF] py-3"
                   onClick={() => {
+                    setForgotPass(false);
                     setType(type === "login" ? "signup" : "login");
                   }}
                 >
