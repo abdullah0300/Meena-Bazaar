@@ -44,15 +44,15 @@ const Footer = () => {
             <h3 className=' capitalize'>follow us:</h3>
             <div className=' flex gap-3'>
               <div className=' rounded-[50%] p-2 bg-white'>
-                <a href='https://www.facebook.com/meenabazaarbytaj/'> <FaFacebookF className='text-primaryColor' /></a>
+                <a href='https://www.facebook.com/meenabazaarbytaj/' target='_blank'> <FaFacebookF className='text-primaryColor' /></a>
               </div>
               {/* <div className=' rounded-[50%] p-2 bg-white'>
                 <FaTwitter className='text-primaryColor' />
               </div> */}
-              <a href='https://www.instagram.com/meenabazaarbytaj/'> <div className=' rounded-[50%] p-2 bg-white'>
+              <a href='https://www.instagram.com/meenabazaarbytaj/' target='_blank'> <div className=' rounded-[50%] p-2 bg-white'>
                 <FaInstagram className='text-primaryColor' />
               </div></a>
-              <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1'> <div className=' rounded-[50%] p-2 bg-white'>
+              <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1' target='_blank'> <div className=' rounded-[50%] p-2 bg-white'>
                 <FaTiktok className='text-primaryColor' />
               </div></a>
             </div>
@@ -82,11 +82,9 @@ const Footer = () => {
                       ? "max-h-60 opacity-100"
                       : "max-h-0 opacity-0 overflow-hidden"
                       }`}>
-                      {
-                        item.sublinks.map((item, i) => (
-                          <li className=' text-sm'>{item}</li>
-                        ))
-                      }
+                      <Link to='./aboutus'>   <p>About us</p></Link>
+                      <Link to="/Shipping"><p>Shipping Policy</p></Link>
+                      <Link to="/ReturnPolicy"><p>Returns Policy</p></Link>
                     </ul>
                   </div>
                 </>
@@ -135,16 +133,16 @@ const Footer = () => {
               <h3 className=' capitalize'>follow us:</h3>
               <div className=' flex gap-3'>
                 <div className=' rounded-[50%] p-2 bg-white'>
-                  <a href='https://www.facebook.com/meenabazaarbytaj/'>  <FaFacebookF className='text-primaryColor' /></a>
+                  <a href='https://www.facebook.com/meenabazaarbytaj/' target='_blank'>  <FaFacebookF className='text-primaryColor' /></a>
                 </div>
                 {/* <div className=' rounded-[50%] p-2 bg-white'>
                   <a> <FaTwitter className='text-primaryColor' /></a>
                 </div> */}
                 <div className=' rounded-[50%] p-2 bg-white'>
-                  <a href='https://www.instagram.com/meenabazaarbytaj/'> <FaInstagram className='text-primaryColor' /></a>
+                  <a href='https://www.instagram.com/meenabazaarbytaj/' target='_blank'> <FaInstagram className='text-primaryColor' /></a>
                 </div>
                 <div className=' rounded-[50%] p-2 bg-white'>
-                  <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1'> <FaTiktok className='text-primaryColor' /></a>
+                  <a href='https://www.tiktok.com/@meenabazaar_jewells?_t=8l9FGcTCbp3&_r=1' target='_blank'> <FaTiktok className='text-primaryColor' /></a>
                 </div>
               </div>
             </div>
