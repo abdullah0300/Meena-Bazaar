@@ -224,6 +224,37 @@ const Navbar = ({ categories, filters }) => {
   // forgot password
   const [forgotPass, setForgotPass] = React.useState(false);
 
+  const handlePasswordReset = (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Enter an email!");
+      return;
+    }
+    const id = toast.loading("Generating Reset Link...");
+
+    axios
+      .post(`${apiUrl}/api/v1/customer/forgotPassword`, { email })
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Email with reset link sent. Check Inbox!", {
+          id,
+        });
+
+        setTimeout(() => {
+          closeModalFunc();
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(
+          err.response?.data?.message || "Could Not Reset Password. Try Later!",
+          {
+            id,
+          }
+        );
+      });
+  };
+
   return (
     <>
       {/* DESKTOP */}
@@ -631,7 +662,7 @@ const Navbar = ({ categories, filters }) => {
                 {forgotPass ? (
                   <button
                     className=" bg-primaryColor text-[#FFFFFF] py-3"
-                    onClick={() => {}}
+                    onClick={handlePasswordReset}
                   >
                     Reset Password
                   </button>
