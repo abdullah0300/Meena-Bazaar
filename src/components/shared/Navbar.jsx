@@ -203,7 +203,7 @@ const Navbar = ({ categories, filters }) => {
     axios
       .post(`${apiUrl}/api/v1/customer/signup`, payload)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         toast.success("Registered Successfully", {
           id,
         });
@@ -218,6 +218,40 @@ const Navbar = ({ categories, filters }) => {
         toast.error(err.response?.data?.message || "Could Not Sign Up", {
           id,
         });
+      });
+  };
+
+  // forgot password
+  const [forgotPass, setForgotPass] = React.useState(false);
+
+  const handlePasswordReset = (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Enter an email!");
+      return;
+    }
+    const id = toast.loading("Generating Reset Link...");
+
+    axios
+      .post(`${apiUrl}/api/v1/customer/forgotPassword`, { email })
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Email with reset link sent. Check Inbox!", {
+          id,
+        });
+
+        setTimeout(() => {
+          closeModalFunc();
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(
+          err.response?.data?.message || "Could Not Reset Password. Try Later!",
+          {
+            id,
+          }
+        );
       });
   };
 
@@ -527,13 +561,23 @@ const Navbar = ({ categories, filters }) => {
                 className="text-2xl font-semibold text-[#161616]"
                 style={{ textAlign: "center" }}
               >
-                {type === "login" ? "Log In" : "Create New Account"}
+                {forgotPass
+                  ? "Reset Password"
+                  : `${type === "login" ? "Log In" : "Create New Account"}`}
               </h3>
 
               {/* FORM */}
               <div className=" flex flex-col gap-3 w-full px-3">
                 {/* INPUTS FOR LOG IN */}
-                {type === "login" ? (
+                {forgotPass ? (
+                  <InputField
+                    label={"Your Email"}
+                    val={email}
+                    onchng={(e) => setEmail(e.target.value)}
+                    typ={"email"}
+                  />
+                ) : null}
+                {forgotPass ? null : type === "login" ? (
                   <>
                     <InputField
                       label={"Email"}
@@ -547,7 +591,10 @@ const Navbar = ({ categories, filters }) => {
                       onchng={(e) => setPassword(e.target.value)}
                       typ="password"
                     />
-                    <p className=" text-[#161616] text-right underline">
+                    <p
+                      className=" text-[#161616] text-right underline cursor-pointer"
+                      onClick={() => setForgotPass(true)}
+                    >
                       Forgot your password?
                     </p>
                   </>
@@ -612,7 +659,15 @@ const Navbar = ({ categories, filters }) => {
 
                 {/* BUTTON */}
 
-                {type === "login" ? (
+                {forgotPass ? (
+                  <button
+                    className=" bg-primaryColor text-[#FFFFFF] py-3"
+                    onClick={handlePasswordReset}
+                  >
+                    Reset Password
+                  </button>
+                ) : null}
+                {forgotPass ? null : type === "login" ? (
                   <button
                     className=" bg-primaryColor text-[#FFFFFF] py-3"
                     onClick={handleLogin}
@@ -641,6 +696,7 @@ const Navbar = ({ categories, filters }) => {
                 <button
                   className=" bg-[#ACACAC] text-[#FFFFFF] py-3"
                   onClick={() => {
+                    setForgotPass(false);
                     setType(type === "login" ? "signup" : "login");
                   }}
                 >
