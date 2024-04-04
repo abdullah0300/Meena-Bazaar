@@ -26,6 +26,7 @@ import GuestCheckout from "./components/SubComponenets/GuestCheckout";
 import AboutUs from "./components/static/About";
 import Shipping from "./components/static/Shipping";
 import ReturnPolicy from "./components/static/ReturnPolicy";
+import ResetPassword from "./components/SubComponenets/ResetPassword";
 
 const App = () => {
   const [products, setProducts] = React.useState([]);
@@ -60,6 +61,10 @@ const App = () => {
       <AuthProvider>
         <ScrollToTop>
           <Routes>
+            <Route
+              path="/resetPassword/:resetToken"
+              element={<ResetPassword />}
+            />
             <Route
               path="/"
               element={
@@ -162,7 +167,9 @@ const App = () => {
             />
             <Route
               path="/ReturnPolicy"
-              element={<ReturnPolicy categories={categories} filters={filters} />}
+              element={
+                <ReturnPolicy categories={categories} filters={filters} />
+              }
             />
           </Routes>
         </ScrollToTop>
