@@ -203,7 +203,7 @@ const Navbar = ({ categories, filters }) => {
     axios
       .post(`${apiUrl}/api/v1/customer/signup`, payload)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         toast.success("Registered Successfully", {
           id,
         });
