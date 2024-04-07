@@ -34,10 +34,15 @@ function Collection({ categories, filters }) {
                     <div className=" relative xl:h-[400px] md:h-[320px]  h-48  justify-center items-center group transition-all duration-300 ease-in-out">
                       <img
                         className="absolute h-full w-full relative object-cover transition ease-in-out delay-75 hover:-translate-y-1 hover:scale-105 duration-150"
-                        src={item.image?.url || ""}
+                        src={
+                          item.image?.url?.replace(
+                            "categories/",
+                            "categories/tr:ar-1-1,h-1600/"
+                          ) || ""
+                        }
                         alt={item.name}
                         width="330px"
-                        height="270px"      
+                        height="270px"
                       />
                       {/* <button className=" px-4 py-[15px] bg-white text-black text-lg opacity-[0] transform translate-y-8 transition duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-[-115px] group-hover:translate-x-[85px]">
                                                 View All
