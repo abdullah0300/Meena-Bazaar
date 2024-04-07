@@ -19,7 +19,7 @@ function ReturnPolicy({ filters, categories }) {
                             <div className={`${styles.contentColumn} col-lg-6 col-md-12 col-sm-12 order-2`}>
                                 <div className={styles.innerColumn}>
                                     <div className={styles.secTitle}>
-                                        <span className={styles.title} >Shipping Policy <span className='text-[#af8e40] '>Meena Bazaar by Taj</span></span>
+                                        <span className={styles.title} >Return Policy <span className='text-[#af8e40] '>Meena Bazaar by Taj</span></span>
                                     </div>
                                     <div className={styles.text}>
                                         Due to hygiene regulations we are unable to refund or exchange jewellery items.
