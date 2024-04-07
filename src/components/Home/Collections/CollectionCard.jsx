@@ -12,7 +12,7 @@ const CollectionCard = ({ cat }) => {
         <img
           src={cat.image?.url || ""}
           alt="img"
-          className="absolute h-full w-full"
+          className="absolute h-full w-full object-cover"
         />
         <button
           className=" px-4 py-[11px] bg-white text-black text-lg opacity-[0] transform translate-y-8 transition duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0"
